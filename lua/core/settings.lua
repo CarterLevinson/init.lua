@@ -13,11 +13,6 @@ g.loaded_netrwSettings    = 1
 set.confirm               = true
 set.vb                    = true
 
-set.spelllang             = "en_us"
-
-set.browsedir             = "buffer"
-set.diffopt               = "vertical"
-
 -- display
 set.title                 = true
 set.showcmd               = true
@@ -31,7 +26,7 @@ set.termguicolors         = true
 
 -- status
 set.laststatus            = 3
-set.showtabline           = 1
+set.showtabline           = 0
 
 -- line breaks
 set.tw                    = 80
@@ -58,6 +53,10 @@ set.smartindent           = true
 set.foldmethod            = "expr"
 set.foldexpr              = "nvim_treesitter#foldexpr()"
 set.foldenable            = false
+
+set.spelllang             = "en_us"
+set.browsedir             = "buffer"
+set.diffopt               = "vertical"
 
 -- ignore compiled files
 set.wildignore            = {
