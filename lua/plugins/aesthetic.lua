@@ -40,7 +40,6 @@ return {
       vim.opt.equalalways = false
       require "windows".setup {}
     end,
-    event = "BufWinEnter",
     enabled = false,
   },
 }

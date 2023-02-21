@@ -1,7 +1,7 @@
 return {
   "hrsh7th/nvim-cmp",
   dependencies = {
-    "dcampos/nvim-snippy", -- snippets
+    "dcampos/nvim-snippy", -- snippets engine
     "dcampos/cmp-snippy",
     "hrsh7th/cmp-omni", -- main cmp src plugins
     "hrsh7th/cmp-path",
@@ -10,7 +10,6 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-nvim-lsp-document-symbol",
-    "rcarriga/cmp-dap",
     "ray-x/cmp-treesitter",
     "kristijanhusak/vim-dadbod-completion",
     "amarakon/nvim-cmp-lua-latex-symbols",
@@ -18,7 +17,8 @@ return {
     "lukas-reineke/cmp-under-comparator", -- extra cmp comparator
     {
       "petertriho/cmp-git",
-      dependencies = "nvim-lua/plenary.nvim"
+      config = true,
+      dependencies = "plenary.nvim"
     },
   },
   config = function()

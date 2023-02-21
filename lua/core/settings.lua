@@ -1,3 +1,4 @@
+local diagnostic          = vim.diagnostic
 local set                 = vim.opt
 local g                   = vim.g
 
@@ -84,3 +85,6 @@ if vim.fn.executable("rg") == 1 then
   set.grepprg    = "rg --vimgrep --no-heading"
   set.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
+
+-- disable virtual text and signcolumn for built in diagnostics
+diagnostic.config { virtual_text = false,  signs = false }

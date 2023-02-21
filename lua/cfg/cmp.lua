@@ -1,13 +1,11 @@
 local snippy   = require "snippy.mapping"
-local cmp_git  = require "cmp_git"
 local cmp      = require "cmp"
 local set      = vim.opt
-local g        = vim.g
 
--- for snippy licenses
-g.snips_author = "Carter S. Levinson"
+-- for license snippets
+vim.g.snips_author = "Carter S. Levinson"
 
--- setup snippy mappings
+-- snippy mappings
 imap("<Tab>",    snippy.expand_or_advance("<Tab>"))
 smap("<Tab>",    snippy.next("<Tab>"))
 ismap("S-<Tab>", snippy.previous("S-<Tab>"))
@@ -62,15 +60,15 @@ local cmp_mappings = {
   ["<C-k>"]     = cmp.mapping(select_prev),
   ["<C-a>"]     = cmp.mapping(abort_completion),
   ["<C-c>"]     = cmp.mapping(close_window),
-  ["<C-b>"]     = cmp.mapping.scroll_docs( -4),
+  ["<C-b>"]     = cmp.mapping.scroll_docs(-4),
   ["<C-f>"]     = cmp.mapping.scroll_docs(4),
   ["<C-space>"] = cmp.mapping(select_entry)
 }
 
--- nvim-cmp completopt
+-- set vim's completopt
 set.completeopt = { "menu", "menuone", "noselect" }
 
--- setup cmp
+-- setup nvim-cmp
 cmp.setup {
   -- nvim snippy
   snippet = {
@@ -159,6 +157,26 @@ cmp.setup {
   })
 }
 
+-- Set configuration for specific filetype (i.e. git commit).
+cmp.setup.filetype("gitcommit", {
+  sources = cmp.config.sources({
+    { name = "git" },
+    { name = "snippy" },
+    { name = "buffer" },
+  })
+})
+
+-- for LaTeX files
+cmp.setup.filetype({ "tex", "plaintex" }, {
+  sources = cmp.config.sources({
+    { name = "omni" },
+    { name = "nvim_lsp" },
+    { name = "snippy" },
+    { name = "buffer" },
+  })
+})
+
+-- for treesitter quereies
 cmp.setup.filetype("query", {
   sources = cmp.config.sources({
     { name = "omni" },
@@ -168,32 +186,12 @@ cmp.setup.filetype("query", {
   })
 })
 
--- dadbod integration
+-- set up database integration
 cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
   sources = cmp.config.sources({
     { name = "vim-dadbod-completion" }
   }, {
     { name = "buffer" }
-  })
-})
-
-
--- Set configuration for specific filetype (i.e. git commit).
-cmp_git.setup {}
-cmp.setup.filetype("gitcommit", {
-  sources = cmp.config.sources({
-    { name = "git" },
-    { name = "snippy" },
-    { name = "buffer" },
-  })
-})
-
-cmp.setup.filetype({ "tex", "plaintex" }, {
-  sources = cmp.config.sources({
-    { name = "omni" },
-    { name = "snippy" },
-    { name = "buffer" },
-    { name = "lua-latex-symbols" },
   })
 })
 

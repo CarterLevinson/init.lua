@@ -77,7 +77,3 @@ function _G.smap(lhs, rhs, opts)
   end
   vim.keymap.set('s', lhs, rhs, options)
 end
-
-function _G.cmd(s)
-  return "<CMD>" .. s .. "<CR>"
-end

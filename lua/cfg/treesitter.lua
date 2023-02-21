@@ -1,8 +1,8 @@
 -- use git instead of curl to install parsers
-require 'nvim-treesitter.install'.prefer_git = true
+require("nvim-treesitter.install").prefer_git = true
 -- setup treesitter modules, all modules are disabled by default
 -- and must be enabled below
-require 'nvim-treesitter.configs'.setup {
+require("nvim-treesitter.configs").setup {
   -- table of languages to always install
   -- c, lua, vim, help should always be installed
   ensure_installed = "all",
@@ -10,17 +10,14 @@ require 'nvim-treesitter.configs'.setup {
   sync_install = false,
   -- Automatically install missing parsers when entering buffer
   auto_install = true,
-
   -- configure TS Highlight module
   highlight = {
     enable = true,
   },
-
   -- ts based indenting based on the = operator
   indent = {
-    enable = false,
+    enable = true,
   },
-
   -- incremental selection based on named nodes from the grammar
   incremental_selection = {
     enable = true,
@@ -31,7 +28,6 @@ require 'nvim-treesitter.configs'.setup {
       scope_incremental = 'grc',
     },
   },
-
   -- configure text objects
   textobjects = {
     select = {
@@ -97,7 +93,6 @@ require 'nvim-treesitter.configs'.setup {
       },
     },
   },
-
   refactor = {
     smart_rename = {
       enable = true,
@@ -115,7 +110,6 @@ require 'nvim-treesitter.configs'.setup {
       },
     },
   },
-
   playground = {
     enable = true,
     keybindings = {
@@ -136,4 +130,8 @@ require 'nvim-treesitter.configs'.setup {
     use_virtual_text = true,
     line_events = { 'BufWrite', 'CurshorHold' },
   },
+  -- close html tags
+  autotag = {
+    enable = true
+  }
 }

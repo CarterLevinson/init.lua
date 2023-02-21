@@ -21,20 +21,19 @@ return {
     cmd = "TSPlaygroundToggle",
   },
   {
-    "nvim-treesitter/nvim-treesitter-context",
-    dependencies = "nvim-treesitter",
-    config = true,
-    enabled = false,
-  },
-  {
     "windwp/nvim-ts-autotag",
     dependencies = "nvim-treesitter",
-    config = true,
   },
   {
     "danymat/neogen", -- create doc strings
     dependencies = "nvim-treesitter",
     opts = { snippet_engine = "snippy" },
     cmd = "Neogen",
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = "nvim-treesitter",
+    config = true,
+    enabled = false,
   },
 }

@@ -1,9 +1,9 @@
 return {
-  "mboughaba/i3config.vim", -- syntax hl plugins
-  "Fymyte/mbsync.vim",
+  "Fymyte/mbsync.vim", -- syntax hl plugins
   "kmonad/kmonad-vim",
   "jbmorgado/vim-pine-script",
   "fladson/vim-kitty",
+  "mboughaba/i3config.vim",
 
   {
     "chrisbra/csv.vim", -- tabular data ftplugin
@@ -11,13 +11,9 @@ return {
   },
 
   {
-    "vim-scripts/cscope.vim", -- C/C++
-    ft = { "c", "cpp" }
-  },
-
-  {
     "vim-scripts/a.vim",
-    ft = { "c", "cpp" }
+    ft = { "c", "cpp" },
+    enabled = false
   },
 
   {

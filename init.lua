@@ -1,2 +1,3 @@
-require("utils")
-require("core")
+require "util"
+require "load"
+require "core"
