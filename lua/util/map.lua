@@ -1,5 +1,7 @@
+local defaults = { silent = true }
+
 function _G.nmap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -7,7 +9,7 @@ function _G.nmap(lhs, rhs, opts)
 end
 
 function _G.ntmap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -15,7 +17,7 @@ function _G.ntmap(lhs, rhs, opts)
 end
 
 function _G.nxmap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -23,15 +25,23 @@ function _G.nxmap(lhs, rhs, opts)
 end
 
 function _G.nvomap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
   vim.keymap.set({ 'n', 'v', 'o' }, lhs, rhs, options)
 end
 
+function _G.nvtmap(lhs, rhs, opts)
+  local options = defaults
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.keymap.set({ 'n', 'v', 't' }, lhs, rhs, options)
+end
+
 function _G.imap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -39,7 +49,7 @@ function _G.imap(lhs, rhs, opts)
 end
 
 function _G.ismap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -47,7 +57,7 @@ function _G.ismap(lhs, rhs, opts)
 end
 
 function _G.tmap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -55,7 +65,7 @@ function _G.tmap(lhs, rhs, opts)
 end
 
 function _G.vmap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -63,7 +73,7 @@ function _G.vmap(lhs, rhs, opts)
 end
 
 function _G.xmap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -71,7 +81,7 @@ function _G.xmap(lhs, rhs, opts)
 end
 
 function _G.smap(lhs, rhs, opts)
-  local options = { silent = true }
+  local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end

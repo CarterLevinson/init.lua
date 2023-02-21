@@ -34,15 +34,11 @@ return {
     end
   },
 
-  { "elihunter173/dirbuf.nvim",   config = true },
-  { "numToStr/Comment.nvim",      config = true },
-  { "chentoast/marks.nvim",       config = true },
-  { "tversteeg/registers.nvim",   config = true },
-  { "kylechui/nvim-surround",     config = true },
-  { "notjedi/nvim-rooter.lua",    config = true },
-  { "yamatsum/nvim-cursorline",   config = true },
-
-  -- common dependencies
-  { "nvim-lua/plenary.nvim",       lazy = true },
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  { "elihunter173/dirbuf.nvim", config = true },
+  { "numToStr/Comment.nvim",    config = true },
+  { "chentoast/marks.nvim",     config = true },
+  { "tversteeg/registers.nvim", config = true },
+  { "kylechui/nvim-surround",   config = true },
+  { "notjedi/nvim-rooter.lua",  config = true },
+  { "yamatsum/nvim-cursorline", config = true },
 }

@@ -1,11 +1,5 @@
 extends c
 
-snippet mainn "main function w/o args"
-	int main() {
-		${0}
-		return 0;
-	}
-
 snippet incc "C++ style include directive"
 	#include <${1:iostream}>
 
@@ -98,8 +92,6 @@ snippet fr "friend access modifier"
 snippet mu "mutable access modifier"
 	mutable
 
-## TODO MORE CLASS SNIPPETS
-
 snippet cl "class definition"
 	class ${1:`fnamemodify(expand("%:t"), ":r")`} {
 	public:
@@ -112,64 +104,25 @@ snippet cl "class definition"
 		${3:type} ${4:name}; // ${5:Member description}
 	};
 
-snippet dc "doxygen comment for class definition"
-	/*!
-	 * \class ${1:`fnamemodify(expand("%:t"), ":r")`}
-	 * \brief ${2:Brief class description}
-	 *
-	 * ${0:Detailed description}
-	 */
-
 snippet mf "define external member function definition"
 	${1:void} ${2:ClassName}::${3:memberFunction}(${4:args...}) {
 		${0:${VISUAL}}
 	}
-
-snippet dmf0 "doxygen comment for member function w/ zero parameters"
-	/*!
-	 * \brief ${1:Brief function description here}
-	 *
-	 * ${0:Detailed description}
-	 *
-	 * \return ${2:Return parameter description}
-	 */
 
 snippet mf0 "define external member function with zero parameters"
 	${1:void} ${2:ClassName}::${3:memberFunction}() {
 		${0:${VISUAL}}
 	}
 
-snippet dmf1 "doxygen comment for external member function w/ one parameter"
-	/*!
-	 * \brief ${1:Brief function description here}
-	 *
-	 * ${0:Detailed description}
-	 *
-	 * \param ${2} ${3:Parameter description}
-	 * \return ${4:Return parameter description}
-	 */
-
 snippet mf1 "define external member function w/ one parameter"
 	${1:void} ${2:ClassName}::${3:memberFunction}(${4:Type} ${5:Parameter}) {
 		${0:${VISUAL}}
 	}
 
-snippet dmf2 "doxygen comment for external member function w/ two parameters"
-	/*!
-	 * \brief ${1:Brief function description here}
-	 *
-	 * ${0:Detailed description}
-	 *
-	 * \param ${2} ${3:Parameter description}
-	 * \param ${4} ${5:Parameter description}
-	 * \return ${6:Return parameter description}
-	 */
-
 snippet mf2 "define external member function w/ two parameters"
 	${1:void} ${2:ClassName}::${3:memberFunction}(${4:Type} ${5:Parameter},${6:Type} ${7:Parameter}) {
 		${0:${VISUAL}}
 	}
-
 
 snippet ns "declare namespace"
 	namespace ${1:`fnamemodify(expand(":%t"),":r"`} {

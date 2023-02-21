@@ -12,40 +12,35 @@ return {
     end,
   },
   {
-    "weilbith/nvim-code-action-menu",
+    "weilbith/nvim-code-action-menu", -- ui for lsp code actions
     cmd = 'CodeActionMenu'
   },
   {
-    "j-hui/fidget.nvim",
+    "j-hui/fidget.nvim", -- ui for lsp progress
     config = true
   },
   {
-    "smjonas/inc-rename.nvim",
+    "smjonas/inc-rename.nvim", -- command preview for lsp rename
     config = true,
     cmd = "IncRename",
   },
   {
-    "amrbashir/nvim-docs-view",
-    config = true,
-    cmd = "DocsViewToggle",
-  },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = "plenary.nvim",
+    "jose-elias-alvarez/null-ls.nvim", -- use linters as lsps
+    dependencies = "nvim-lua/plenary.nvim",
     config = function()
       require "cfg.null"
     end,
   },
   {
-    "MrcJkb/haskell-tools.nvim",
+    "MrcJkb/haskell-tools.nvim", -- haskell lsp extensions
     dependencies = {
       "nvim-lspconfig",
       "toggleterm.nvim",
-      "plenary.nvim",
+      "nvim-lua/plenary.nvim",
     },
   },
   {
-    "p00f/clangd_extensions.nvim",
+    "p00f/clangd_extensions.nvim", -- clangd lsp extensions
     dependencies = "nvim-lspconfig",
     config = function()
       require "cfg.clangd"
@@ -53,7 +48,7 @@ return {
     ft = { "c", "cpp", "objc", "objcpp", "cuda" },
   },
   {
-    "kosayoda/nvim-lightbulb",
+    "kosayoda/nvim-lightbulb", -- signcolumn support for lsp code actions
     dependencies = "antoinemadec/FixCursorHold.nvim",
     config = function()
       require("nvim-lightbulb").setup { autocmd = { enabled = true } }

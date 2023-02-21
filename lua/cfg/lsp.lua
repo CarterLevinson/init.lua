@@ -10,7 +10,7 @@ neodev.setup {}
 -- setup goto preview plugin
 gp.setup {}
 
-local function lsp_formatting(bufnr)
+local function null_ls_format(bufnr)
   lsp.buf.format {
     filter = function(client)
       -- logic here
@@ -26,7 +26,7 @@ local function lsp_print_workspaces()
   vim.pretty_print(lsp.buf.list_workspace_folders())
 end
 
-local function lsp_basic_formatting()
+local function lsp_format()
   lsp.buf.format { async = true }
 end
 
@@ -59,7 +59,7 @@ local function on_attach(_, bufnr)
 
 
   buf_create_cmd(bufnr, "ListWS", lsp_print_workspaces)
-  buf_create_cmd(bufnr, "Format", lsp_basic_formatting)
+  buf_create_cmd(bufnr, "Format", lsp_format)
 end
 
 -- default lsp configuration, others can extend from here

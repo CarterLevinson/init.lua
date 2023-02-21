@@ -11,9 +11,8 @@ return {
   },
 
   {
-    "vim-scripts/a.vim",
+    "vim-scripts/a.vim", -- C/C++
     ft = { "c", "cpp" },
-    enabled = false
   },
 
   {
@@ -23,11 +22,13 @@ return {
 
   {
     "vmchale/pointfree",
+    cond = has("pointfree"),
     ft = { "haskell", "lhaskell" }
   },
 
   {
     "Twinside/vim-hoogle",
+    cond = has("hoogle"),
     ft = { "haskell", "lhaskell" }
   },
 
@@ -42,7 +43,7 @@ return {
       vim.g.mkdp_auto_start = 1
       vim.g.mkdp_auto_close = 1
       vim.g.mkdp_theme = "dark"
-      vim.g.mkdp_browser = get_filename(os.getenv("BROWSER"))
+      vim.g.mkdp_browser = strip_path(os.getenv("BROWSER"))
     end,
     build = function()
       vim.fn["mkdp#util#install"]()
@@ -55,7 +56,7 @@ return {
     config = function()
       vim.g.vimtex_inded_enabled = 1
       vim.g.vimtex_complete_closed_braces = 1
-      vim.g.vimtex_view_method = get_filename(os.getenv("READER"))
+      vim.g.vimtex_view_method = strip_path(os.getenv("READER"))
     end,
   },
 }

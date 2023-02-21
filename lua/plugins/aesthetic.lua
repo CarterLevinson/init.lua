@@ -40,6 +40,6 @@ return {
       vim.opt.equalalways = false
       require "windows".setup {}
     end,
-    enabled = false,
+    enabled = false, -- try again on nightly?
   },
 }

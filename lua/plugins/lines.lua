@@ -1,9 +1,9 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = "nvim-web-devicons",
+    dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
-      require "cfg.lines"
+      require "cfg.lualine"
     end,
     event = "UiEnter",
     enabled = true,
@@ -11,7 +11,7 @@ return {
   {
     "rebelot/heirline.nvim",
     event = "UiEnter",
-    dependencies = "nvim-web-devicons",
+    dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require "cfg.heirline"
     end,
@@ -21,7 +21,7 @@ return {
     "utilyre/barbecue.nvim",
     version = "*",
     dependencies = {
-      "nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
       "SmiteshP/nvim-navic",
     },
     event = "UiEnter",

@@ -16,7 +16,6 @@ return {
     config = function()
       require "netman"
     end,
-    lazy = true,
   },
   {
     "akinsho/toggleterm.nvim", -- better terminal integration
@@ -37,19 +36,19 @@ return {
 
       float_opts = { border = "curved" },
     },
-    version = "v2.*",
+    version = "*",
   },
   {
     "liuchengxu/vista.vim", -- lsp symbol / ctags browser
     dependencies = { "junegunn/fzf.vim", enabled = false },
     keys = {
-      -- \s toggle the vista window
+      -- \s:  toggle the vista window
       { "<leader>s",  cmd "Vista!!" },
-      -- \st toggle the vista window
+      -- \st: toggle the vista window
       { "<leader>st", cmd "Vista!!" },
-      -- \sf focus open vista window
+      -- \sf: focus open vista window
       { "<leader>sf", cmd "Vista focus" },
-      -- \sl open vista using nvim lsp
+      -- \sl: open vista using nvim lsp
       { "<leader>sl", cmd "Vista nvim_lsp" },
       -- \sc: close open vista window
       { "<leader>sc", cmd "Vista!" },
@@ -60,21 +59,29 @@ return {
   },
   {
     "folke/trouble.nvim", -- pretty diagnostic interface
-    dependencies = "nvim-web-devicons",
+    dependencies = "nvim-tree/nvim-web-devicons",
     keys = {
+      -- \x:  toggle the trouble window
       { "<leader>x",  cmd "TroubleToggle" },
+      -- \xt: toggle the trouble window
       { "<leader>xt", cmd "TroubleToggle" },
+      -- \xw: open trouble with workspace diagnostics
       { "<leader>xw", cmd "Trouble workspace_diagnostics" },
+      -- \xd: open trouble with document diagnostics
       { "<leader>xd", cmd "Trouble document_diagnostics" },
+      -- \xq: open trouble with the elements of the qf list
       { "<leader>xq", cmd "Trouble quickfix" },
+      -- \xl: open trouble with the elements of the loclist
       { "<leader>xl", cmd "Trouble loclist" },
+      -- \xr: open trouble with lspr references
       { "<leader>xr", cmd "Trouble lsp_references" },
+      -- \xc: close the trouble window
       { "<leader>xc", cmd "TroubleClose" },
       -- also, lsp definitions, lsp implementations,
       -- and lsp type definitions
     },
     config = function()
-      require "trouble".setup { auto_close = true }
+      require("trouble").setup { auto_close = true }
       vim.cmd [[cnoreabbrev copen  Trouble quickfix]]
       vim.cmd [[cnoreabbrev lopen  Trouble loclist]]
       vim.cmd [[cnoreabbrev cclose TroubleClose]]

@@ -1,11 +1,11 @@
-snippet main "main function w/ cli args"
+snippet main "main function with args"
 	int main(int argc, char *argv[]) {
 		${0}
 		return 0;
 	}
 
-snippet mainn "main function w/o args"
-	int main(void) {
+snippet mainn "main function without args"
+	int main() {
 		${0}
 		return 0;
 	}
@@ -162,58 +162,6 @@ snippet f3 "function definition with three parameters"
 		${0:${VISUAL}}
 	}
 
-snippet df "doxygen comment for a function"
-	/*!
-	 * \brief ${1:Brief function description here}
-	 *
-	 * ${4:Detailed description of the function}
-	 *
-	 * ${3:Any parameters}
-	 * \return ${2:Return parameter description}
-	 */
-
-snippet df0 "doxygen comment for function with zero parameters"
-	/*!
-	 * \brief ${1:Brief function description here}
-	 *
-	 * ${0:Detailed description of the function}
-	 *
-	 * \return ${2:Return parameter description}
-	 */
-
-
-snippet df1 "doxygen comment for function with one parameter"
-	/*!
-	 * \brief ${1:Brief function description here}
-	 *
-	 * ${0:Detailed description of the function}
-	 *
-	 * \param $2 ${3:Parameter description}
-	 * \return ${4:Return parameter description}
-	 */
-snippet df2 "doxygen comment for function with two parameters"
-	/*!
-	 * \brief ${1:Brief function description here}
-	 *
-	 *  ${0:Detailed description of the function}
-	 *
-	 * \param $2 ${3:Parameter description}
-	 * \param $4 ${5:Parameter description}
-	 * \return ${6:Return parameter description}
-	 */
-
-snippet df3 "doxygen comment for function with three parameters"
-	/*!
-	 * \brief ${1:Brief function description here}
-	 *
-	 *  ${0:Detailed description of the function}
-	 *
-	 * \param $1 ${2:Parameter description}
-	 * \param $3 ${4:Parameter description}
-	 * \param $5 ${6:Parameter description}
-	 * \return ${7:Return parameter description}
-	 */
-
 snippet td "typedef declaration"
 	typedef ${1:int} ${2:MyCustomType};
 
@@ -227,14 +175,6 @@ snippet tdst "typedef struct"
 		m_${3:Data} /*!< ${4:Description} */
 	} ${1:`fnamemodify(expand("%:t"), :r")`};
 
-snippet dst "doxygen comments for struct declaration"
-	/*!
-	 * \struct ${1:`fnamemodify(expand("%:t"), :r")`}
-	 * \brief ${2:Brief struct description}
-	 *
-	 * ${0:Detailed description}
-	 */
-
 snippet en "enum declaration"
 	enum ${1:name} { ${0} };
 
@@ -242,13 +182,6 @@ snippet tden "typedef enum"
 	typedef enum {
 		${1:Data} /*!< ${3:Description} */
 	} ${2:foo};
-
-snippet den "doxygen comments for enum declaration"
-	/*!
-	 * \enum ${1:name}
-	 *
-	 * ${0:Detailed description}
-	 */
 
 snippet pr "printf statement"
 	printf("${1:%s}\n"${2});

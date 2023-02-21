@@ -12,59 +12,35 @@ ismap("S-<Tab>", snippy.previous("S-<Tab>"))
 xmap("<Tab>",    snippy.cut_text, { remap = true })
 nmap("g<Tab>",   snippy.cut_text, { remap = true })
 
--- cmp mappings
-local function select_next(fallback)
-  if cmp.visible() then
-    cmp.select_next_item()
-  else
-    fallback()
-  end
-end
+-- local cmp_mappings = {
+--   ["<C-n>"]     = cmp.mapping(select_next),
+--   ["<C-p>"]     = cmp.mapping(select_prev),
+--   ["<C-j>"]     = cmp.mapping(select_next),
+--   ["<C-k>"]     = cmp.mapping(select_prev),
+--   ["<C-a>"]     = cmp.mapping(abort_completion),
+--   ["<C-c>"]     = cmp.mapping(close_window),
+--   ["<C-b>"]     = cmp.mapping.scroll_docs(-4),
+--   ["<C-f>"]     = cmp.mapping.scroll_docs(4),
+--   ["<C-space>"] = cmp.mapping(select_entry)
+-- }
 
-local function select_prev(fallback)
-  if cmp.visible() then
-    cmp.select_prev_item()
-  else
-    fallback()
-  end
-end
-
-local function close_window(fallback)
-  if cmp.visible() then
-    cmp.close()
-  else
-    fallback()
-  end
-end
-
-local function abort_completion(fallback)
-  if cmp.visible() then
-    cmp.abort()
-  else
-    fallback()
-  end
-end
-
-local function select_entry(fallback)
-  if cmp.visible() then
-    cmp.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace })
-  else
-    fallback()
-  end
-end
-
-local cmp_mappings = {
-  ["<C-n>"]     = cmp.mapping(select_next),
-  ["<C-p>"]     = cmp.mapping(select_prev),
-  ["<C-j>"]     = cmp.mapping(select_next),
-  ["<C-k>"]     = cmp.mapping(select_prev),
-  ["<C-a>"]     = cmp.mapping(abort_completion),
-  ["<C-c>"]     = cmp.mapping(close_window),
-  ["<C-b>"]     = cmp.mapping.scroll_docs(-4),
-  ["<C-f>"]     = cmp.mapping.scroll_docs(4),
-  ["<C-space>"] = cmp.mapping(select_entry)
+local select = {
+  select = false,
+  behavior = cmp.ConfirmBehavior.Replace
 }
 
+local cmp_mappings = {
+  ["<C-n>"] = cmp.mapping.select_next_item(),
+  ["<C-p>"] = cmp.mapping.select_prev_item(),
+  ["<C-j>"] = cmp.mapping.select_next_item(),
+  ["<C-k>"] = cmp.mapping.select_prev_item(),
+  ["<C-a>"] = cmp.mapping.abort(),
+  ["<C-e>"] = cmp.mapping.close(),
+  ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+  ["<C-f>"] = cmp.mapping.scroll_docs(4),
+  ["<CR>"]  = cmp.mapping.confirm(select)
+  -- ["<C-c>"] = cmp.mapping.complete(),
+}
 -- set vim's completopt
 set.completeopt = { "menu", "menuone", "noselect" }
 
@@ -147,33 +123,33 @@ cmp.setup {
     end,
   },
   -- set up sources
-  sources = cmp.config.sources({
+  sources = cmp.config.sources {
     { name = "nvim_lsp_signature_help" },
     { name = "nvim_lsp" },
     { name = "snippy" },
     { name = "rg", max_item_count = 15 },
     { name = "path" },
     { name = "lua-latex-symbols" },
-  })
+  }
 }
 
 -- Set configuration for specific filetype (i.e. git commit).
 cmp.setup.filetype("gitcommit", {
-  sources = cmp.config.sources({
+  sources = cmp.config.sources {
     { name = "git" },
     { name = "snippy" },
     { name = "buffer" },
-  })
+  }
 })
 
 -- for LaTeX files
 cmp.setup.filetype({ "tex", "plaintex" }, {
-  sources = cmp.config.sources({
-    { name = "omni" },
+  sources = cmp.config.sources {
     { name = "nvim_lsp" },
+    { name = "omni" },
     { name = "snippy" },
     { name = "buffer" },
-  })
+  }
 })
 
 -- for treesitter quereies

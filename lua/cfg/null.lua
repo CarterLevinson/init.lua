@@ -22,7 +22,7 @@ local diagnostics_pylint = diagnostics.pylint.with {
 }
 
 local diagnostics_luacheck = diagnostics.luacheck.with {
-
+  -- ignore vim directory somehow?
 }
 
 null_ls.setup {

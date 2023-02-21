@@ -39,15 +39,6 @@ local diag = {
 
 local display_byte = [["0x%B"]]
 
--- require("tabline").setup {
---   enable = false,
---   options = {
---     show_filename_only = true,
---     show_bufnr = true,
---     show_tabs_always = true,
---   }
--- }
-
 require("lualine").setup {
   options = {
     icons_enabled = true,

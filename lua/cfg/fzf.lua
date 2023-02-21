@@ -2,7 +2,7 @@ local fzf = require "fzf-lua"
 
 fzf.setup {
   winopts = { fullscreen = true },
-  -- for null-ls compatability
+  -- for null-ls compatibility
   lsp = { async_or_timeout = 3000 },
 }
 

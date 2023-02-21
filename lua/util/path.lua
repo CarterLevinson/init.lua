@@ -1,3 +1,3 @@
-function _G.get_filename(path)
+function _G.strip_path(path)
   return path:match("^.+/(.+)$")
 end

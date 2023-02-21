@@ -25,7 +25,7 @@ return {
     dependencies = "nvim-treesitter",
   },
   {
-    "danymat/neogen", -- create doc strings
+    "danymat/neogen",
     dependencies = "nvim-treesitter",
     opts = { snippet_engine = "snippy" },
     cmd = "Neogen",

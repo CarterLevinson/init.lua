@@ -81,7 +81,7 @@ set.listchars             = {
 }
 
 -- set :grep to use ripgrep if installed
-if vim.fn.executable("rg") == 1 then
+if has("rg") then
   set.grepprg    = "rg --vimgrep --no-heading"
   set.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end

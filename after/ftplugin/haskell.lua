@@ -1,9 +1,10 @@
-local setlocal       = vim.opt_local
-local lspc           = require 'cfg.lsp'
-local ht             = require 'haskell-tools'
+local terms = require 'cfg.terminals'
+local lspc = require 'cfg.lsp'
+local ht = require 'haskell-tools'
+local setlocal = vim.opt_local
 
-setlocal.tabstop     = 4
-setlocal.shiftwidth  = 4
+setlocal.tabstop = 4
+setlocal.shiftwidth = 4
 setlocal.softtabstop = 4
 
 ht.start_or_attach {
@@ -32,7 +33,7 @@ local function bufGhciToggle()
   ht.repl.toggle(vim.api.nvim_buf_get_name(0))
 end
 
--- haskell file type specifing keybindings / plugins
+-- haskell file type specifying keybindings / plugins
 local opts = { buffer = 0 }
 -- haskell tools repl commands
 nmap("<leader>rr", ht.repl.toggle, opts)
@@ -42,4 +43,6 @@ nmap("<leader>rq", ht.repl.quit, opts)
 -- point free binary
 nxmap("<leader>pf", "<Plug>Pointfree", opts)
 
--- todo: design toggle terms for hdc and hoogle
+-- custom toggle term commands
+buf_create_cmd(0, "GHCup", function() terms.ghcup:toggle() end)
+buf_create_cmd(0, "Hdc",   function() terms.hdc:toggle() end)
