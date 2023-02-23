@@ -1,5 +1,4 @@
-local tt = require "cfg.toggleterms"
+-- local radian = require "cfg.terminals".radian
 
-local opts = { buffer = 0 }
-
-nmap("<leader>rr", function() tt.radian:toggle() end, opts)
+-- local opts = { buffer = 0 }
+-- nmap("<leader>rr", function() radian:toggle() end, opts)

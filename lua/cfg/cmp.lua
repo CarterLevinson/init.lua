@@ -12,18 +12,6 @@ ismap("S-<Tab>", snippy.previous("S-<Tab>"))
 xmap("<Tab>",    snippy.cut_text, { remap = true })
 nmap("g<Tab>",   snippy.cut_text, { remap = true })
 
--- local cmp_mappings = {
---   ["<C-n>"]     = cmp.mapping(select_next),
---   ["<C-p>"]     = cmp.mapping(select_prev),
---   ["<C-j>"]     = cmp.mapping(select_next),
---   ["<C-k>"]     = cmp.mapping(select_prev),
---   ["<C-a>"]     = cmp.mapping(abort_completion),
---   ["<C-c>"]     = cmp.mapping(close_window),
---   ["<C-b>"]     = cmp.mapping.scroll_docs(-4),
---   ["<C-f>"]     = cmp.mapping.scroll_docs(4),
---   ["<C-space>"] = cmp.mapping(select_entry)
--- }
-
 local select = {
   select = false,
   behavior = cmp.ConfirmBehavior.Replace
@@ -39,8 +27,8 @@ local cmp_mappings = {
   ["<C-b>"] = cmp.mapping.scroll_docs(-4),
   ["<C-f>"] = cmp.mapping.scroll_docs(4),
   ["<CR>"]  = cmp.mapping.confirm(select)
-  -- ["<C-c>"] = cmp.mapping.complete(),
 }
+
 -- set vim's completopt
 set.completeopt = { "menu", "menuone", "noselect" }
 

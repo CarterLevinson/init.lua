@@ -34,6 +34,15 @@ return {
     end
   },
 
+  {
+    "Vonr/align.nvim",
+    config = function()
+      --todo
+    end,
+    enabled = false
+  },
+
+  -- { "lewis6991/spaceless.nvim", config = true },
   { "elihunter173/dirbuf.nvim", config = true },
   { "numToStr/Comment.nvim",    config = true },
   { "chentoast/marks.nvim",     config = true },

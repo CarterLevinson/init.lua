@@ -34,32 +34,31 @@ end
 -- callback function on lsp buffer attach
 -- define keymaps and commands for LSP buffers
 local function on_attach(_, bufnr)
-  local opts = { noremap = true, silent = true, buffer = bufnr }
-  nmap("gd",         lsp.buf.definition, opts) -- go to definition
-  nmap("gD",         lsp.buf.declaration, opts) -- go to declaration
-  nmap("gr",         lsp.buf.references, opts) -- list all refs in qf
-  nmap("gi",         lsp.buf.implementation, opts) -- list imps in qf
+  local options = { buffer = bufnr }
+  nmap("gd",         lsp.buf.definition, options) -- go to definition
+  nmap("gD",         lsp.buf.declaration, options) -- go to declaration
+  nmap("gr",         lsp.buf.references, options) -- list all refs in qf
+  nmap("gi",         lsp.buf.implementation, options) -- list imps in qf
 
-  nmap("gpd",        gp.goto_preview_definition, opts)
-  nmap("gpt",        gp.goto_preview_type_definition, opts)
-  nmap("gpr",        gp.goto_preview_references, opts)
-  nmap("gpc",        gp.close_all_win, opts)
+  nmap("gpd",        gp.goto_preview_definition, options)
+  nmap("gpt",        gp.goto_preview_type_definition, options)
+  nmap("gpr",        gp.goto_preview_references, options)
+  nmap("gpc",        gp.close_all_win, options)
 
-  nmap("K",          lsp.buf.hover, opts)
-  nmap("<leader>h",  lsp.buf.signature_help, opts)
-  nmap("<leader>d",  lsp.buf.type_definition, opts)
+  nmap("K",          lsp.buf.hover, options)
+  nmap("<leader>h",  lsp.buf.signature_help, options)
+  nmap("<leader>d",  lsp.buf.type_definition, options)
 
-  nmap("<leader>wa", lsp.buf.add_workspace_folder, opts)
-  nmap("<leader>wr", lsp.buf.remove_workspace_folder, opts)
+  nmap("<leader>wa", lsp.buf.add_workspace_folder, options)
+  nmap("<leader>wr", lsp.buf.remove_workspace_folder, options)
 
-  nmap("<leader>cl", lsp.codelens.run, opts)
+  nmap("<leader>cl", lsp.codelens.run, options)
 
-  nmap("<leader>rn", ":IncRename ", opts)
-  nmap("<leader>ca", cmd "CodeActionMenu", opts)
+  nmap("<leader>rn", ":IncRename ", options)
+  nmap("<leader>ca", cmd "CodeActionMenu", options)
 
-
-  buf_create_cmd(bufnr, "ListWS", lsp_print_workspaces)
-  buf_create_cmd(bufnr, "Format", lsp_format)
+  buffer_command(bufnr, "ListWS", lsp_print_workspaces)
+  buffer_command(bufnr, "Format", lsp_format)
 end
 
 -- default lsp configuration, others can extend from here
@@ -73,6 +72,17 @@ local default_conf = {
   single_file_support = true,
 }
 
+-- json languager server extra configuration
+local json_conf = {
+  settings = {
+    json = {
+      -- use schema store plugin for json schemas
+      schemas = json.json.schemas(),
+      validate = { enable = true },
+    }
+  }
+}
+
 -- lua language server extra configuration
 local luals_conf = {
   settings = {
@@ -82,13 +92,10 @@ local luals_conf = {
   }
 }
 
--- json languager server extra configuration
-local json_conf = {
+local ltex_conf = {
   settings = {
-    json = {
-      -- use schema store plugin for json schemas
-      schemas = json.json.schemas(),
-      validate = { enable = true },
+    ltex = {
+      language = "en-us"
     }
   }
 }
@@ -101,11 +108,12 @@ local lsp_servers = {
   cssls = {},
   html = {},
   jsonls = json_conf,
+  lua_ls = luals_conf,
+  ltex = ltex_conf,
   pyright = {},
   r_language_server = {},
   rust_analyzer = {},
-  lua_ls = luals_conf,
-  texlab = {}
+  texlab = {},
 }
 
 -- setup each lsp server in list

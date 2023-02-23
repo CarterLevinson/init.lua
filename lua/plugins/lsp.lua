@@ -28,7 +28,7 @@ return {
     "jose-elias-alvarez/null-ls.nvim", -- use linters as lsps
     dependencies = "nvim-lua/plenary.nvim",
     config = function()
-      require "cfg.null"
+      require "cfg.null-ls"
     end,
   },
   {
@@ -38,6 +38,10 @@ return {
       "toggleterm.nvim",
       "nvim-lua/plenary.nvim",
     },
+    config = function()
+      require "cfg.hls"
+    end,
+    ft = { "haskell", "lhaskell" },
   },
   {
     "p00f/clangd_extensions.nvim", -- clangd lsp extensions

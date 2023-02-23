@@ -17,13 +17,14 @@ return {
 
   {
     "neovimhaskell/haskell-vim", -- Haskell
-    ft = { "haskell", "lhaskell" }
+    ft = { "haskell", "lhaskell" },
+    enabled = false,
   },
 
   {
     "vmchale/pointfree",
     cond = has("pointfree"),
-    ft = { "haskell", "lhaskell" }
+    ft = { "haskell", "lhaskell" },
   },
 
   {

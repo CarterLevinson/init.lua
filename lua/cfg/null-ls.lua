@@ -25,31 +25,55 @@ local diagnostics_luacheck = diagnostics.luacheck.with {
   -- ignore vim directory somehow?
 }
 
+local cpp_cppcheck = diagnostics.cppcheck.with {
+  filetypes = { "cpp" },
+  args = {
+    "--enable=warning,style,information",
+    "--template=gcc",
+    "--language=c++",
+    "-j", "6",
+  }
+}
+
+local c_cppcheck = diagnostics.cppcheck.with {
+  filetypes = { "c" },
+  args = {
+    "--enable=warning,style,information",
+    "--template=gcc",
+    "--language=c",
+    "-j", "6",
+  }
+
+}
 null_ls.setup {
   sources = {
+    -- code actions
     code_actions.shellcheck,
     code_action_gitsigns,
+    -- diagnostics
     diagnostics.chktex,
     diagnostics.shellcheck,
     diagnostics.codespell,
-    diagnostics.cppcheck,
+    cpp_cppcheck,
+    c_cppcheck,
     diagnostics.cpplint,
-    diagnostics.markdownlint,
+    -- diagnostics.markdownlint,
     diagnostics.mdl,
     diagnostics.cmake_lint,
     diagnostics_pylint,
+    -- formatting
     formatting.isort,
     formatting.black,
     formatting.cabal_fmt,
-    formatting.clang_format,
-    formatting.cmake_format,
+    -- formatting.clang_format,
+    -- formatting.cmake_format,
     formatting.codespell,
     formatting.format_r,
     formatting.jq,
     formatting.latexindent,
-    formatting.markdownlint,
-    formatting.stylish_haskell,
-    formatting.brittany,
+    -- formatting.markdownlint,
+    -- formatting.stylish_haskell,
+    -- formatting.brittany,
     formatting.yapf,
   }
 }

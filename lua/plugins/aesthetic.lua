@@ -1,17 +1,20 @@
 return {
   {
-    "rebelot/kanagawa.nvim", -- main colorscheme
+    "yashguptaz/calvera-dark.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme [[kanagawa]]
+      vim.g.calvera_borders = true
+      vim.cmd.colorscheme [[calvera]]
     end
   },
   {
-    "ofirgall/ofirkai.nvim", -- alt colorschemes
+    "rebelot/kanagawa.nvim",
+    "ofirgall/ofirkai.nvim",
     "tanvirtin/monokai.nvim",
     "sainnhe/sonokai",
     "lourenci/github-colors",
+    "rose-pine/neovim",
   },
   {
     "uga-rosa/ccc.nvim", -- colorizer and color picker
@@ -27,6 +30,12 @@ return {
     "xiyaowong/nvim-transparent", -- provides transparent background hl
     opts = { enable = true },
     event = "BufWinEnter",
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require "cfg.indent"
+    end,
   },
   {
     "anuvyklack/windows.nvim", -- window animation and auto resize

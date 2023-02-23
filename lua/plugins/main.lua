@@ -16,6 +16,7 @@ return {
     config = function()
       require "netman"
     end,
+    lazy = true,
   },
   {
     "akinsho/toggleterm.nvim", -- better terminal integration
@@ -37,6 +38,7 @@ return {
       float_opts = { border = "curved" },
     },
     version = "*",
+    lazy = true,
   },
   {
     "liuchengxu/vista.vim", -- lsp symbol / ctags browser

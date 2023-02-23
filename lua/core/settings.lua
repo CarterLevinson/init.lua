@@ -69,16 +69,16 @@ set.wildignore            = {
 }
 
 -- set custom listchars
-set.listchars             = {
-  eol                     = "↲",
-  tab                     = "»·",
-  space                   = "␣",
-  trail                   = "·",
-  extends                 = "☛",
-  precedes                = "☚",
-  conceal                 = "┊",
-  nbsp                    = "☠",
-}
+-- set.listchars             = {
+--   eol                     = "↲",
+--   tab                     = "»·",
+--   space                   = "␣",
+--   trail                   = "·",
+--   extends                 = "☛",
+--   precedes                = "☚",
+--   conceal                 = "┊",
+--   nbsp                    = "☠",
+-- }
 
 -- set :grep to use ripgrep if installed
 if has("rg") then

@@ -1,4 +1,4 @@
-function _G.format_output_as_manpage(command)
+function _G.format_as_manpage(command)
   return function(opts)
     vim.cmd("new")
     vim.cmd("r ! " .. command .. opts.args)
