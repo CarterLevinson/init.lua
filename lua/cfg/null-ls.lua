@@ -56,7 +56,7 @@ null_ls.setup {
     diagnostics.codespell,
     cpp_cppcheck,
     c_cppcheck,
-    diagnostics.cpplint,
+    -- diagnostics.cpplint,
     -- diagnostics.markdownlint,
     diagnostics.mdl,
     diagnostics.cmake_lint,
@@ -64,16 +64,16 @@ null_ls.setup {
     -- formatting
     formatting.isort,
     formatting.black,
+    formatting.yapf,
     formatting.cabal_fmt,
     -- formatting.clang_format,
     -- formatting.cmake_format,
-    formatting.codespell,
+    -- formatting.codespell,
     formatting.format_r,
     formatting.jq,
     formatting.latexindent,
     -- formatting.markdownlint,
     -- formatting.stylish_haskell,
     -- formatting.brittany,
-    formatting.yapf,
   }
 }

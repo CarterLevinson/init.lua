@@ -9,6 +9,7 @@ require("clangd_extensions").setup {
       "--all-scopes-completion",
       "--completion-style=detailed",
       "--function-arg-placeholders",
+      "--offset-encoding=utf-16",
     }
   })
 }

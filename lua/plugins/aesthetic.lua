@@ -36,6 +36,7 @@ return {
     config = function()
       require "cfg.indent"
     end,
+    enabled = false,
   },
   {
     "anuvyklack/windows.nvim", -- window animation and auto resize
