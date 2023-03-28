@@ -23,7 +23,7 @@ return {
   {
     "johnfrankmorgan/whitespace.nvim",
     config = function()
-      require "cfg.whitespace"
+      require("cfg.whitespace")
     end,
   },
 
@@ -42,7 +42,6 @@ return {
     enabled = false
   },
 
-  -- { "lewis6991/spaceless.nvim", config = true },
   { "elihunter173/dirbuf.nvim", config = true },
   { "numToStr/Comment.nvim",    config = true },
   { "chentoast/marks.nvim",     config = true },
@@ -50,4 +49,6 @@ return {
   { "kylechui/nvim-surround",   config = true },
   { "notjedi/nvim-rooter.lua",  config = true },
   { "yamatsum/nvim-cursorline", config = true },
+
+  { "lewis6991/spaceless.nvim", config = true, enabled = false },
 }

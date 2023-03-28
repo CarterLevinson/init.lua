@@ -1,5 +1,5 @@
-local snippy   = require "snippy.mapping"
-local cmp      = require "cmp"
+local snippy   = require("snippy.mapping")
+local cmp      = require("cmp")
 local set      = vim.opt
 
 -- for license snippets
@@ -12,21 +12,57 @@ ismap("S-<Tab>", snippy.previous("S-<Tab>"))
 xmap("<Tab>",    snippy.cut_text, { remap = true })
 nmap("g<Tab>",   snippy.cut_text, { remap = true })
 
-local select = {
-  select = false,
-  behavior = cmp.ConfirmBehavior.Replace
-}
+
+local function select_next(fallback)
+  if cmp.visible() then
+    cmp.select_next_item()
+  else
+    fallback()
+  end
+end
+
+local function select_prev(fallback)
+  if cmp.visible() then
+    cmp.select_prev_item()
+  else
+    fallback()
+  end
+end
+
+local function abort(fallback)
+  if cmp.visible() then
+    cmp.abort()
+  else
+    fallback()
+  end
+end
+
+local function close(fallback)
+  if cmp.visible() then
+    cmp.close()
+  else
+    fallback()
+  end
+end
+
+local function confirm(fallback)
+  if cmp.visible() then
+    cmp.confirm { select = false, behavior = cmp.ConfirmBehavior.Replace }
+  else
+    fallback()
+  end
+end
 
 local cmp_mappings = {
-  ["<C-n>"] = cmp.mapping.select_next_item(),
-  ["<C-p>"] = cmp.mapping.select_prev_item(),
-  ["<C-j>"] = cmp.mapping.select_next_item(),
-  ["<C-k>"] = cmp.mapping.select_prev_item(),
-  ["<C-a>"] = cmp.mapping.abort(),
-  ["<C-e>"] = cmp.mapping.close(),
+  ["<C-n>"] = cmp.mapping(select_next),
+  ["<C-p>"] = cmp.mapping(select_prev),
+  ["<C-j>"] = cmp.mapping(select_next),
+  ["<C-k>"] = cmp.mapping(select_prev),
+  ["<C-a>"] = cmp.mapping(abort),
+  ["<C-e>"] = cmp.mapping(close),
   ["<C-b>"] = cmp.mapping.scroll_docs(-4),
   ["<C-f>"] = cmp.mapping.scroll_docs(4),
-  ["<CR>"]  = cmp.mapping.confirm(select)
+  ["<CR>"]  = cmp.mapping(confirm),
 }
 
 -- set vim's completopt
@@ -113,7 +149,7 @@ cmp.setup {
   -- set up sources
   sources = cmp.config.sources {
     { name = "nvim_lsp_signature_help" },
-    { name = "nvim_lsp" },
+    { name = "nvim_lsp",  },
     { name = "snippy" },
     { name = "rg", max_item_count = 15 },
     { name = "path" },

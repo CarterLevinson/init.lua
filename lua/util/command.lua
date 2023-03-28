@@ -4,7 +4,7 @@ end
 
 local defaults = {}
 
-function _G.buffer_command(bufnr, name, cmd, opts)
+function _G.bufcommand(bufnr, name, cmd, opts)
   local options = defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
@@ -17,5 +17,5 @@ function _G.command(name, cmd, opts)
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
-  vim.api.nvim_create_user_command(name, cmd, opts)
+  vim.api.nvim_create_user_command(name, cmd, options)
 end

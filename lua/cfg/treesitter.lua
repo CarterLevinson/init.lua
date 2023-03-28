@@ -18,6 +18,8 @@ require("nvim-treesitter.configs").setup {
   autotag = { enable = true },
   -- rainbow delimiters
   rainbow = { enable = true },
+  -- c++ tools
+  nt_cpp_tools = { enable = true },
   -- incremental selection based on named nodes from the grammar
   incremental_selection = {
     enable = true,

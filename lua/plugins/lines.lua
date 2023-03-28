@@ -3,7 +3,7 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
-      require "cfg.lualine"
+      require("cfg.lualine")
     end,
     event = "UiEnter",
     enabled = true,
@@ -13,7 +13,7 @@ return {
     event = "UiEnter",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
-      require "cfg.heirline"
+      require("cfg.heirline")
     end,
     enabled = false,
   },
@@ -25,6 +25,6 @@ return {
       "SmiteshP/nvim-navic",
     },
     event = "UiEnter",
-    opts = { theme = "kanagawa" },
+    config = true,
   }
 }

@@ -3,7 +3,7 @@ return {
     "ibhagwan/fzf-lua", -- fuzzy finder
     dependencies = "nvim-web-devicons",
     config = function()
-      require "cfg.fzf"
+      require("cfg.fzf")
     end
   },
   {
@@ -14,7 +14,7 @@ return {
   {
     "miversen33/netman.nvim", -- remote editing interface
     config = function()
-      require "netman"
+      require("netman")
     end,
     lazy = true,
   },
@@ -39,6 +39,7 @@ return {
     },
     version = "*",
     lazy = true,
+    enabled = true,
   },
   {
     "liuchengxu/vista.vim", -- lsp symbol / ctags browser
@@ -56,7 +57,7 @@ return {
       { "<leader>sc", cmd "Vista!" },
     },
     config = function()
-      require "cfg.vista"
+      require("cfg.vista")
     end,
   },
   {
@@ -93,8 +94,10 @@ return {
   {
     "knubie/vim-kitty-navigator",
     cond = os.getenv("TERM") == "xterm-kitty",
-    config = function()
+    init = function()
       vim.g.kitty_navigator_no_mappings = 1
+    end,
+    config = function()
       ntmap("<C-h>", cmd "KittyNavigateLeft")
       ntmap("<C-j>", cmd "KittyNavigateDown")
       ntmap("<C-k>", cmd "KittyNavigateUp")
@@ -103,9 +106,14 @@ return {
     build = "cp ./*.py ~/.config/kitty/",
   },
   {
+    "jghauser/kitty-runner.nvim",
+    cond = os.getenv("TERM") == "xterm-kitty",
+    opts = { use_keymaps = false },
+  },
+  {
     "radenling/vim-dispatch-neovim", -- async build cmds
     dependencies = "tpope/vim-dispatch",
-    config = function()
+    init = function()
       vim.g.dispatch_no_maps          = 1
       vim.g.dispatch_no_tmux_start    = 1
       vim.g.dispatch_no_tmux_spawn    = 1

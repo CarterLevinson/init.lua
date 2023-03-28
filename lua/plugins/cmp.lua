@@ -22,7 +22,7 @@ return {
     },
   },
   config = function()
-    require "cfg.cmp"
+    require("cfg.cmp")
   end,
   event = { "InsertEnter", "CmdlineEnter" },
 }

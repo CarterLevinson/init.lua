@@ -1,5 +1,5 @@
-local lspc = require 'cfg.lsp'
-local ht   = require 'haskell-tools'
+local lspc = require("cfg.lsp")
+local ht   = require("haskell-tools")
 
 local hls_conf = {
   on_attach = function(_, bufnr)
@@ -12,7 +12,8 @@ local hls_conf = {
     haskell = {
       hlintOn = true,
       checkProject = true,
-      formattingProvider = "stylish-haskell",
+      -- formattingProvider = "stylish-haskell",
+      formattingProvider = "floskell"
     }
   }
 }

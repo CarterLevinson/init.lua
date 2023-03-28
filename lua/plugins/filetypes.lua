@@ -40,7 +40,7 @@ return {
 
   {
     "iamcco/markdown-preview.nvim",
-    config = function()
+    init = function()
       vim.g.mkdp_auto_start = 1
       vim.g.mkdp_auto_close = 1
       vim.g.mkdp_theme = "dark"
@@ -54,7 +54,7 @@ return {
 
   {
     "lervag/vimtex", -- LaTeX
-    config = function()
+    init = function()
       vim.g.vimtex_inded_enabled = 1
       vim.g.vimtex_complete_closed_braces = 1
       vim.g.vimtex_view_method = strip_path(os.getenv("READER"))

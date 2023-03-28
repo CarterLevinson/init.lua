@@ -4,7 +4,7 @@ setlocal.shiftwidth  = 4
 setlocal.softtabstop = 4
 
 local pydoc = format_as_manpage "pydoc"
-buffer_command(0, "Pydoc",  pydoc , { nargs = 1 })
+bufcommand(0, "Pydoc",  pydoc , { nargs = 1 })
 
 -- local ipython        = require "cfg.terminals".ipython
 -- local opts = { buffer = 0 }

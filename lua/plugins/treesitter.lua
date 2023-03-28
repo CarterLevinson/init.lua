@@ -2,7 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     config = function()
-      require "cfg.treesitter"
+      require("cfg.treesitter")
     end,
     build = ":TSUpdate",
     event = "BufWinEnter",
@@ -34,4 +34,8 @@ return {
     opts = { snippet_engine = "snippy" },
     cmd = "Neogen",
   },
+  {
+    "Badhi/nvim-treesitter-cpp-tools",
+    dependencies = "nvim-treesitter",
+  }
 }

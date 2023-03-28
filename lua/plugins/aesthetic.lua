@@ -28,13 +28,13 @@ return {
   },
   {
     "xiyaowong/nvim-transparent", -- provides transparent background hl
-    opts = { enable = true },
+    config = true,
     event = "BufWinEnter",
   },
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require "cfg.indent"
+      require("cfg.indent")
     end,
     enabled = false,
   },
@@ -48,7 +48,7 @@ return {
       vim.opt.winwidth = 10
       vim.opt.winminwidth = 5
       vim.opt.equalalways = false
-      require "windows".setup {}
+      require("windows").setup {}
     end,
     enabled = false, -- try again on nightly?
   },

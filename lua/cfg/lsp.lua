@@ -1,8 +1,8 @@
-local lspconfig = require "lspconfig"
-local neodev    = require "neodev"
-local json      = require "schemastore"
-local cmp       = require "cmp_nvim_lsp"
-local gp        = require "goto-preview"
+local lspconfig = require("lspconfig")
+local neodev    = require("neodev")
+local json      = require("schemastore")
+local cmp       = require("cmp_nvim_lsp")
+local gp        = require("goto-preview")
 local lsp       = vim.lsp
 
 -- need to setup neodev before lua_ls
@@ -10,19 +10,7 @@ neodev.setup {}
 -- setup goto preview plugin
 gp.setup {}
 
-local function null_ls_format(bufnr)
-  lsp.buf.format {
-    filter = function(client)
-      -- logic here
-      -- in this case always return null-ls
-      return client.name == "null-ls"
-    end,
-    bufnr = bufnr,
-    async = true,
-  }
-end
-
-local function lsp_print_workspaces()
+local function print_lsp_workspaces()
   vim.pretty_print(lsp.buf.list_workspace_folders())
 end
 
@@ -57,16 +45,18 @@ local function on_attach(_, bufnr)
   nmap("<leader>rn", ":IncRename ", options)
   nmap("<leader>ca", cmd "CodeActionMenu", options)
 
-  buffer_command(bufnr, "ListWS", lsp_print_workspaces)
-  buffer_command(bufnr, "Format", lsp_format)
+  bufcommand(bufnr, "ListWS", print_lsp_workspaces)
+  bufcommand(bufnr, "Format", lsp_format)
 end
+
+local capabilities = lsp.protocol.make_client_capabilities()
 
 -- default lsp configuration, others can extend from here
 local default_conf = {
   on_attach = on_attach,
   settings = {
     --create nvim-cmp capabilities for lsp client
-    capabilities = cmp.default_capabilities(),
+    capabilities = cmp.default_capabilities(capabilities),
     telemetry = { enable = false },
   },
   single_file_support = true,

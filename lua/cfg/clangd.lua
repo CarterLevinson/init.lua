@@ -1,4 +1,4 @@
-local lspc = require "cfg.lsp"
+local lspc = require("cfg.lsp")
 
 require("clangd_extensions").setup {
   server = vim.tbl_deep_extend("force", lspc.config, {
@@ -9,7 +9,7 @@ require("clangd_extensions").setup {
       "--all-scopes-completion",
       "--completion-style=detailed",
       "--function-arg-placeholders",
-      "--offset-encoding=utf-16",
+      -- "--offset-encoding=utf-16",
     }
   })
 }
