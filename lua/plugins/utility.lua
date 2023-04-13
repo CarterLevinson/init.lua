@@ -43,6 +43,7 @@ return {
     enabled = false,
   },
 
+  -- todo : add lua highlight whitespace
   { "lewis6991/spaceless.nvim", config = true },
   { "elihunter173/dirbuf.nvim", config = true },
   { "numToStr/Comment.nvim",    config = true },

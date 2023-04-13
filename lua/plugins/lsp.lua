@@ -44,17 +44,17 @@ return {
     cmd = "IncRename",
   },
   {
-    "Fildo7525/pretty_hover",
+    "Fildo7525/pretty_hover", -- renders doxygen tags in hover
     opts = { border = "none" },
     event = "LspAttach",
   },
   {
-    "VidocqH/lsp-lens.nvim",
+    "VidocqH/lsp-lens.nvim", -- show reference counts
     config = true,
     event = "LspAttach",
   },
   {
-    "mfussenegger/nvim-lint",
+    "mfussenegger/nvim-lint", -- linter diagnostic interface
     config = function()
       require("cfg.lint")
     end,
@@ -67,6 +67,6 @@ return {
       require("nvim-lightbulb").setup { autocmd = { enabled = true } }
       vim.fn.sign_define("LightBulbSign", { text = "" })
     end,
-    event = "BufWinEnter"
+    event = "BufWinEnter",
   },
 }

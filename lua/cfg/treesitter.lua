@@ -16,8 +16,6 @@ require("nvim-treesitter.configs").setup {
   indent = { enable = true },
   -- auto-close html tags
   autotag = { enable = true },
-  -- rainbow delimiters
-  rainbow = { enable = true },
   -- incremental selection based on named nodes from the grammar
   incremental_selection = {
     enable = true,

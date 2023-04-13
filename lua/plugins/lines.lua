@@ -9,15 +9,6 @@ return {
     enabled = true,
   },
   {
-    "rebelot/heirline.nvim",
-    event = "UiEnter",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("cfg.heirline")
-    end,
-    enabled = false,
-  },
-  {
     "utilyre/barbecue.nvim",
     version = "*",
     dependencies = {
@@ -26,5 +17,14 @@ return {
     },
     event = "UiEnter",
     opts = { theme = 'oh-my-monokai' },
-  }
+  },
+  { -- todo: one day?
+    "rebelot/heirline.nvim",
+    event = "UiEnter",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("cfg.heirline")
+    end,
+    enabled = false,
+  },
 }

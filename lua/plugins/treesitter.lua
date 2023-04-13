@@ -20,10 +20,6 @@ return {
     dependencies = "nvim-treesitter",
   },
   {
-    "HiPhish/nvim-ts-rainbow2",
-    dependencies = "nvim-treesitter"
-  },
-  {
     "danymat/neogen",
     dependencies = "nvim-treesitter",
     opts = { snippet_engine = "snippy" },
