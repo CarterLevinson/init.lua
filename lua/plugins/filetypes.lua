@@ -11,11 +11,6 @@ return {
   },
 
   {
-    "vim-scripts/a.vim", -- C/C++
-    ft = { "c", "cpp" },
-  },
-
-  {
     "neovimhaskell/haskell-vim", -- Haskell
     ft = { "haskell", "lhaskell" },
     enabled = false,

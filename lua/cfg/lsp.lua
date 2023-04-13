@@ -3,6 +3,7 @@ local neodev    = require("neodev")
 local json      = require("schemastore")
 local cmp       = require("cmp_nvim_lsp")
 local gp        = require("goto-preview")
+local pretty    = require("pretty_hover")
 local lsp       = vim.lsp
 
 -- need to setup neodev before lua_ls
@@ -33,7 +34,7 @@ local function on_attach(_, bufnr)
   nmap("gpr",        gp.goto_preview_references, options)
   nmap("gpc",        gp.close_all_win, options)
 
-  nmap("K",          lsp.buf.hover, options)
+  nmap("K",          pretty.hover, options)
   nmap("<leader>h",  lsp.buf.signature_help, options)
   nmap("<leader>d",  lsp.buf.type_definition, options)
 
@@ -50,6 +51,7 @@ local function on_attach(_, bufnr)
 end
 
 local capabilities = lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- default lsp configuration, others can extend from here
 local default_conf = {
@@ -82,6 +84,7 @@ local luals_conf = {
   }
 }
 
+-- ltex language server configurations
 local ltex_conf = {
   settings = {
     ltex = {

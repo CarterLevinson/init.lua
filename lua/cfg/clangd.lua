@@ -8,8 +8,8 @@ require("clangd_extensions").setup {
       "--background-index",
       "--all-scopes-completion",
       "--completion-style=detailed",
+      "--suggest-missing-includes",
       "--function-arg-placeholders",
-      -- "--offset-encoding=utf-16",
     }
   })
 }

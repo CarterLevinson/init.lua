@@ -16,11 +16,6 @@ return {
     dependencies = "nvim-treesitter",
   },
   {
-    "nvim-treesitter/playground",
-    dependencies = "nvim-treesitter",
-    cmd = "TSPlaygroundToggle",
-  },
-  {
     "windwp/nvim-ts-autotag",
     dependencies = "nvim-treesitter",
   },
@@ -37,5 +32,6 @@ return {
   {
     "Badhi/nvim-treesitter-cpp-tools",
     dependencies = "nvim-treesitter",
+    config = true,
   }
 }

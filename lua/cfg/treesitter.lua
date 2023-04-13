@@ -18,8 +18,6 @@ require("nvim-treesitter.configs").setup {
   autotag = { enable = true },
   -- rainbow delimiters
   rainbow = { enable = true },
-  -- c++ tools
-  nt_cpp_tools = { enable = true },
   -- incremental selection based on named nodes from the grammar
   incremental_selection = {
     enable = true,
@@ -111,21 +109,6 @@ require("nvim-treesitter.configs").setup {
         },
       },
     },
-  },
-  playground = {
-    enable = true,
-    keybindings = {
-      toggle_query_editor = 'o',
-      toggle_hl_groups = 'i',
-      toggle_injected_languages = 't',
-      toggle_anonymous_nodes = 'a',
-      toggle_language_display = 'I',
-      focus_language = 'f',
-      unfocus_language = 'F',
-      update = 'R',
-      goto_node = '<cr>',
-      show_help = '?',
-    }
   },
   query_linter = {
     enable = true,

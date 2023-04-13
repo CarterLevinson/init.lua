@@ -1,15 +1,16 @@
 return {
   {
-    "yashguptaz/calvera-dark.nvim",
+    "justinsgithub/oh-my-monokai.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.g.calvera_borders = true
-      vim.cmd.colorscheme [[calvera]]
-    end
+      require("oh-my-monokai").setup{}
+      vim.cmd [[colorscheme oh-my-monokai]]
+    end,
   },
   {
     "rebelot/kanagawa.nvim",
+    "yashguptaz/calvera-dark.nvim",
     "ofirgall/ofirkai.nvim",
     "tanvirtin/monokai.nvim",
     "sainnhe/sonokai",

@@ -12,30 +12,9 @@ return {
     end,
   },
   {
-    "weilbith/nvim-code-action-menu", -- ui for lsp code actions
-    cmd = "CodeActionMenu"
-  },
-  {
-    "j-hui/fidget.nvim", -- ui for lsp progress
-    config = true
-  },
-  {
-    "smjonas/inc-rename.nvim", -- command preview for lsp rename
-    config = true,
-    cmd = "IncRename",
-  },
-  {
-    "mfussenegger/nvim-lint",
-    config = function()
-      require("cfg.lint")
-    end,
-    enabled = true,
-  },
-  {
     "MrcJkb/haskell-tools.nvim", -- haskell lsp extensions
     dependencies = {
       "nvim-lspconfig",
-      -- "toggleterm.nvim",
       "nvim-lua/plenary.nvim",
     },
     config = function()
@@ -52,6 +31,36 @@ return {
     ft = { "c", "cpp", "objc", "objcpp", "cuda" },
   },
   {
+    "weilbith/nvim-code-action-menu", -- ui for lsp code actions
+    cmd = "CodeActionMenu"
+  },
+  {
+    "j-hui/fidget.nvim", -- ui for lsp progress
+    config = true
+  },
+  {
+    "smjonas/inc-rename.nvim", -- command preview for lsp rename
+    config = true,
+    cmd = "IncRename",
+  },
+  {
+    "Fildo7525/pretty_hover",
+    opts = { border = "none" },
+    event = "LspAttach",
+  },
+  {
+    "VidocqH/lsp-lens.nvim",
+    config = true,
+    event = "LspAttach",
+  },
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      require("cfg.lint")
+    end,
+    enabled = true,
+  },
+  {
     "kosayoda/nvim-lightbulb", -- signcolumn support for lsp code actions
     dependencies = "antoinemadec/FixCursorHold.nvim",
     config = function()
@@ -59,13 +68,5 @@ return {
       vim.fn.sign_define("LightBulbSign", { text = "" })
     end,
     event = "BufWinEnter"
-  },
-  {
-    "jose-elias-alvarez/null-ls.nvim", -- use linters as lsps
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require("cfg.null-ls")
-    end,
-    enabled = false,
   },
 }

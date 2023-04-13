@@ -47,7 +47,7 @@ require("lualine").setup {
     disabled_filetypes = {},
     always_divide_middle = true,
     globalstatus = true,
-    -- theme = "kanagawa",
+    theme = "oh-my-monokai",
   },
   sections = {
     lualine_a = { "mode" },

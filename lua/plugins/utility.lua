@@ -21,13 +21,6 @@ return {
   "mbbill/undotree",
 
   {
-    "johnfrankmorgan/whitespace.nvim",
-    config = function()
-      require("cfg.whitespace")
-    end,
-  },
-
-  {
     "junegunn/vim-easy-align",
     config = function()
       nxmap("ga", "<Plug>(EasyAlign)")
@@ -42,6 +35,15 @@ return {
     enabled = false
   },
 
+  {
+    "johnfrankmorgan/whitespace.nvim",
+    config = function()
+      require("cfg.whitespace")
+    end,
+    enabled = false,
+  },
+
+  { "lewis6991/spaceless.nvim", config = true },
   { "elihunter173/dirbuf.nvim", config = true },
   { "numToStr/Comment.nvim",    config = true },
   { "chentoast/marks.nvim",     config = true },
@@ -49,6 +51,4 @@ return {
   { "kylechui/nvim-surround",   config = true },
   { "notjedi/nvim-rooter.lua",  config = true },
   { "yamatsum/nvim-cursorline", config = true },
-
-  { "lewis6991/spaceless.nvim", config = true, enabled = false },
 }
