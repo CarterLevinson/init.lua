@@ -1,9 +1,13 @@
+-- use git instead of curl to install treesitter parsers
+require("nvim-treesitter.install").prefer_git = true
 -- setup treesitter modules, all modules are disabled by default
 -- and must be enabled below
 require("nvim-treesitter.configs").setup {
   -- table of languages to always install
   -- c, lua, vim, help should always be installed
   ensure_installed = "all",
+  -- ignore certain parsers from all
+  ignore_install = { "gleam" },
   -- install parsers synchronously (only applies to 'ensure_installed')
   sync_install = false,
   -- Automatically install missing parsers when entering buffer
