@@ -1,4 +1,5 @@
 return {
+  -- navigate between vim and kitty windows
   {
     "knubie/vim-kitty-navigator",
     cond = os.getenv("TERM") == "xterm-kitty",
@@ -13,9 +14,11 @@ return {
     end,
     build = "cp ./*.py ~/.config/kitty/",
   },
+  -- run tasks in spawned kitty terminal
   {
     "jghauser/kitty-runner.nvim",
     cond = os.getenv("TERM") == "xterm-kitty",
     opts = { use_keymaps = false },
+    enabled = false,
   },
 }

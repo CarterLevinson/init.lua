@@ -1,28 +1,11 @@
 return {
+  -- window scrolling animations
   {
-    "justinsgithub/oh-my-monokai.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("oh-my-monokai").setup {}
-      vim.cmd [[colorscheme oh-my-monokai]]
-    end,
-  },
-  {
-    "uga-rosa/ccc.nvim", -- colorizer and color picker
-    opts = { highlighter = { auto_enable = true } },
-    event = "BufWinEnter",
-  },
-  {
-    "karb94/neoscroll.nvim", -- window scrolling animations
+    "karb94/neoscroll.nvim",
     opts = { easing_function = "sine" },
     event = "BufWinEnter",
   },
-  {
-    "xiyaowong/nvim-transparent", -- provides transparent background hl
-    config = true,
-    event = "BufWinEnter",
-  },
+  -- highlight indent levels
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
@@ -30,8 +13,9 @@ return {
     end,
     enabled = false,
   },
+  -- window animation and auto resize
   {
-    "anuvyklack/windows.nvim", -- window animation and auto resize
+    "anuvyklack/windows.nvim",
     dependencies = {
       "anuvyklack/middleclass",
       "anuvyklack/animation.nvim",
@@ -42,6 +26,8 @@ return {
       vim.opt.equalalways = false
     end,
     config = true,
-    enabled = false, -- try again on nightly?
+    -- try this again on nightly?
+    -- doesn't play nice with vista.vim
+    enabled = false,
   },
 }

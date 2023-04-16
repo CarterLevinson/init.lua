@@ -19,15 +19,15 @@ return {
       { "<leader>xr", cmd "Trouble lsp_references" },
       -- \xc: close the trouble window
       { "<leader>xc", cmd "TroubleClose" },
-      -- also, lsp definitions, lsp implementations,
+      -- also supports lsp definitions, lsp implementations,
       -- and lsp type definitions
     },
-    config = function()
-      require("trouble").setup { auto_close = true }
+    init = function()
       vim.cmd [[cnoreabbrev copen  Trouble quickfix]]
       vim.cmd [[cnoreabbrev lopen  Trouble loclist]]
       vim.cmd [[cnoreabbrev cclose TroubleClose]]
       vim.cmd [[cnoreabbrev lclose TroubleClose]]
     end,
+    opts = { auto_close = true },
   }
 }

@@ -5,8 +5,11 @@ return {
   "jghauser/mkdir.nvim",
 
   -- lua utilities
-  "milisims/nvim-luaref",
   "bfredl/nvim-luadev",
+  "milisims/nvim-luaref",
+  -- see also:
+  -- :h lua-guide
+  -- :h h luvref
 
   -- git utilities
   "tpope/vim-fugitive",
@@ -15,6 +18,15 @@ return {
     "lewis6991/gitsigns.nvim",
     config = true,
     event = "BufWinEnter"
+  },
+
+  -- remote editing utilities
+  {
+    "miversen33/netman.nvim",
+    config = function()
+      require("netman")
+    end,
+    lazy = true,
   },
 
   -- editing utilities
@@ -27,7 +39,7 @@ return {
     end
   },
 
-  -- TODO : add lua highlight whitespace?
+  -- TODO : add lua highlight whitespace function?
   { "lewis6991/spaceless.nvim", config = true },
   { "elihunter173/dirbuf.nvim", config = true },
   { "numToStr/Comment.nvim",    config = true },

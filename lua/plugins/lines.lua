@@ -18,7 +18,7 @@ return {
     event = "UiEnter",
     opts = { theme = 'oh-my-monokai' },
   },
-  { -- todo: one day?
+  { -- TODO: ?
     "rebelot/heirline.nvim",
     event = "UiEnter",
     dependencies = "nvim-tree/nvim-web-devicons",

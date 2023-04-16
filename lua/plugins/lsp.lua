@@ -45,7 +45,8 @@ return {
   },
   {
     "Fildo7525/pretty_hover", -- renders doxygen tags in hover
-    opts = { border = "none" },
+    -- opts = { border = "none" },
+    config = true,
     event = "LspAttach",
   },
   {

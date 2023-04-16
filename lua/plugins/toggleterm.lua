@@ -2,11 +2,16 @@ return {
   {
     "akinsho/toggleterm.nvim", -- better terminal integration
     keys = {
+      -- [count] \t: open or toggle terminal indexed at count
       { "<leader>t", },
-      { "<leader>T",  cmd "ToggleTermSendCurrentLine" },
-      { "<leader>tv", cmd "ToggleTermSendVisualSelection" },
-      { "<leader>Tv", cmd "ToggleTermSendVisualLines" },
-      { "<leader>tt", cmd "ToggleTermToggleAll" },
+      -- \tt: send current line to toggleterm
+      { "<leader>tt",  cmd "ToggleTermSendCurrentLine" },
+      -- \tv: send visual selection to toggleterm
+      { "<leader>tv",  cmd "ToggleTermSendVisualSelection" },
+      -- \ttv: send visual selection (lines mode) to toggleterm
+      { "<leader>ttv", cmd "ToggleTermSendVisualLines" },
+      -- \ta: toggle all terminals
+      { "<leader>ta",  cmd "ToggleTermToggleAll" },
     },
     opts = {
       open_mapping = "<leader>t",

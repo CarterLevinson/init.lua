@@ -1,4 +1,8 @@
-local strip_path = require("util.path").strip_path
+local util = require("util.path")
+
+local get_env = function(str)
+  return(util.strip_path(os.getenv(str)))
+end
 
 return {
   "Fymyte/mbsync.vim", -- syntax hl plugins
@@ -7,6 +11,12 @@ return {
   "jbmorgado/vim-pine-script",
   "fladson/vim-kitty",
   "mboughaba/i3config.vim",
+
+  {
+    "Civitasv/cmake-tools.nvim",
+    ft = { "cpp", "cmake" },
+    config = true,
+  },
 
   {
     "chrisbra/csv.vim", -- tabular data ftplugin
@@ -42,7 +52,7 @@ return {
       vim.g.mkdp_auto_start = 1
       vim.g.mkdp_auto_close = 1
       vim.g.mkdp_theme = "dark"
-      vim.g.mkdp_browser = strip_path(os.getenv("BROWSER"))
+      vim.g.mkdp_browser = get_env("BROWSER")
     end,
     build = function()
       vim.fn["mkdp#util#install"]()
@@ -55,7 +65,7 @@ return {
     init = function()
       vim.g.vimtex_inded_enabled = 1
       vim.g.vimtex_complete_closed_braces = 1
-      vim.g.vimtex_view_method = strip_path(os.getenv("READER"))
+      vim.g.vimtex_view_method = get_env("READER")
     end,
   },
 }
