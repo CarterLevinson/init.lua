@@ -4,18 +4,9 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      require("oh-my-monokai").setup{}
+      require("oh-my-monokai").setup {}
       vim.cmd [[colorscheme oh-my-monokai]]
     end,
-  },
-  {
-    "rebelot/kanagawa.nvim",
-    "yashguptaz/calvera-dark.nvim",
-    "ofirgall/ofirkai.nvim",
-    "tanvirtin/monokai.nvim",
-    "sainnhe/sonokai",
-    "lourenci/github-colors",
-    "rose-pine/neovim",
   },
   {
     "uga-rosa/ccc.nvim", -- colorizer and color picker
@@ -45,12 +36,12 @@ return {
       "anuvyklack/middleclass",
       "anuvyklack/animation.nvim",
     },
-    config = function()
+    init = function()
       vim.opt.winwidth = 10
       vim.opt.winminwidth = 5
       vim.opt.equalalways = false
-      require("windows").setup {}
     end,
+    config = true,
     enabled = false, -- try again on nightly?
   },
 }

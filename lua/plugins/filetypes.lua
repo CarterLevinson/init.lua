@@ -1,5 +1,8 @@
+local strip_path = require("util.path").strip_path
+
 return {
   "Fymyte/mbsync.vim", -- syntax hl plugins
+  "kovetskiy/sxhkd-vim",
   "kmonad/kmonad-vim",
   "jbmorgado/vim-pine-script",
   "fladson/vim-kitty",

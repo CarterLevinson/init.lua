@@ -22,7 +22,7 @@ globals = {
   "strip_path",
   "cmd",
   "command",
-  "bufcommand",
+  "bcommand",
   "format_as_manpage",
   "has",
 }

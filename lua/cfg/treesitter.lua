@@ -1,5 +1,3 @@
--- use git instead of curl to install parsers
-require("nvim-treesitter.install").prefer_git = true
 -- setup treesitter modules, all modules are disabled by default
 -- and must be enabled below
 require("nvim-treesitter.configs").setup {

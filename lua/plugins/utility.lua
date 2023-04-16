@@ -27,23 +27,7 @@ return {
     end
   },
 
-  {
-    "Vonr/align.nvim",
-    config = function()
-      --todo
-    end,
-    enabled = false
-  },
-
-  {
-    "johnfrankmorgan/whitespace.nvim",
-    config = function()
-      require("cfg.whitespace")
-    end,
-    enabled = false,
-  },
-
-  -- todo : add lua highlight whitespace
+  -- TODO : add lua highlight whitespace?
   { "lewis6991/spaceless.nvim", config = true },
   { "elihunter173/dirbuf.nvim", config = true },
   { "numToStr/Comment.nvim",    config = true },

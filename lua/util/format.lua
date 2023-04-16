@@ -1,4 +1,4 @@
-function _G.format_as_manpage(command)
+local format_as_manpage = function(command)
   return function(opts)
     vim.cmd("new")
     vim.cmd("r ! " .. command .. " " .. opts.args)
@@ -7,6 +7,6 @@ function _G.format_as_manpage(command)
   end
 end
 
-function _G.has(command)
-  return vim.fn.executable(command) == 1
-end
+return {
+  format_as_manpage = format_as_manpage
+}

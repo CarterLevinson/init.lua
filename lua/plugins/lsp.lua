@@ -28,7 +28,7 @@ return {
     config = function()
       require("cfg.clangd")
     end,
-    ft = { "c", "cpp", "objc", "objcpp", "cuda" },
+    ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
   },
   {
     "weilbith/nvim-code-action-menu", -- ui for lsp code actions
@@ -49,8 +49,8 @@ return {
     event = "LspAttach",
   },
   {
-    "VidocqH/lsp-lens.nvim", -- show reference counts
-    config = true,
+    "VidocqH/lsp-lens.nvim", -- show reference counts above function
+    opts = { ignore_filetype = { "sh", "r" } },
     event = "LspAttach",
   },
   {
@@ -58,15 +58,14 @@ return {
     config = function()
       require("cfg.lint")
     end,
-    enabled = true,
   },
   {
     "kosayoda/nvim-lightbulb", -- signcolumn support for lsp code actions
     dependencies = "antoinemadec/FixCursorHold.nvim",
-    config = function()
-      require("nvim-lightbulb").setup { autocmd = { enabled = true } }
+    init = function()
       vim.fn.sign_define("LightBulbSign", { text = "" })
     end,
-    event = "BufWinEnter",
+    opts = { autocmd = { enabled = true } },
+    event = "LspAttach",
   },
 }

@@ -19,43 +19,43 @@ local function lsp_format()
   lsp.buf.format { async = true }
 end
 
+-- change keymaps to use space?
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("LspConfig", {}),
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
+    nmap("gd",         lsp.buf.definition, opts)     -- go to definition
+    nmap("gD",         lsp.buf.declaration, opts)    -- go to declaration
+    nmap("gr",         lsp.buf.references, opts)     -- list all refs in qf
+    nmap("gi",         lsp.buf.implementation, opts) -- list imps in qf
 
--- callback function on lsp buffer attach
--- define keymaps and commands for LSP buffers
-local function on_attach(_, bufnr)
-  local options = { buffer = bufnr }
-  nmap("gd",         lsp.buf.definition, options) -- go to definition
-  nmap("gD",         lsp.buf.declaration, options) -- go to declaration
-  nmap("gr",         lsp.buf.references, options) -- list all refs in qf
-  nmap("gi",         lsp.buf.implementation, options) -- list imps in qf
+    nmap("gpd",        gp.goto_preview_definition, opts)
+    nmap("gpt",        gp.goto_preview_type_definition, opts)
+    nmap("gpr",        gp.goto_preview_references, opts)
+    nmap("gpc",        gp.close_all_win, opts)
 
-  nmap("gpd",        gp.goto_preview_definition, options)
-  nmap("gpt",        gp.goto_preview_type_definition, options)
-  nmap("gpr",        gp.goto_preview_references, options)
-  nmap("gpc",        gp.close_all_win, options)
+    nmap("K",          pretty.hover, opts)
+    nmap("<leader>h",  lsp.buf.signature_help, opts)
+    nmap("<leader>d",  lsp.buf.type_definition, opts)
 
-  nmap("K",          pretty.hover, options)
-  nmap("<leader>h",  lsp.buf.signature_help, options)
-  nmap("<leader>d",  lsp.buf.type_definition, options)
+    nmap("<leader>wa", lsp.buf.add_workspace_folder, opts)
+    nmap("<leader>wr", lsp.buf.remove_workspace_folder, opts)
 
-  nmap("<leader>wa", lsp.buf.add_workspace_folder, options)
-  nmap("<leader>wr", lsp.buf.remove_workspace_folder, options)
+    nmap("<leader>cl", lsp.codelens.run, opts)
 
-  nmap("<leader>cl", lsp.codelens.run, options)
+    nmap("<leader>rn", ":IncRename ", opts)
+    nmap("<leader>ca", cmd "CodeActionMenu", opts)
 
-  nmap("<leader>rn", ":IncRename ", options)
-  nmap("<leader>ca", cmd "CodeActionMenu", options)
-
-  bufcommand(bufnr, "ListWS", print_lsp_workspaces)
-  bufcommand(bufnr, "Format", lsp_format)
-end
+    bcommand(ev.buf, "ListLspWS", print_lsp_workspaces)
+    bcommand(ev.buf, "LspFormat", lsp_format)
+  end,
+})
 
 local capabilities = lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- default lsp configuration, others can extend from here
 local default_conf = {
-  on_attach = on_attach,
   settings = {
     --create nvim-cmp capabilities for lsp client
     capabilities = cmp.default_capabilities(capabilities),
@@ -104,6 +104,7 @@ local lsp_servers = {
   lua_ls = luals_conf,
   ltex = ltex_conf,
   pyright = {},
+  pylsp = {},
   r_language_server = {},
   rust_analyzer = {},
   texlab = {},
@@ -118,8 +119,7 @@ for server, conf in pairs(lsp_servers) do
   lspconfig[server].setup(config)
 end
 
--- return these core components for lsp extension plugins to build off of
+-- return core config components for lsp extension plugins to build off of
 return {
-  callback = on_attach,
-  config   = default_conf
+  default = default_conf
 }

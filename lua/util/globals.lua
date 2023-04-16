@@ -1,7 +1,33 @@
-local defaults = { silent = true }
+local command_defaults = {}
+
+function _G.has(command)
+  return vim.fn.executable(command) == 1
+end
+
+function _G.cmd(command)
+  return "<CMD>" .. command .. "<CR>"
+end
+
+function _G.command(name, cmd, opts)
+  local options = command_defaults
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.api.nvim_create_user_command(name, cmd, options)
+end
+
+function _G.bcommand(bufnr, name, cmd, opts)
+  local options = command_defaults
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.api.nvim_buf_create_user_command(bufnr, name, cmd, options)
+end
+
+keymap_defaults = { silent = true }
 
 function _G.nmap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -9,7 +35,7 @@ function _G.nmap(lhs, rhs, opts)
 end
 
 function _G.ntmap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -17,7 +43,7 @@ function _G.ntmap(lhs, rhs, opts)
 end
 
 function _G.nxmap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -25,7 +51,7 @@ function _G.nxmap(lhs, rhs, opts)
 end
 
 function _G.nvomap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -33,7 +59,7 @@ function _G.nvomap(lhs, rhs, opts)
 end
 
 function _G.nvtmap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -41,7 +67,7 @@ function _G.nvtmap(lhs, rhs, opts)
 end
 
 function _G.imap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -49,7 +75,7 @@ function _G.imap(lhs, rhs, opts)
 end
 
 function _G.ismap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -57,7 +83,7 @@ function _G.ismap(lhs, rhs, opts)
 end
 
 function _G.tmap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -65,7 +91,7 @@ function _G.tmap(lhs, rhs, opts)
 end
 
 function _G.vmap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -73,7 +99,7 @@ function _G.vmap(lhs, rhs, opts)
 end
 
 function _G.xmap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -81,7 +107,7 @@ function _G.xmap(lhs, rhs, opts)
 end
 
 function _G.smap(lhs, rhs, opts)
-  local options = defaults
+  local options = keymap_defaults
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
