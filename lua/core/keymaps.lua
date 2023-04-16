@@ -1,11 +1,3 @@
--- only if not using vim-kitty-navigator
-if os.getenv("TERM") ~= "xterm-kitty" then
-  ntmap("<C-h>", cmd "wincmd h")
-  ntmap("<C-j>", cmd "wincmd j")
-  ntmap("<C-k>", cmd "wincmd k")
-  ntmap("<C-l>", cmd "wincmd l")
-end
-
 -- pseudo auto close for '{' & '}'
 imap("{<CR>", "{<CR>}<ESC>O")
 
@@ -54,3 +46,11 @@ nmap("[<space>", [[:set paste<CR>m`O<ESC>``:set nopaste<CR>]])
 nmap("]<space>", [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
 -- nmap('[S', [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
 -- nmap(']S', [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
+
+-- only if not using vim-kitty-navigator
+if os.getenv("TERM") ~= "xterm-kitty" then
+  ntmap("<C-h>", cmd "wincmd h")
+  ntmap("<C-j>", cmd "wincmd j")
+  ntmap("<C-k>", cmd "wincmd k")
+  ntmap("<C-l>", cmd "wincmd l")
+end
