@@ -5,7 +5,7 @@ return {
     opts = { easing_function = "sine" },
     event = "BufWinEnter",
   },
-  -- highlight indent levels
+  -- highlight indentation level
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()

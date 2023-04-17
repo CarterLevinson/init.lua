@@ -8,17 +8,15 @@ lint.linters_by_ft = {
   python  = { "pylint" },
 }
 
-vim.api.nvim_create_augroup("Linters", {})
-
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
-  group = "Linters",
+  group = vim.api.nvim_create_augroup("Lint", { clear = false }),
   callback = function()
     lint.try_lint()
   end,
 })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost"}, {
-  group = "Linters",
+  group = vim.api.nvim_create_augroup("Lint", { clear = false }),
   callback = function()
     lint.try_lint("cspell")
     lint.try_lint("codespell")

@@ -33,6 +33,10 @@ return {
     "vmchale/pointfree",
     cond = has("pointfree"),
     ft = { "haskell", "lhaskell" },
+    config = function()
+      -- \pf: rewrites the line in pointfree style
+      nxmap("<leader>pf", "<Plug>Pointfree", { buffer = 0})
+    end
   },
 
   {

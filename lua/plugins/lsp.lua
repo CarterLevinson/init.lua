@@ -45,7 +45,7 @@ return {
   },
   {
     "Fildo7525/pretty_hover", -- renders doxygen tags in hover
-    -- opts = { border = "none" },
+    opts = { border = "none" },
     config = true,
     event = "LspAttach",
   },
@@ -55,18 +55,12 @@ return {
     event = "LspAttach",
   },
   {
-    "mfussenegger/nvim-lint", -- linter diagnostic interface
-    config = function()
-      require("cfg.lint")
-    end,
-  },
-  {
     "kosayoda/nvim-lightbulb", -- signcolumn support for lsp code actions
     dependencies = "antoinemadec/FixCursorHold.nvim",
-    init = function()
+    config = function()
+      require("nvim-lightbulb").setup { autocmd = { enabled = true } }
       vim.fn.sign_define("LightBulbSign", { text = "" })
     end,
-    opts = { autocmd = { enabled = true } },
     event = "LspAttach",
   },
 }

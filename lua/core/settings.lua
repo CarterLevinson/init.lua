@@ -49,6 +49,7 @@ set.expandtab             = true
 
 set.autoindent            = true
 set.smartindent           = true
+set.cindent               = true
 
 -- treesitter folds
 set.foldmethod            = "expr"
