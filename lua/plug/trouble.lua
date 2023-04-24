@@ -29,5 +29,6 @@ return {
       vim.cmd [[cnoreabbrev lclose TroubleClose]]
     end,
     opts = { auto_close = true },
+    enabled = false,
   }
 }

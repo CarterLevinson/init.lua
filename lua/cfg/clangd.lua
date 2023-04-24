@@ -1,14 +1,15 @@
-local lspc = require("cfg.lsp")
+local lspc   = require("cfg.lsp")
+local clangd = require("clangd_extensions")
 
 -- add clangd extensions specific key maps?
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("LspConfig", { clear = false }),
-  callback = function(ev)
-    local opts = { buffer = ev.buf }
-  end,
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   group = vim.api.nvim_create_augroup("LspConfig", { clear = false }),
+--   callback = function(ev)
+--     local opts = { buffer = ev.buf }
+--   end,
+-- })
 
-require("clangd_extensions").setup {
+clangd.setup {
   server = vim.tbl_deep_extend("force", lspc.default, {
     cmd = {
       "clangd",

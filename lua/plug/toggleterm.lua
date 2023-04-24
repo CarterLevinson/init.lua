@@ -25,6 +25,6 @@ return {
     },
     version = "*",
     lazy = true,
-    enabled = true,
+    enabled = false,
   }
 }

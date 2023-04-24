@@ -1,7 +1,8 @@
+local g = vim.g
+
 return {
   {
     "liuchengxu/vista.vim", -- lsp symbol / ctags browser
-    dependencies = { "junegunn/fzf.vim", enabled = false },
     keys = {
       -- \s:  toggle the vista window
       { "<leader>s",  cmd "Vista!!" },
@@ -15,18 +16,18 @@ return {
       { "<leader>sc", cmd "Vista!" },
     },
     init = function()
-      vim.g.vista_icon_indent = { "╰─➤ ", "├─➤ " }
-      vim.g.vista_sidebar_position = "vertical topleft"
-      vim.g.vista_update_on_text_changed = 1
-      vim.g.vista_default_executive = "ctags"
+      g.vista_icon_indent = { "╰─➤ ", "├─➤ " }
+      g.vista_sidebar_position = "vertical topleft"
+      g.vista_update_on_text_changed = 1
+      g.vista_default_executive = "ctags"
 
       -- use fast tags instead?
-      vim.g.vista_ctags_cmd = {
+      g.vista_ctags_cmd = {
         haskell  = "hasktags -x -o - -c",
         lhaskell = "hasktags -x -o - -c",
       }
 
-      vim.g.vista_executive_for = {
+      g.vista_executive_for = {
         awk      = "nvim_lsp",
         c        = "nvim_lsp",
         cpp      = "nvim_lsp",

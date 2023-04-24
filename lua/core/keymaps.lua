@@ -1,3 +1,4 @@
+local diagnostic = vim.diagnostic
 -- pseudo auto close for '{' & '}'
 imap("{<CR>",     "{<CR>}<ESC>O")
 
@@ -35,17 +36,19 @@ nmap('[e',        [[:m .+1<CR>==]])
 nmap(']e',        [[:m .-2<CR>==]])
 
 -- diagnostics
-nmap("[d",        vim.diagnostic.goto_prev)
-nmap("]d",        vim.diagnostic.goto_next)
-nmap("<leader>e", vim.diagnostic.open_float)
-nmap("<leader>q", vim.diagnostic.setloclist)
+nmap("[d",        diagnostic.goto_prev)
+nmap("]d",        diagnostic.goto_next)
+
+nmap("<space>e",  diagnostic.open_float)
+nmap("<space>l",  diagnostic.setloclist)
+nmap("<space>q",  diagnostic.setqflist)
 
 -- insert / remove blank lines, using '[' and ']' as leader
 -- how to make these dot repetable
 nmap("[<space>",  [[:set paste<CR>m`O<ESC>``:set nopaste<CR>]])
 nmap("]<space>",  [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
--- nmap('[S', [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
--- nmap(']S', [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
+nmap('[s',        [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
+nmap(']s',        [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
 
 -- only if not using vim-kitty-navigator
 if os.getenv("TERM") ~= "xterm-kitty" then

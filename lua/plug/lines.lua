@@ -8,6 +8,15 @@ return {
     event = "UiEnter",
     enabled = true,
   },
+  { -- TODO: ?
+    "rebelot/heirline.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("cfg.heirline")
+    end,
+    event = "UiEnter",
+    enabled = false,
+  },
   {
     "utilyre/barbecue.nvim",
     version = "*",
@@ -17,14 +26,5 @@ return {
     },
     event = "UiEnter",
     opts = { theme = 'oh-my-monokai' },
-  },
-  { -- TODO: ?
-    "rebelot/heirline.nvim",
-    event = "UiEnter",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("cfg.heirline")
-    end,
-    enabled = false,
   },
 }

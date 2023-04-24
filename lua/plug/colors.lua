@@ -11,13 +11,13 @@ return {
   -- transparent background highlighting
   {
     "xiyaowong/nvim-transparent",
-    config = true,
     event = "BufWinEnter",
+    opts = {},
   },
   -- colorizer and color picker
   {
     "uga-rosa/ccc.nvim",
-    opts = { highlighter = { auto_enable = true } },
     event = "BufWinEnter",
+    opts = { highlighter = { auto_enable = true } },
   }
 }

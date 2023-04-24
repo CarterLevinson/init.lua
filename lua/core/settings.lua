@@ -49,7 +49,6 @@ set.expandtab             = true
 
 set.autoindent            = true
 set.smartindent           = true
-set.cindent               = true
 
 -- treesitter folds
 set.foldmethod            = "expr"
@@ -70,16 +69,16 @@ set.wildignore            = {
 }
 
 -- set custom listchars
--- set.listchars             = {
---   eol                     = "↲",
---   tab                     = "»·",
---   space                   = "␣",
---   trail                   = "·",
---   extends                 = "☛",
---   precedes                = "☚",
---   conceal                 = "┊",
---   nbsp                    = "☠",
--- }
+set.listchars             = {
+  eol                     = "↲",
+  tab                     = "»·",
+  space                   = "␣",
+  trail                   = "·",
+  extends                 = "☛",
+  precedes                = "☚",
+  conceal                 = "┊",
+  nbsp                    = "☠",
+}
 
 -- set :grep to use ripgrep if installed
 if has("rg") then
@@ -88,4 +87,4 @@ if has("rg") then
 end
 
 -- disable virtual text and signcolumn for built in diagnostics
-diagnostic.config { virtual_text = false,  signs = false }
+diagnostic.config({ virtual_text = false,  signs = false })

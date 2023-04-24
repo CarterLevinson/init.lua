@@ -1,19 +1,20 @@
+local set = vim.opt
+
 return {
   -- window scrolling animations
   {
     "karb94/neoscroll.nvim",
-    opts = { easing_function = "sine" },
     event = "BufWinEnter",
+    opts = { easing_function = "sine" },
   },
   -- highlight indentation level
   {
     "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("cfg.indent")
-    end,
-    enabled = false,
+    opts = {},
   },
   -- window animation and auto resize
+  -- try this again on nightly?
+  -- doesn't play nice with vista.vim
   {
     "anuvyklack/windows.nvim",
     dependencies = {
@@ -21,13 +22,11 @@ return {
       "anuvyklack/animation.nvim",
     },
     init = function()
-      vim.opt.winwidth = 10
-      vim.opt.winminwidth = 5
-      vim.opt.equalalways = false
+      set.winwidth    = 10
+      set.winminwidth = 5
+      set.equalalways = false
     end,
-    config = true,
-    -- try this again on nightly?
-    -- doesn't play nice with vista.vim
+    opts = {},
     enabled = false,
   },
 }

@@ -1,8 +1,10 @@
+-- setup git branch component using vim-fugitive
 local fugitive_branch = {
   "FugitiveHead",
   icon = "",
 }
 
+-- setup git diff component for buffer using gitsigns.nvim
 local gitsigns_diff = {
   "diff",
   source = function()
@@ -17,6 +19,7 @@ local gitsigns_diff = {
   end
 }
 
+-- setup filename component
 local fname = {
   "filename",
   file_status = true,
@@ -28,7 +31,8 @@ local fname = {
   }
 }
 
-local diag = {
+-- setup diagnostics component
+local diagnostics = {
   "diagnostics",
   sources = {
     "nvim_lsp",
@@ -37,8 +41,11 @@ local diag = {
   },
 }
 
+-- display hex value for byte under cursor using vim statusline syntax
+-- see :h statusline
 local display_byte = [["0x%B"]]
 
+-- setup lualine with specified components
 require("lualine").setup {
   options = {
     icons_enabled = true,
@@ -51,7 +58,7 @@ require("lualine").setup {
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { fugitive_branch, gitsigns_diff, diag },
+    lualine_b = { fugitive_branch, gitsigns_diff, diagnostics },
     lualine_c = { fname },
     lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_y = { "progress", "filesize", display_byte },

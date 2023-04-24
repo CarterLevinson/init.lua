@@ -12,7 +12,6 @@ ismap("S-<Tab>", snippy.previous("S-<Tab>"))
 xmap("<Tab>",    snippy.cut_text, { remap = true })
 nmap("g<Tab>",   snippy.cut_text, { remap = true })
 
-
 local function select_next(fallback)
   if cmp.visible() then
     cmp.select_next_item()
