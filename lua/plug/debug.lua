@@ -32,12 +32,4 @@ return {
     end,
     cmd = { "Make", "Dispatch", "Start", "Spawn" },
   },
-  -- vim database interface: commands + user interface
-  -- {
-  --   "kristijanhusak/vim-dadbod-ui",
-  --   dependencies = "tpope/vim-dadbod",
-  --   cmd = { "DBUI", "DB" },
-  --   enabled = false,
-  -- },
-  -- { "kristijanhusak/vim-dadbod-completion", enabled = false },
 }

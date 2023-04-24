@@ -17,26 +17,6 @@ return {
   "fladson/vim-kitty",
   "mboughaba/i3config.vim",
 
-  -- configures lua-ls for neovim development
-  {
-    "folke/neodev.nvim",
-    dependencies = "nvim-lspconfig",
-    ft = "lua",
-    config = function()
-      require("cfg.luals")
-    end,
-  },
-
-  -- provides json schemas for json ls
-  {
-    "b0o/schemastore.nvim",
-    dependencies = "nvim-lspconfig",
-    ft = "json",
-    config = function()
-      require("cfg.jsonls")
-    end,
-  },
-
   -- ftplugin for working with tabular data in vim
   {
     "chrisbra/csv.vim",
@@ -76,6 +56,26 @@ return {
       require("cfg.hls")
     end,
     ft = { "haskell", "lhaskell", "cabal" },
+  },
+
+  -- configures lua-ls for neovim development
+  {
+    "folke/neodev.nvim",
+    dependencies = "nvim-lspconfig",
+    ft = "lua",
+    config = function()
+      require("cfg.luals")
+    end,
+  },
+
+  -- provides json schemas for json ls
+  {
+    "b0o/schemastore.nvim",
+    dependencies = "nvim-lspconfig",
+    ft = "json",
+    config = function()
+      require("cfg.jsonls")
+    end,
   },
 
   -- C family plugins
