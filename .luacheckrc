@@ -19,11 +19,9 @@ globals = {
   "vmap",
   "xmap",
   "smap",
-  "strip_path",
   "cmd",
   "command",
   "bcommand",
-  "format_as_manpage",
   "has",
 }
 

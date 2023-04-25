@@ -1,5 +1,3 @@
-local set = vim.opt
-
 return {
   -- window scrolling animations
   {
@@ -10,23 +8,27 @@ return {
   -- highlight indentation level
   {
     "lukas-reineke/indent-blankline.nvim",
-    opts = {},
+    opts = { use_treesitter = true },
   },
-  -- window animation and auto resize
-  -- try this again on nightly?
-  -- doesn't play nice with vista.vim
+  -- current colorscheme
   {
-    "anuvyklack/windows.nvim",
-    dependencies = {
-      "anuvyklack/middleclass",
-      "anuvyklack/animation.nvim",
-    },
-    init = function()
-      set.winwidth    = 10
-      set.winminwidth = 5
-      set.equalalways = false
+    "justinsgithub/oh-my-monokai.nvim",
+    lazy = false,
+    config = function()
+      require("oh-my-monokai").setup {}
+      vim.cmd [[colorscheme oh-my-monokai]]
     end,
-    opts = {},
-    enabled = false,
   },
+  -- transparent background highlighting
+  {
+    "xiyaowong/nvim-transparent",
+    event = "BufWinEnter",
+    opts = {},
+  },
+  -- colorizer and color picker
+  {
+    "uga-rosa/ccc.nvim",
+    event = "BufWinEnter",
+    opts = { highlighter = { auto_enable = true } },
+  }
 }

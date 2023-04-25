@@ -72,7 +72,7 @@ cmp.setup {
   -- nvim snippy
   snippet = {
     expand = function(args)
-      require "snippy".expand_snippet(args.body)
+      require("snippy").expand_snippet(args.body)
     end,
   },
   -- borders
@@ -145,12 +145,16 @@ cmp.setup {
       return item
     end,
   },
+  -- experimental cmp features
+  experimental = {
+    ghost_text = true,
+  },
   -- set up sources
   sources = cmp.config.sources {
     { name = "nvim_lsp_signature_help" },
-    { name = "nvim_lsp",  },
+    { name = "nvim_lsp" },
     { name = "snippy" },
-    { name = "rg", max_item_count = 15 },
+    { name = "rg" },
     { name = "path" },
     { name = "lua-latex-symbols" },
   }
@@ -161,7 +165,7 @@ cmp.setup.filetype("gitcommit", {
   sources = cmp.config.sources {
     { name = "git" },
     { name = "snippy" },
-    { name = "buffer" },
+    { name = "rg" },
   }
 })
 
@@ -171,7 +175,7 @@ cmp.setup.filetype({ "tex", "plaintex" }, {
     { name = "nvim_lsp" },
     { name = "omni" },
     { name = "snippy" },
-    { name = "buffer" },
+    { name = "rg" },
   }
 })
 
@@ -179,20 +183,19 @@ cmp.setup.filetype({ "tex", "plaintex" }, {
 cmp.setup.filetype("query", {
   sources = cmp.config.sources({
     { name = "omni" },
-    { name = "treesitter" }
-  }, {
+    { name = "treesitter" },
     { name = "buffer" }
   })
 })
 
--- set up database integration
-cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
-  sources = cmp.config.sources({
-    { name = "vim-dadbod-completion" }
-  }, {
-    { name = "buffer" }
-  })
-})
+-- -- set up database integration
+-- cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+--   sources = cmp.config.sources({
+--     { name = "vim-dadbod-completion" }
+--   }, {
+--     { name = "buffer" }
+--   })
+-- })
 
 -- use buffer and lsp document symbol source for `/`
 cmp.setup.cmdline({ "/", "?" }, {

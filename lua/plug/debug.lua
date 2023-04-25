@@ -1,5 +1,3 @@
-local g = vim.g
-
 return {
   -- nvim dap user interface and protocol implementation
   {
@@ -21,14 +19,14 @@ return {
   {
     "kevinhwang91/nvim-bqf",
     ft = "qf" ,
-    opts = {},
+    opts = {}
   },
   -- async build cmds linked to vim qf window
   {
     "radenling/vim-dispatch-neovim",
     dependencies = "tpope/vim-dispatch",
     init = function()
-      g.dispatch_no_maps = 1
+      vim.g.dispatch_no_maps = 1
     end,
     cmd = { "Make", "Dispatch", "Start", "Spawn" },
   },

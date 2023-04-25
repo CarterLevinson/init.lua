@@ -8,8 +8,12 @@ local function lsp_format_buffer()
   lsp.buf.format({ async = true })
 end
 
+local function pretty_print(obj)
+  vim.print(vim.inspect(obj))
+end
+
 local function print_lsp_ws_folders()
-  vim.pretty_print(lsp.buf.list_workspace_folders())
+  pretty_print(lsp.buf.list_workspace_folders())
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -33,14 +37,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     nmap("<space>wa", lsp.buf.add_workspace_folder, opts)
     nmap("<space>wr", lsp.buf.remove_workspace_folder, opts)
+    nmap("<space>ls", print_lsp_ws_folders, opts)
 
     nmap("<space>cl", lsp.codelens.run, opts)
 
-    nmap("<space>rn", ":IncRename ", opts)
+    nmap("<space>rn", ":IncRename " , opts)
     nmap("<space>ca", cmd "CodeActionMenu", opts)
 
     bcommand(ev.buf,  "Format", lsp_format_buffer)
-    bcommand(ev.buf,  "ListWorkSpace", print_lsp_ws_folders)
+    bcommand(ev.buf,  "ListWS", print_lsp_ws_folders)
   end,
 })
 
@@ -56,7 +61,7 @@ local config = {
     -- disable telemetry (if any)
     telemetry = { enable = false },
   },
-  -- enable signle file mode, if possible
+  -- enable single file mode, if possible
   single_file_support = true,
 }
 
@@ -79,7 +84,5 @@ for server, _ in pairs(lsp_servers) do
   lspconfig[server].setup(config)
 end
 
--- return default config for extension plugins to build confguration
-return {
-  default = config
-}
+-- return default config for lsp extension plugins to build confgurations
+return { default = config }

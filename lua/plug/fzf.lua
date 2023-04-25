@@ -6,7 +6,9 @@ return {
     keys = {
       { "<leader>f",   cmd "FzfLua files" },
       { "<leader>g",   cmd "FzfLua live_grep" },
-      -- { "<leader>g",   cmd "FzfLua grep_cword" },
+      { "<leader>gw",  cmd "FzfLua grep_cword" },
+      { "<leader>gW",  cmd "FzfLua grep_cWORD" },
+      { "<leader>gr",  cmd "FzfLua live_grep_resume"},
       { "<leader>b",   cmd "FzfLua buffers" },
       { "<leader>fo",  cmd "FzfLua oldfiles" },
       { "<leader>fq",  cmd "FzfLua quickfix" },

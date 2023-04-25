@@ -1,7 +1,6 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    -- for cmp default capabilities
     dependencies = "hrsh7th/cmp-nvim-lsp",
     config = function()
       require("cfg.lsp")
@@ -44,7 +43,6 @@ return {
   -- displays LightBulbSign in signcolumn if code action is available
   {
     "kosayoda/nvim-lightbulb",
-    dependencies = "antoinemadec/FixCursorHold.nvim",
     event = "LspAttach",
     init = function()
       vim.fn.sign_define("LightBulbSign", { text = '' })

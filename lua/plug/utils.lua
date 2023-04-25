@@ -1,26 +1,24 @@
 return {
-  -- shell utilities
+  -- shell
   "tpope/vim-eunuch",
-  "aymericbeaumet/vim-symlink",
   "jghauser/mkdir.nvim",
 
-  -- lua utilities
-  "bfredl/nvim-luadev",
+  -- lua
   "milisims/nvim-luaref",
+  "bfredl/nvim-luadev",
   -- see also:
-  -- :h lua-guide
-  -- :h h luvref
+  -- :h lua-guide & :h luvref
 
-  -- git utilities
+  -- git
   "tpope/vim-fugitive",
 
   {
     "lewis6991/gitsigns.nvim",
-    config = true,
-    event = "BufWinEnter"
+    event = "BufWinEnter",
+    opts = {},
   },
 
-  -- remote editing utilities
+  -- editing
   {
     "miversen33/netman.nvim",
     config = function()
@@ -29,7 +27,6 @@ return {
     lazy = true,
   },
 
-  -- editing utilities
   "mbbill/undotree",
 
   {

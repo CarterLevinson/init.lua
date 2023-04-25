@@ -13,4 +13,4 @@ local config = vim.tbl_deep_extend("force", lspc.default, {
   }
 })
 
-lspconfig["luals"].setup(config)
+lspconfig["lua_ls"].setup(config)

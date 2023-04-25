@@ -8,6 +8,8 @@ lint.linters_by_ft = {
   python  = { "pylint" },
 }
 
+vim.api.nvim_create_augroup("Lint", {})
+
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
   group = vim.api.nvim_create_augroup("Lint", { clear = false }),
   callback = function()
@@ -15,7 +17,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
   group = vim.api.nvim_create_augroup("Lint", { clear = false }),
   callback = function()
     lint.try_lint("cspell")

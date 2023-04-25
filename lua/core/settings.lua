@@ -10,6 +10,7 @@ g.loaded_node_provider    = 0
 g.loaded_netrw            = 1
 g.loaded_netrwPlugin      = 1
 g.loaded_netrwSettings    = 1
+g.loaded_matchit          = 1
 
 set.confirm               = true
 set.vb                    = true
@@ -86,5 +87,5 @@ if has("rg") then
   set.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
 
--- disable virtual text and signcolumn for built in diagnostics
+-- configure nvim diagnostic module
 diagnostic.config({ virtual_text = false,  signs = false })

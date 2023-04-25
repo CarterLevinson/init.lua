@@ -1,12 +1,10 @@
-local strip_path = function(path)
+local function strip_path(path)
   return path:match("^.+/(.+)$")
 end
 
-local strip_env = function(env)
+local function strip_env(env)
   return strip_path(os.getenv(env))
 end
-
-local g = vim.g
 
 return {
   -- vim syntax highlighting files
@@ -16,6 +14,7 @@ return {
   "jbmorgado/vim-pine-script",
   "fladson/vim-kitty",
   "mboughaba/i3config.vim",
+  "neovimhaskell/haskell-vim",
 
   -- ftplugin for working with tabular data in vim
   {
@@ -24,11 +23,6 @@ return {
   },
 
   -- Haskell ftplugins
-  {
-    "neovimhaskell/haskell-vim",
-    ft = { "haskell", "lhaskell" },
-    enabled = false,
-  },
 
   {
     "Twinside/vim-hoogle",
@@ -39,59 +33,18 @@ return {
   {
     "vmchale/pointfree",
     cond = has("pointfree"),
-    ft = { "haskell", "lhaskell" },
     config = function()
       -- \pf: rewrites the current line in "pointfree" haskell
       nxmap("<leader>pf", "<Plug>Pointfree", { buffer = 0 })
-    end
-  },
-
-  {
-    "MrcJkb/haskell-tools.nvim", -- haskell lsp extensions
-    dependencies = {
-      "nvim-lspconfig",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("cfg.hls")
     end,
-    ft = { "haskell", "lhaskell", "cabal" },
-  },
-
-  -- configures lua-ls for neovim development
-  {
-    "folke/neodev.nvim",
-    dependencies = "nvim-lspconfig",
-    ft = "lua",
-    config = function()
-      require("cfg.luals")
-    end,
-  },
-
-  -- provides json schemas for json ls
-  {
-    "b0o/schemastore.nvim",
-    dependencies = "nvim-lspconfig",
-    ft = "json",
-    config = function()
-      require("cfg.jsonls")
-    end,
+    ft = { "haskell", "lhaskell" },
   },
 
   -- C family plugins
   {
     "Civitasv/cmake-tools.nvim",
-    ft = { "c", "cpp", "cmake" },
+    ft = "cmake",
     opts = {},
-  },
-
-  {
-    "p00f/clangd_extensions.nvim", -- clangd lsp extensions
-    dependencies = "nvim-lspconfig",
-    config = function()
-      require("cfg.clangd")
-    end,
-    ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
   },
 
   -- Markdown plugins
@@ -103,10 +56,10 @@ return {
   {
     "iamcco/markdown-preview.nvim",
     init = function()
-      g.mkdp_auto_start = 1
-      g.mkdp_auto_close = 1
-      g.mkdp_theme = "dark"
-      g.mkdp_browser = strip_env("BROWSER")
+      vim.g.mkdp_auto_start = 1
+      vim.g.mkdp_auto_close = 1
+      vim.g.mkdp_theme = "dark"
+      vim.g.mkdp_browser = strip_env("BROWSER")
     end,
     build = function()
       vim.fn["mkdp#util#install"]()
@@ -118,19 +71,8 @@ return {
   {
     "lervag/vimtex",
     init = function()
-      g.vimtex_inded_enabled = 1
-      g.vimtex_complete_closed_braces = 1
-      g.vimtex_view_method = strip_env("READER")
-    end,
-  },
-
-  -- ltexls extra features plugin
-  {
-    "barreiroleo/ltex_extra.nvim",
-    ft = { "markdown", "rmd", "tex" },
-    dependencies = "nvim-lspconfig",
-    config = function()
-      require("cfg.ltexls")
+      vim.g.vimtex_complete_closed_braces = 1
+      vim.g.vimtex_view_method = strip_env("READER")
     end,
   },
 }

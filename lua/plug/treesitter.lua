@@ -26,13 +26,13 @@ return {
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter",
-    opts = { snippet_engine = "snippy" },
     cmd = "Neogen",
+    opts = { snippet_engine = "snippy" },
   },
   -- treesitter semantic functions for generating cpp code
   {
     "Badhi/nvim-treesitter-cpp-tools",
     dependencies = "nvim-treesitter",
-    config = true,
+    opts = {},
   }
 }

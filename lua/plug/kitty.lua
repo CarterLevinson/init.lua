@@ -1,12 +1,10 @@
-local g = vim.g
-
 return {
-  -- easyily navigate between vim windows and kitty windows
+  -- easily navigate between vim windows and kitty windows
   {
     "knubie/vim-kitty-navigator",
     cond = os.getenv("TERM") == "xterm-kitty",
     init = function()
-      g.kitty_navigator_no_mappings = 1
+      vim.g.kitty_navigator_no_mappings = 1
     end,
     config = function()
       ntmap("<C-h>", cmd "KittyNavigateLeft")

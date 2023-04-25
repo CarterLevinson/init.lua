@@ -1,23 +1,24 @@
 return {
   "uga-rosa/ugaterm.nvim",
-  keys = { "<leader>t", "<leader>tn" },
-  cmd = { "UgatermOpen", "UgatermNew" },
-  config = function()
+  keys = {
     -- \t: open the most recent terminal or exec UgatermNew
-    ntmap("<leader>t",   cmd "UgatermOpen")
+    { "<leader>t",   cmd "UgatermOpen",   mode = { "n", "t" } },
     -- \to: same as \t
-    ntmap("<leader>to",  cmd "UgatermOpen")
+    { "<leader>to",  cmd "UgatermOpen",   mode = { "n", "t" } },
     -- \tn: create a new terminal buffer
-    ntmap("<leader>tn",  cmd "UgatermNew")
+    { "<leader>tn",  cmd "UgatermNew",    mode = { "n", "t" } },
     -- \tt: toggle the current terminal buffer
-    ntmap("<leader>tt",  cmd "UgatermToggle")
+    { "<leader>tt",  cmd "UgatermToggle", mode = { "n", "t" } },
     -- \ts: select a terminal using vim.ui.select()
-    ntmap("<leader>ts",  cmd "UgatermSelect")
+    { "<leader>ts",  cmd "UgatermSelect", mode = { "n", "t" } },
     -- \td: delete current terminal buffer
-    ntmap("<leader>td",  cmd "UgatermDelete")
+    { "<leader>td",  cmd "UgatermDelete", mode = { "n", "t" } },
+    -- \tc: same as \td
+    { "<leader>tc",  cmd "UgatermDelete", mode = { "n", "t" } },
     -- \trn: rename the current terminal buffer
-    ntmap("<leader>trn", cmd "UgatermRename")
-  end,
+    { "<leader>trn", cmd "UgatermRename", mode = { "n", "t" } },
+  },
+  cmd = { "UgatermOpen", "UgatermNew" },
   lazy = true,
   opts = {},
 }
