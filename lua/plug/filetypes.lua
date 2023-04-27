@@ -17,10 +17,11 @@ return {
   "neovimhaskell/haskell-vim",
 
   -- ftplugin for working with tabular data in vim
-  {
-    "chrisbra/csv.vim",
-    ft = { "csv", "tsv" }
-  },
+  "chrisbra/csv.vim",
+  -- {
+  --   "chrisbra/csv.vim",
+  --   ft = { "csv", "tsv" }
+  -- },
 
   -- Haskell ftplugins
 
@@ -72,6 +73,7 @@ return {
     "lervag/vimtex",
     init = function()
       vim.g.vimtex_complete_closed_braces = 1
+      vim.g.vimtex_quickfix_method = "pplatex"
       vim.g.vimtex_view_method = strip_env("READER")
     end,
   },

@@ -45,6 +45,6 @@ return {
     config = function()
       require("cfg.clangd")
     end,
-    ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+    ft = { "c", "cpp", "objc", "objcpp", "cuda" },
   },
 }

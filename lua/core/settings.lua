@@ -88,4 +88,9 @@ if has("rg") then
 end
 
 -- configure nvim diagnostic module
-diagnostic.config({ virtual_text = false,  signs = false })
+diagnostic.config {
+  signs = false,
+  virtual_text = false,
+  float = { source = true },
+}
+

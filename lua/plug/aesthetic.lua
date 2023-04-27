@@ -8,7 +8,7 @@ return {
   -- highlight indentation level
   {
     "lukas-reineke/indent-blankline.nvim",
-    opts = { use_treesitter = true },
+    opts = {},
   },
   -- current colorscheme
   {
@@ -16,7 +16,7 @@ return {
     lazy = false,
     config = function()
       require("oh-my-monokai").setup {}
-      vim.cmd [[colorscheme oh-my-monokai]]
+      vim.cmd.colorscheme [[oh-my-monokai]]
     end,
   },
   -- transparent background highlighting

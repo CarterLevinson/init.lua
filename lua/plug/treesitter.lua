@@ -17,11 +17,6 @@ return {
     "nvim-treesitter/nvim-treesitter-refactor",
     dependencies = "nvim-treesitter",
   },
-  -- use treesitter to automagically close html tags
-  {
-    "windwp/nvim-ts-autotag",
-    dependencies = "nvim-treesitter",
-  },
   -- use treesitter and snippet_engine to generate docstrings
   {
     "danymat/neogen",
@@ -34,5 +29,11 @@ return {
     "Badhi/nvim-treesitter-cpp-tools",
     dependencies = "nvim-treesitter",
     opts = {},
-  }
+  },
+  -- use treesitter to automagically close html tags
+  {
+    "windwp/nvim-ts-autotag",
+    dependencies = "nvim-treesitter",
+    opts = {}
+  },
 }

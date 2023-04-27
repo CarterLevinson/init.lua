@@ -2,6 +2,7 @@ local dap = require("dap")
 
 local debugger = "/vscode-cpptools/extension/debugAdapters/bin/OpenDebugAD7"
 
+-- prevoius
 dap.adapters.cppdbg = {
   id = "cppdgb",
   type = "executable",
