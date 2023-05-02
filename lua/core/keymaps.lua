@@ -1,3 +1,4 @@
+local diagnostic = vim.diagnostic
 -- pseudo auto close for '{' & '}'
 imap("{<CR>",          "{<CR>}<ESC>O")
 
@@ -29,12 +30,10 @@ nmap("]Q",             cmd "clast")
 nmap('[e',             [[:m .+1<CR>==]])
 nmap(']e',             [[:m .-2<CR>==]])
 
-nmap("[d",             vim.diagnostic.goto_prev)
-nmap("]d",             vim.diagnostic.goto_next)
+nmap("[d",             diagnostic.goto_prev)
+nmap("]d",             diagnostic.goto_next)
 
-nmap("<space>e",       vim.diagnostic.open_float)
-nmap("<space>q",       cmd "cwindow")
-nmap("<space>l",       cmd "lwindow")
+nmap("<space>e",       diagnostic.open_float)
 
 nmap("<space>w",       cmd "write")
 nmap("<space>c",       cmd "close")
@@ -48,10 +47,14 @@ nmap("]<space>",       [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
 nmap('[s',             [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
 nmap(']s',             [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
 
+-- turn these into toggle functiosn
+nmap("<space>q",       cmd "copen")
+nmap("<space>l>",      cmd "lopen")
+
 -- only if not using vim-kitty-navigator
 if os.getenv("TERM") ~= "xterm-kitty" then
-  ntmap("<C-h>", cmd "wincmd h")
-  ntmap("<C-j>", cmd "wincmd j")
-  ntmap("<C-k>", cmd "wincmd k")
-  ntmap("<C-l>", cmd "wincmd l")
+  ntmap("<C-h>",       cmd "wincmd h")
+  ntmap("<C-j>",       cmd "wincmd j")
+  ntmap("<C-k>",       cmd "wincmd k")
+  ntmap("<C-l>",       cmd "wincmd l")
 end

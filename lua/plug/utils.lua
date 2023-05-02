@@ -5,9 +5,8 @@ return {
 
   -- lua
   "milisims/nvim-luaref",
+  -- see also :h lua-guide & :h luvref
   "bfredl/nvim-luadev",
-  -- see also:
-  -- :h lua-guide & :h luvref
 
   -- git
   "tpope/vim-fugitive",
@@ -25,8 +24,10 @@ return {
       require("netman")
     end,
     lazy = true,
+    enabled = false,
   },
 
+  -- visualize the undo tree
   "mbbill/undotree",
 
   {
@@ -36,13 +37,14 @@ return {
     end
   },
 
+  { "elihunter173/dirbuf.nvim", opts = {} },
+
   -- TODO : add lua highlight whitespace function?
   { "lewis6991/spaceless.nvim", opts = {} },
 
-  { "elihunter173/dirbuf.nvim", opts = {} },
-  { "numToStr/Comment.nvim",    opts = {} },
   { "chentoast/marks.nvim",     opts = {} },
   { "tversteeg/registers.nvim", opts = {} },
+  { "numToStr/Comment.nvim",    opts = {} },
   { "kylechui/nvim-surround",   opts = {} },
   { "notjedi/nvim-rooter.lua",  opts = {} },
   { "yamatsum/nvim-cursorline", opts = {} },

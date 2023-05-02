@@ -17,23 +17,25 @@ return {
     "nvim-treesitter/nvim-treesitter-refactor",
     dependencies = "nvim-treesitter",
   },
-  -- use treesitter and snippet_engine to generate docstrings
+  -- use treesitter to automagically close html tags
   {
-    "danymat/neogen",
+    "windwp/nvim-ts-autotag",
     dependencies = "nvim-treesitter",
-    cmd = "Neogen",
-    opts = { snippet_engine = "snippy" },
+    opts = {}
   },
   -- treesitter semantic functions for generating cpp code
   {
     "Badhi/nvim-treesitter-cpp-tools",
     dependencies = "nvim-treesitter",
     opts = {},
+    ft = "cpp",
+    lazy = true,
   },
-  -- use treesitter to automagically close html tags
+  -- use treesitter and snippet_engine to generate docstrings
   {
-    "windwp/nvim-ts-autotag",
+    "danymat/neogen",
     dependencies = "nvim-treesitter",
-    opts = {}
+    cmd = "Neogen",
+    opts = { snippet_engine = "snippy" },
   },
 }

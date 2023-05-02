@@ -1,8 +1,10 @@
 return {
-  { "junegunn/fzf.vim", lazy = true },
   {
-    "ibhagwan/fzf-lua", -- fuzzy finder
-    dependencies = "nvim-tree/nvim-web-devicons",
+    "ibhagwan/fzf-lua", -- fuzzy finder interface
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      { "junegunn/fzf.vim", enabled = false },
+    },
     keys = {
       { "<leader>f",   cmd "FzfLua files" },
       { "<leader>g",   cmd "FzfLua live_grep" },
@@ -24,6 +26,16 @@ return {
       { "<leader>fR",  cmd "FzfLua registers" },
     },
     cmd = "FzfLua",
-    opts = { winopts = { fullscreen = true } },
+    opts = {
+      winopts = {
+        border = "double",
+        hl = {
+          normal = "NormalFloat",
+          border = "NormalFloat",
+          cursorline = "Normal",
+        },
+      }
+    },
+    lazy = true,
   }
 }

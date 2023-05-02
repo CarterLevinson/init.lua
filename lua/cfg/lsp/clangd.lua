@@ -17,8 +17,9 @@ clangd.setup {
       "--background-index",
       "--all-scopes-completion",
       "--completion-style=detailed",
-      "--suggest-missing-includes",
       "--function-arg-placeholders",
+      "--header-insertion=iwyu",
+      "--header-insertion-decorators",
     }
   })
 }

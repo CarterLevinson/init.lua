@@ -20,6 +20,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("LspConfig", {}),
   callback = function(ev)
     local opts = { buffer = ev.buf }
+
     nmap("gd",        lsp.buf.definition, opts)     -- go to definition
     nmap("gD",        lsp.buf.declaration, opts)    -- go to declaration
     nmap("gr",        lsp.buf.references, opts)     -- list all refs in qf
@@ -32,7 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     nmap("K",         pretty.hover, opts)
     nmap("<space>h",  lsp.buf.signature_help, opts)
-    nmap("<space>d",  lsp.buf.type_definition, opts)
+    nmap("<space>t",  lsp.buf.type_definition, opts)
     nmap("<space>f",  lsp_format_buffer, opts)
 
     nmap("<space>wa", lsp.buf.add_workspace_folder, opts)
@@ -66,7 +67,7 @@ local config = {
 }
 
 -- list of installed lsp servers with default configurations
-local lsp_servers = {
+local servers = {
   awk_ls = {},
   bashls = {},
   cmake = {},
@@ -80,7 +81,7 @@ local lsp_servers = {
 }
 
 -- setup each lsp server in list
-for server, _ in pairs(lsp_servers) do
+for server, _ in pairs(servers) do
   lspconfig[server].setup(config)
 end
 

@@ -6,12 +6,12 @@ return {
       require("cfg.lsp")
     end,
   },
-  -- ui for lsp code actions
+  -- ui-menu for lsp code actions
   {
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu"
   },
-  -- command preview for lsp rename
+  -- command preview applied to lsp rename
   {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
@@ -32,7 +32,7 @@ return {
   {
     "Fildo7525/pretty_hover",
     event = "LspAttach",
-    opts = { border = "none" },
+    opts = { border = "double" },
   },
   -- show reference counts above function if lsp supports codelens
   {

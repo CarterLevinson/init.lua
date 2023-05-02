@@ -18,10 +18,6 @@ return {
 
   -- ftplugin for working with tabular data in vim
   "chrisbra/csv.vim",
-  -- {
-  --   "chrisbra/csv.vim",
-  --   ft = { "csv", "tsv" }
-  -- },
 
   -- Haskell ftplugins
 

@@ -25,6 +25,6 @@ return {
       "SmiteshP/nvim-navic",
     },
     event = "UiEnter",
-    opts = { theme = 'oh-my-monokai' },
+    opts = { theme = "auto" },
   },
 }

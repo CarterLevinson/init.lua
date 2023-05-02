@@ -10,9 +10,9 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-nvim-lsp-document-symbol",
-    "ray-x/cmp-treesitter",
     "amarakon/nvim-cmp-lua-latex-symbols",
-    "lukas-reineke/cmp-rg",
+    "ray-x/cmp-treesitter",
+    { "lukas-reineke/cmp-rg", enabled = false },
     "lukas-reineke/cmp-under-comparator", -- extra cmp comparator
     {
       "petertriho/cmp-git",

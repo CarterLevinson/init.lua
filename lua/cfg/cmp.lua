@@ -1,16 +1,17 @@
-local snippy   = require("snippy.mapping")
-local cmp      = require("cmp")
-local set      = vim.opt
+local snippy_mapping  = require("snippy.mapping")
+local snippy          = require ("snippy")
+local cmp             = require("cmp")
+local set             = vim.opt
 
 -- for license snippets
 vim.g.snips_author = "Carter S. Levinson"
 
 -- snippy mappings
-imap("<Tab>",    snippy.expand_or_advance("<Tab>"))
-smap("<Tab>",    snippy.next("<Tab>"))
-ismap("S-<Tab>", snippy.previous("S-<Tab>"))
-xmap("<Tab>",    snippy.cut_text, { remap = true })
-nmap("g<Tab>",   snippy.cut_text, { remap = true })
+imap("<Tab>",    snippy_mapping.expand_or_advance("<Tab>"))
+smap("<Tab>",    snippy_mapping.next("<Tab>"))
+ismap("S-<Tab>", snippy_mapping.previous("S-<Tab>"))
+xmap("<Tab>",    snippy_mapping.cut_text, { remap = true })
+nmap("g<Tab>",   snippy_mapping.cut_text, { remap = true })
 
 local function select_next(fallback)
   if cmp.visible() then
@@ -45,8 +46,9 @@ local function close(fallback)
 end
 
 local function confirm(fallback)
+  local opts = { select = false, behavior = cmp.ConfirmBehavior.Replace }
   if cmp.visible() then
-    cmp.confirm { select = false, behavior = cmp.ConfirmBehavior.Replace }
+    cmp.confirm(opts)
   else
     fallback()
   end
@@ -55,13 +57,17 @@ end
 local cmp_mappings = {
   ["<C-n>"] = cmp.mapping(select_next),
   ["<C-p>"] = cmp.mapping(select_prev),
+
   ["<C-j>"] = cmp.mapping(select_next),
   ["<C-k>"] = cmp.mapping(select_prev),
+
   ["<C-a>"] = cmp.mapping(abort),
   ["<C-e>"] = cmp.mapping(close),
-  ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+
   ["<C-f>"] = cmp.mapping.scroll_docs(4),
-  ["<CR>"]  = cmp.mapping(confirm),
+  ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+
+  ["<CR>"] = cmp.mapping(confirm),
 }
 
 -- set vim's completopt
@@ -69,23 +75,21 @@ set.completeopt = { "menu", "menuone", "noselect" }
 
 -- setup nvim-cmp
 cmp.setup {
-  -- nvim snippy
   snippet = {
     expand = function(args)
-      require("snippy").expand_snippet(args.body)
-    end,
+      snippy.expand_snippet(args.body)
+    end
   },
-  -- borders
   window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  -- comparators
   sorting = {
     comparators = {
       cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.score,
+      -- extra sorting comparators
       require "clangd_extensions.cmp_scores",
       require "cmp-under-comparator".under,
       cmp.config.compare.kind,
@@ -94,70 +98,71 @@ cmp.setup {
       cmp.config.compare.order,
     },
   },
-  -- keymaps defined above
+  -- keymaps defined in table above
   mapping = cmp.mapping.preset.insert(cmp_mappings),
   -- format: icon[kind] txt menu[src]
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, item)
       item.kind = ({
-            Text                         = ' ',
-            Method                       = ' ',
-            Function                     = ' ',
-            Constructor                  = ' ',
-            Field                        = 'ﰠ ',
-            Variable                     = ' ',
-            Class                        = ' ',
-            Interface                    = 'ﳤ ',
-            Module                       = ' ',
-            Property                     = '襁',
-            Unit                         = '塞',
-            Value                        = ' ',
-            Keyword                      = ' ',
-            Snippet                      = ' ',
-            Color                        = ' ',
-            Enum                         = '練',
-            File                         = ' ',
-            Reference                    = ' ',
-            Folder                       = ' ',
-            EnumMember                   = 'ﴯ ',
-            Constant                     = ' ',
-            Struct                       = 'פּ ',
-            Event                        = ' ',
-            Operator                     = ' ',
-            TypeParameter                = ' ',
-          })[item.kind]
+        Text                         = ' ',
+        Method                       = ' ',
+        Function                     = ' ',
+        Constructor                  = ' ',
+        Field                        = 'ﰠ ',
+        Variable                     = ' ',
+        Class                        = ' ',
+        Interface                    = 'ﳤ ',
+        Module                       = ' ',
+        Property                     = '襁',
+        Unit                         = '塞',
+        Number                       = ' ',
+        Keyword                      = ' ',
+        Snippet                      = ' ',
+        Color                        = ' ',
+        Enum                         = '練',
+        File                         = ' ',
+        Reference                    = ' ',
+        Folder                       = ' ',
+        EnumMember                   = 'ﴯ ',
+        Constant                     = ' ',
+        Struct                       = 'פּ ',
+        String                       = ' ',
+        Event                        = ' ',
+        Operator                     = ' ',
+        Null                         = ' ',
+        TypeParameter                = ' ',
+      })[item.kind]
       item.menu = ({
-            ["buffer"]                   = '[β]',
-            ["cmdline"]                  = '[C]',
-            ["snippy"]                   = '[𝜎]',
-            ["git"]                      = '[𝛾]',
-            ["path"]                     = '[𝜑]',
-            ["omni"]                     = '[Ω]',
-            ["rg"]                       = '[𝜌]',
-            ["treesitter"]               = '[T]',
-            ["lua-latex-symbols"]        = '[𝜒]',
-            ["vim-dadbod-completion"]    = '[𝛿]',
-            ["nvim_lsp"]                 = '[𝜆]',
-            ["nvim_lsp_signature_help"]  = '[𝜆]',
-            ["nvim_lsp_document_symbol"] = '[𝜆]',
-          })[entry.source.name]
+        ["buffer"]                   = '[β]',
+        ["cmdline"]                  = '[C]',
+        ["snippy"]                   = '[𝜎]',
+        ["git"]                      = '[𝛾]',
+        ["path"]                     = '[𝜑]',
+        ["omni"]                     = '[Ω]',
+        ["treesitter"]               = '[T]',
+        ["lua-latex-symbols"]        = '[𝜒]',
+        ["nvim_lsp"]                 = '[𝜆]',
+        ["nvim_lsp_signature_help"]  = '[𝜆]',
+        ["nvim_lsp_document_symbol"] = '[𝜆]',
+        -- ["vim-dadbod-completion"]    = '[𝛿]',
+        -- ["rg"]                       = '[𝜌]',
+      })[entry.source.name]
       return item
-    end,
+    end
   },
-  -- experimental cmp features
   experimental = {
     ghost_text = true,
+    { hl_group = "LspCodeLens" }
   },
-  -- set up sources
   sources = cmp.config.sources {
     { name = "nvim_lsp_signature_help" },
     { name = "nvim_lsp" },
     { name = "snippy" },
-    { name = "rg" },
+    { name = "buffer" },
     { name = "path" },
     { name = "lua-latex-symbols" },
-  }
+  },
 }
 
 -- Set configuration for specific filetype (i.e. git commit).
@@ -165,21 +170,21 @@ cmp.setup.filetype("gitcommit", {
   sources = cmp.config.sources {
     { name = "git" },
     { name = "snippy" },
-    { name = "rg" },
+    { name = "buffer" },
   }
 })
 
 -- for LaTeX files
 cmp.setup.filetype({ "tex", "plaintex" }, {
   sources = cmp.config.sources {
+    { name = "omni" }, -- for VimTeX
     { name = "nvim_lsp" },
-    { name = "omni" },
     { name = "snippy" },
-    { name = "rg" },
+    { name = "buffer" },
   }
 })
 
--- for treesitter quereies
+-- -- for treesitter quereies
 cmp.setup.filetype("query", {
   sources = cmp.config.sources({
     { name = "omni" },

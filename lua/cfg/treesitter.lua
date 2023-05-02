@@ -82,7 +82,18 @@ refactor.navigation = {
   }
 }
 
+local selection = {
+  enable = true,
+  keymaps = {
+    init_selection = "gnn",
+    node_incremental = "grn",
+    node_decremental = "grm",
+    scope_incremental = "grc",
+  }
+}
+
 local enabled = { enable = true }
+
 -- use git instead of curl to install treesitter parsers
 require("nvim-treesitter.install").prefer_git = true
 
@@ -97,28 +108,14 @@ require("nvim-treesitter.configs").setup {
   sync_install = false,
   -- Automatically install missing parsers when entering buffer
   auto_install = true,
-  -- configure TS Highlight module
+  -- enable TS highlighting
   highlight = enabled,
-  -- ts based indenting based on the = operator
+  -- enable TS indentin with = operator
   indent = enabled,
-  -- configure ts textobjects
+  -- enable TS syntactical text objects
   textobjects = textobjects,
-  -- configure ts-refactor
+  -- enable TS based renaming and refactoring
   refactor = refactor,
-  -- incremental selection based on named nodes from the grammar
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection    = "gnn",
-      node_incremental  = "grn",
-      node_decremental  = "grm",
-      scope_incremental = "grc",
-    },
-  },
-  -- enable the query linter
-  query_linter = {
-    enable = true,
-    use_virtual_text = true,
-    line_events = { "BufWrite", "CurshorHold" },
-  },
+  -- enable TS Node based selection operations
+  incremental_selection = selection,
 }
