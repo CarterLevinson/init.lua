@@ -19,7 +19,6 @@ Optional Dependencies:
 Currently configured LSP Servers:
 
 * awk_ls
-* bashls
 * clangd
 * cmake
 * cssls
@@ -27,9 +26,7 @@ Currently configured LSP Servers:
 * hls
 * jsonls
 * lua_ls
-* ltexls
-* null-ls
-* pyright
+* pylsp / pyright
 * r_language_server
 * rust_analyzer
 * texlab

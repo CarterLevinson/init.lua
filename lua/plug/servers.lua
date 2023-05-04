@@ -1,16 +1,4 @@
 return {
-  -- haskell lsp extensions
-  {
-    "MrcJkb/haskell-tools.nvim",
-    dependencies = {
-      "nvim-lspconfig",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("cfg.lsp.hls")
-    end,
-    ft = { "haskell", "lhaskell", "cabal" },
-  },
   -- setup lua-ls for neovim development
   {
     "folke/neodev.nvim",
@@ -28,6 +16,18 @@ return {
       require("cfg.lsp.jsonls")
     end,
     ft = "json",
+  },
+  -- haskell lsp extensions
+  {
+    "MrcJkb/haskell-tools.nvim",
+    dependencies = {
+      "nvim-lspconfig",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("cfg.lsp.hls")
+    end,
+    ft = { "haskell", "lhaskell", "cabal" },
   },
   -- clangd lsp extensions
   {

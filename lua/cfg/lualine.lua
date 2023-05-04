@@ -73,10 +73,10 @@ require("lualine").setup {
     lualine_z = {}
   },
   tabline = {},
-  extensions = {
-    "fugitive",
-    "man",
-    "quickfix",
-    "fzf",
-  },
+  -- extensions = {
+  --   "fugitive",
+  --   "man",
+  --   "quickfix",
+  --   "fzf",
+  -- },
 }

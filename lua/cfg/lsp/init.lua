@@ -2,6 +2,7 @@ local lspconfig = require("lspconfig")
 local pretty    = require("pretty_hover")
 local cmp       = require("cmp_nvim_lsp")
 local gp        = require("goto-preview")
+local api       = vim.api
 local lsp       = vim.lsp
 
 local function lsp_format_buffer()
@@ -19,7 +20,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("LspConfig", {}),
   callback = function(ev)
-    local opts = { buffer = ev.buf }
+    local opts        = { buffer = ev.buf }
 
     nmap("gd",        lsp.buf.definition, opts)     -- go to definition
     nmap("gD",        lsp.buf.declaration, opts)    -- go to declaration
@@ -44,9 +45,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     nmap("<space>rn", ":IncRename " , opts)
     nmap("<space>ca", cmd "CodeActionMenu", opts)
-
-    bcommand(ev.buf,  "Format", lsp_format_buffer)
-    bcommand(ev.buf,  "ListWS", print_lsp_ws_folders)
   end,
 })
 
@@ -69,12 +67,12 @@ local config = {
 -- list of installed lsp servers with default configurations
 local servers = {
   awk_ls = {},
-  bashls = {},
+  -- bashls = {},
   cmake = {},
   cssls = {},
   html = {},
-  pyright = {},
   pylsp = {},
+  -- pyright = {},
   r_language_server = {},
   rust_analyzer = {},
   texlab = {},
@@ -85,5 +83,5 @@ for server, _ in pairs(servers) do
   lspconfig[server].setup(config)
 end
 
--- return default config for lsp extension plugins to build confgurations
+-- return default config for lsp extension plugins to build configurations
 return { default = config }

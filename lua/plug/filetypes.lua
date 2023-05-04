@@ -39,6 +39,11 @@ return {
 
   -- C family plugins
   {
+    "gauteh/vim-cppman",
+    cond = has("cppman"),
+    ft = "cpp"
+  },
+  {
     "Civitasv/cmake-tools.nvim",
     ft = "cmake",
     opts = {},

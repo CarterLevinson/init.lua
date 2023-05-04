@@ -36,7 +36,8 @@ textobjects.select = {
 
 textobjects.move = {
   enable = true,
-  set_jumps = true, -- whether to set jumps in the jumplist
+  -- whether to set jumps in the jump list
+  set_jumps = true,
   goto_next_start = {
     ["]m"] = "@function.outer",
     ["]]"] = "@class.outer",
@@ -58,10 +59,14 @@ textobjects.move = {
 textobjects.swap = {
   enable = true,
   swap_next = {
-    ["<leader>a"] = "@parameter.inner",
+    ["<leader>xa"] = "@parameter.inner",
+    ["<leader>xs"] = "@statement.inner",
+    -- ["<leader>xf"] = "@function.inner",
   },
   swap_previous = {
-    ["<leader>A"] = "@parameter.inner",
+    ["<leader>xA"] = "@parameter.inner",
+    ["<leader>xS"] = "@statement.inner",
+    -- ["<leader>xF"] = "@function.inner",
   },
 }
 
@@ -92,10 +97,12 @@ local selection = {
   }
 }
 
-local enabled = { enable = true }
+local enable = { enable = true }
+
+local ignore = { "gleam" }
 
 -- use git instead of curl to install treesitter parsers
-require("nvim-treesitter.install").prefer_git = true
+-- require("nvim-treesitter.install").prefer_git = true
 
 -- setup treesitter modules, all modules are disabled by default
 -- and must be enabled below
@@ -103,15 +110,15 @@ require("nvim-treesitter.configs").setup {
   -- c, lua, vim, help should always be installed
   ensure_installed = "all",
   -- ignore certain parsers from all
-  ignore_install = { "gleam" },
+  ignore_install = ignore,
   -- install parsers synchronously (only applies to 'ensure_installed')
   sync_install = false,
   -- Automatically install missing parsers when entering buffer
   auto_install = true,
   -- enable TS highlighting
-  highlight = enabled,
-  -- enable TS indentin with = operator
-  indent = enabled,
+  highlight = enable,
+  -- enable TS indenting with = operator
+  indent = enable,
   -- enable TS syntactical text objects
   textobjects = textobjects,
   -- enable TS based renaming and refactoring

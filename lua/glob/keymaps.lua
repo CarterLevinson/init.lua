@@ -26,6 +26,12 @@ nmap("]q",             cmd "cnext")
 nmap("[Q",             cmd "cfirst")
 nmap("]Q",             cmd "clast")
 
+-- turn these into toggle functions
+nmap("<space>q",       cmd "copen")
+nmap("<space>qc",      cmd "cclose")
+nmap("<space>l",       cmd "lopen")
+nmap("<space>lc",      cmd "lclose")
+
 -- exchange line with the next / previous line
 nmap('[e',             [[:m .+1<CR>==]])
 nmap(']e',             [[:m .-2<CR>==]])
@@ -47,9 +53,6 @@ nmap("]<space>",       [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
 nmap('[s',             [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
 nmap(']s',             [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
 
--- turn these into toggle functiosn
-nmap("<space>q",       cmd "copen")
-nmap("<space>l>",      cmd "lopen")
 
 -- only if not using vim-kitty-navigator
 if os.getenv("TERM") ~= "xterm-kitty" then

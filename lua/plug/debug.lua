@@ -19,7 +19,14 @@ return {
   {
     "kevinhwang91/nvim-bqf",
     ft = "qf",
-    opts = {}
+    opts = {},
+    enabled = false,
+  },
+  {
+    "yorickpeterse/nvim-pqf",
+    ft = "qf",
+    opts = {},
+    enabled = false,
   },
   -- async build cmds linked to vim qf window
   {
@@ -33,13 +40,26 @@ return {
   -- live render workspace and buffer diagnostics in qf / loclist
   {
     "onsails/diaglist.nvim",
-    keys = { "<space>dw", "<space>db" },
+    config = function()
+      nmap("<leader>dw", require("diaglist").open_all_diagnostics)
+      nmap("<leader>db", require("diaglist").open_buffer_diagnostics)
+    end,
     init = function()
       require("diaglist").init {}
     end,
-    config = function()
-      nmap("<space>dw", require("diaglist").open_all_diagnostics)
-      nmap("<space>db", require("diaglist").open_buffer_diagnostics)
-    end,
+    keys = { "<leader>dw", "<leader>db" },
+    enabled = false,
+  },
+  {
+    "folke/trouble.nvim",
+    keys = {
+      { "<leader>q",  cmd "TroubleToggle" },
+      { "<leader>qw", cmd "TroubleToggle workspace_diagnostics" },
+      { "<leader>qd", cmd "TroubleToggle document_diagnostics" },
+      { "<leader>ql", cmd "TroubleToggle loclist" },
+      { "<leader>qq", cmd "TroubleToggle quickfix" },
+      { "<leader>qc", cmd "TroubleClose" },
+    },
+    opts = { autoclose = true },
   },
 }

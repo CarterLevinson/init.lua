@@ -1,5 +1,5 @@
 local snippy_mapping  = require("snippy.mapping")
-local snippy          = require ("snippy")
+local snippy          = require("snippy")
 local cmp             = require("cmp")
 local set             = vim.opt
 
@@ -62,7 +62,7 @@ local cmp_mappings = {
   ["<C-k>"] = cmp.mapping(select_prev),
 
   ["<C-a>"] = cmp.mapping(abort),
-  ["<C-e>"] = cmp.mapping(close),
+  ["<C-c>"] = cmp.mapping(close),
 
   ["<C-f>"] = cmp.mapping.scroll_docs(4),
   ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -81,8 +81,8 @@ cmp.setup {
     end
   },
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered({ border =  "double" }),
+    documentation = cmp.config.window.bordered({ border = "double" }),
   },
   sorting = {
     comparators = {
@@ -145,23 +145,23 @@ cmp.setup {
         ["nvim_lsp"]                 = '[𝜆]',
         ["nvim_lsp_signature_help"]  = '[𝜆]',
         ["nvim_lsp_document_symbol"] = '[𝜆]',
-        -- ["vim-dadbod-completion"]    = '[𝛿]',
-        -- ["rg"]                       = '[𝜌]',
+        ["rg"]                       = '[𝜌]',
       })[entry.source.name]
       return item
     end
   },
+  sources = cmp.config.sources {
+    { name = "nvim_lsp_signature_help" },
+    { name = "snippy" },
+    { name = "nvim_lsp" },
+    { name = "treesitter" },
+    { name = "lua-latex-symbols" },
+    { name = "path" },
+    { name = "buffer" },
+  },
   experimental = {
     ghost_text = true,
     { hl_group = "LspCodeLens" }
-  },
-  sources = cmp.config.sources {
-    { name = "nvim_lsp_signature_help" },
-    { name = "nvim_lsp" },
-    { name = "snippy" },
-    { name = "buffer" },
-    { name = "path" },
-    { name = "lua-latex-symbols" },
   },
 }
 
@@ -183,24 +183,6 @@ cmp.setup.filetype({ "tex", "plaintex" }, {
     { name = "buffer" },
   }
 })
-
--- -- for treesitter quereies
-cmp.setup.filetype("query", {
-  sources = cmp.config.sources({
-    { name = "omni" },
-    { name = "treesitter" },
-    { name = "buffer" }
-  })
-})
-
--- -- set up database integration
--- cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
---   sources = cmp.config.sources({
---     { name = "vim-dadbod-completion" }
---   }, {
---     { name = "buffer" }
---   })
--- })
 
 -- use buffer and lsp document symbol source for `/`
 cmp.setup.cmdline({ "/", "?" }, {
