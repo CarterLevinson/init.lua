@@ -1,6 +1,8 @@
 local severity = vim.diagnostic.severity
 local M = {}
 
+
+
 vim.diagnostic.config {
   virtual_text = false,
   -- signs = icons.diagnostic_signs,
@@ -22,6 +24,10 @@ local function goto_next(opts)
     options = vim.tbl_extend('force', options, opts)
   end
   vim.diagnostic.goto_next(options)
+end
+
+M.open_float = function()
+  vim.diagnostic.open_float()
 end
 
 M.goto_next = function()

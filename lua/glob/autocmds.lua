@@ -37,16 +37,16 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
--- highlight yanked text
+-- highlight yanked text for 300ms
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = create_augroup 'YankHighlight',
   callback = function()
-    vim.highlight.on_yank { timeout = 250 }
+    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 300 }
   end,
   pattern = '*',
 })
 
--- show macro recording state
+-- show cmdline when recording macros
 vim.api.nvim_create_autocmd('RecordingEnter', {
   group = create_augroup 'MacroRecord',
   callback = function()
@@ -56,6 +56,7 @@ vim.api.nvim_create_autocmd('RecordingEnter', {
   pattern = '*',
 })
 
+-- stop showing cmdline when done
 vim.api.nvim_create_autocmd('RecordingLeave', {
   group = get_augroup 'MacroRecord',
   callback = function()

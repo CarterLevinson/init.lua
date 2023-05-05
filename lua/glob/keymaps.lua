@@ -1,9 +1,5 @@
 local toggle           = require 'util.toggle'
 local diag             = require 'glob.diagnostics'
--- redo these auto close things as global snippets?
--- pseudo auto close for '{' & '}'
-imap("{<CR>",          "{<CR>}<ESC>O")
-
 -- follow :h terminal and bring back the escape key
 tmap("<ESC>",          "<C-\\><C-n>")
 
@@ -15,7 +11,6 @@ ntmap("<C-l>",         cmd "wincmd l")
 
 -- quickfix list
 nmap("<space>q",       toggle.toggle_qf)
-
 nmap("[q",             cmd "cprev")
 nmap("]q",             cmd "cnext")
 nmap("[Q",             cmd "cfirst")
@@ -42,7 +37,7 @@ nmap("[T",             cmd "tabfirst")
 nmap("]T",             cmd "tablast")
 
 -- diagnostics
-nmap("<space>e",       vim.diagnostic.open_float)
+nmap("<space>e",       diag.open_float)
 nmap("[d",             diag.goto_prev)
 nmap("]d",             diag.goto_next)
 nmap("[e",             diag.goto_prev_error)
@@ -63,18 +58,16 @@ nmap("<space>c",       cmd "close")
 nmap("<space><space>", cmd "nohlsearch")
 
 -- insert / remove blank lines, how to make these dot repeatable?
-nmap("<space>j",       [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
-nmap("<space>k",       [[:set paste<CR>m`O<ESC>``:set nopaste<CR>]])
-nmap("<space>J",       [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
-nmap("<space>K",       [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
+nmap("<C-s>j",         [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
+nmap("<C-s>k",         [[:set paste<CR>m`O<ESC>``:set nopaste<CR>]])
+nmap("<A-s>j",         [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
+nmap("<A-s>k",         [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
 
--- nmap("<A-j>",          [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
--- nmap("<A-k>",          [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
+-- nmap("<space>j",       [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
+-- nmap("<space>k",       [[:set paste<CR>m`O<ESC>``:set nopaste<CR>]])
+-- nmap("<space>J",       [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
+-- nmap("<space>K",       [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
 
--- nmap("[<space>",       [[:set paste<CR>m`O<ESC>``:set nopaste<CR>]])
--- nmap("]<space>",       [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
-
--- nmap('[s',             [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
--- nmap(']s',             [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
-
-
+-- redo these auto close things as global snippets?
+-- pseudo auto close for '{' & '}'
+-- imap("{<CR>",          "{<CR>}<ESC>O")
