@@ -1,4 +1,3 @@
-local diagnostic          = vim.diagnostic
 local set                 = vim.opt
 local g                   = vim.g
 
@@ -61,17 +60,10 @@ set.browsedir             = "buffer"
 set.diffopt               = "vertical"
 
 -- ignore compiled files
-set.wildignore            = { "*.o",  "*.so",  "*.pyc", "*.class", "*.hi" }
+set.wildignore            = { "*.o", "*.so", "*.pyc", "*.class", "*.hi" }
 
 -- set :grep to use ripgrep if installed
 if has("rg") then
-  set.grepprg             = "rg --vimgrep --no-heading"
-  set.grepformat          = "%f:%l:%c:%m,%f:%l:%m"
+  set.grepprg    = "rg --vimgrep --no-heading"
+  set.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
-
--- configure nvim built in diagnostic module
-diagnostic.config {
-  virtual_text = false,
-  signs = false,
-  float = { source = true },
-}

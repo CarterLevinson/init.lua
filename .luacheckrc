@@ -8,11 +8,14 @@ globals = {
   "vim.wo",
   "vim.go",
   "vim.env",
+  "vim.fn",
   "nmap",
   "ntmap",
   "nxmap",
   "nvomap",
   "nvtmap",
+  "oxmap",
+  "nvmap",
   "imap",
   "ismap",
   "tmap",
@@ -20,8 +23,6 @@ globals = {
   "xmap",
   "smap",
   "cmd",
-  "command",
-  "bcommand",
   "has",
 }
 

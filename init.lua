@@ -1,2 +1,2 @@
-require("glob")
-require("load")
+require 'glob'
+require 'load'

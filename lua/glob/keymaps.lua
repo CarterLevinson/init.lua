@@ -1,63 +1,80 @@
-local diagnostic = vim.diagnostic
+local toggle           = require 'util.toggle'
+local diag             = require 'glob.diagnostics'
+-- redo these auto close things as global snippets?
 -- pseudo auto close for '{' & '}'
 imap("{<CR>",          "{<CR>}<ESC>O")
 
 -- follow :h terminal and bring back the escape key
 tmap("<ESC>",          "<C-\\><C-n>")
 
--- tpope inspired mappings w/o heavy plugin
-nmap("[b",             cmd "bprev")
-nmap("]b",             cmd "bnext")
-nmap("[B",             cmd "bfirst")
-nmap("]B",             cmd "blast")
+-- vim kitty navigator can over ride if loaded
+ntmap("<C-h>",         cmd "wincmd h")
+ntmap("<C-j>",         cmd "wincmd j")
+ntmap("<C-k>",         cmd "wincmd k")
+ntmap("<C-l>",         cmd "wincmd l")
 
-nmap("[t",             cmd "tabprev")
-nmap("]t",             cmd "tabnext")
-nmap("[T",             cmd "tabfirst")
-nmap("]T",             cmd "tablast")
-
-nmap("[l",             cmd "lprev")
-nmap("]l",             cmd "lnext")
-nmap("[L",             cmd "lfirst")
-nmap("]L",             cmd "llast")
+-- quickfix list
+nmap("<space>q",       toggle.toggle_qf)
 
 nmap("[q",             cmd "cprev")
 nmap("]q",             cmd "cnext")
 nmap("[Q",             cmd "cfirst")
 nmap("]Q",             cmd "clast")
 
--- turn these into toggle functions
-nmap("<space>q",       cmd "copen")
-nmap("<space>qc",      cmd "cclose")
-nmap("<space>l",       cmd "lopen")
-nmap("<space>lc",      cmd "lclose")
+-- location list
+nmap("<space>l",       toggle.toggle_loc)
+nmap("[l",             cmd "lprev")
+nmap("]l",             cmd "lnext")
+nmap("[L",             cmd "lfirst")
+nmap("]L",             cmd "llast")
 
--- exchange line with the next / previous line
-nmap('[e',             [[:m .+1<CR>==]])
-nmap(']e',             [[:m .-2<CR>==]])
+-- buffers
+nmap("<space>b",       cmd "ls" .. ":b ")
+nmap("[b",             cmd "bprev")
+nmap("]b",             cmd "bnext")
+nmap("[B",             cmd "bfirst")
+nmap("]B",             cmd "blast")
 
-nmap("[d",             diagnostic.goto_prev)
-nmap("]d",             diagnostic.goto_next)
+-- tabs
+nmap("[t",             cmd "tabprev")
+nmap("]t",             cmd "tabnext")
+nmap("[T",             cmd "tabfirst")
+nmap("]T",             cmd "tablast")
 
-nmap("<space>e",       diagnostic.open_float)
+-- diagnostics
+nmap("<space>e",       vim.diagnostic.open_float)
+nmap("[d",             diag.goto_prev)
+nmap("]d",             diag.goto_next)
+nmap("[e",             diag.goto_prev_error)
+nmap("]e",             diag.goto_next_error)
+nmap("[w",             diag.goto_prev_warning)
+nmap("]w",             diag.goto_next_warning)
 
+-- exchange previous / next line
+nmap(']x',             [[:m .-2<CR>==]])
+nmap('[x',             [[:m .+1<CR>==]])
+
+-- toggle spellcheck
+nmap("<space>s",       toggle.toggle_spell)
+
+-- common commands
 nmap("<space>w",       cmd "write")
 nmap("<space>c",       cmd "close")
 nmap("<space><space>", cmd "nohlsearch")
 
--- insert / remove blank lines, using '[' and ']' as leader
--- how to make these dot repetable?
-nmap("[<space>",       [[:set paste<CR>m`O<ESC>``:set nopaste<CR>]])
-nmap("]<space>",       [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
+-- insert / remove blank lines, how to make these dot repeatable?
+nmap("<space>j",       [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
+nmap("<space>k",       [[:set paste<CR>m`O<ESC>``:set nopaste<CR>]])
+nmap("<space>J",       [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
+nmap("<space>K",       [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
 
-nmap('[s',             [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
-nmap(']s',             [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
+-- nmap("<A-j>",          [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
+-- nmap("<A-k>",          [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
+
+-- nmap("[<space>",       [[:set paste<CR>m`O<ESC>``:set nopaste<CR>]])
+-- nmap("]<space>",       [[:set paste<CR>m`o<ESC>``:set nopaste<CR>]])
+
+-- nmap('[s',             [[m`:silent -g/\m^s*$/d<CR>``:noh<CR>]])
+-- nmap(']s',             [[m`:silent +g/\m^\s*$/d<CR>``:noh<CR>]])
 
 
--- only if not using vim-kitty-navigator
-if os.getenv("TERM") ~= "xterm-kitty" then
-  ntmap("<C-h>",       cmd "wincmd h")
-  ntmap("<C-j>",       cmd "wincmd j")
-  ntmap("<C-k>",       cmd "wincmd k")
-  ntmap("<C-l>",       cmd "wincmd l")
-end

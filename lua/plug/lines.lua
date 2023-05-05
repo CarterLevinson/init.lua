@@ -1,30 +1,30 @@
 return {
   {
-    "nvim-lualine/lualine.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
+    'nvim-lualine/lualine.nvim',
+    dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
-      require("cfg.lualine")
+      require('cfg.lualine')
     end,
-    event = "UiEnter",
+    event = 'UiEnter',
     enabled = true,
   },
   { -- TODO: ?
-    "rebelot/heirline.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
+    'rebelot/heirline.nvim',
+    dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
-      require("cfg.heirline")
+      require('cfg.heirline')
     end,
-    event = "UiEnter",
+    event = 'UiEnter',
     enabled = false,
   },
   {
-    "utilyre/barbecue.nvim",
-    version = "*",
+    'utilyre/barbecue.nvim',
+    version = '*',
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "SmiteshP/nvim-navic",
+      'nvim-tree/nvim-web-devicons',
+      'SmiteshP/nvim-navic',
     },
-    event = "UiEnter",
-    opts = { theme = "auto" },
+    event = 'UiEnter',
+    opts = { theme = 'auto' },
   },
 }

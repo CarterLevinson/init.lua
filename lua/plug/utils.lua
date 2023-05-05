@@ -1,45 +1,34 @@
 return {
   -- shell
-  "tpope/vim-eunuch",
-  "jghauser/mkdir.nvim",
+  'tpope/vim-eunuch',
+  'jghauser/mkdir.nvim',
 
   -- lua
-  "milisims/nvim-luaref",
+  'milisims/nvim-luaref',
   -- see also :h lua-guide & :h luvref
-  "bfredl/nvim-luadev",
-
+  'bfredl/nvim-luadev',
 
   -- editing
-  {
-    "miversen33/netman.nvim",
-    config = function()
-      require("netman")
-    end,
-    lazy = true,
-    enabled = false,
-  },
-
   -- visualize the undo tree
-  "mbbill/undotree",
+  'mbbill/undotree',
 
   {
-    "junegunn/vim-easy-align",
-    keys = "ga",
+    'junegunn/vim-easy-align',
     config = function()
-      nxmap("ga", "<Plug>(EasyAlign)")
-    end
+      nxmap('ga', '<Plug>(EasyAlign)')
+    end,
   },
 
   -- TODO : add lua highlight whitespace function?
-  { "lewis6991/spaceless.nvim", opts = {} },
-  { "elihunter173/dirbuf.nvim", opts = {} },
+  { 'lewis6991/spaceless.nvim', opts = {} },
+  { 'elihunter173/dirbuf.nvim', opts = {} },
 
-  { "chentoast/marks.nvim",     opts = {} },
-  { "tversteeg/registers.nvim", opts = {} },
+  { 'chentoast/marks.nvim', opts = {} },
+  { 'tversteeg/registers.nvim', opts = {} },
 
-  { "numToStr/Comment.nvim",    opts = {} },
-  { "kylechui/nvim-surround",   opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
+  { 'kylechui/nvim-surround', opts = {} },
 
-  { "notjedi/nvim-rooter.lua",  opts = {} },
-  { "yamatsum/nvim-cursorline", opts = {} },
+  { 'notjedi/nvim-rooter.lua', opts = {} },
+  { 'yamatsum/nvim-cursorline', opts = {} },
 }

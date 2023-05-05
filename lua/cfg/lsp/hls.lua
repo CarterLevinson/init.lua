@@ -4,8 +4,9 @@ local ht     = require("haskell-tools")
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("LspConfig", { clear = false }),
   callback = function(ev)
-    nmap("<space>ea", ht.lsp.buf_eval_all, { buffer = ev.buf})
-    nmap("<space>hs", ht.hoogle.hoogle_signature, { buffer = ev.buf})
+    local opts = { buffer = ev.buf }
+    nmap("<space>ea", ht.lsp.buf_eval_all, opts)
+    nmap("<space>hs", ht.hoogle.hoogle_signature, opts)
   end,
 })
 

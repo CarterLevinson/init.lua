@@ -1,44 +1,37 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
     config = function()
-      require("cfg.treesitter")
+      require 'cfg.treesitter'
     end,
-    build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    build = ':TSUpdate',
+    event = { 'BufReadPost', 'BufNewFile' },
   },
   -- create vim textobjects using treesitter queries
   {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = "nvim-treesitter",
-    event = "BufWinEnter",
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = 'nvim-treesitter',
+    event = 'BufWinEnter',
   },
   -- use treesitter to semantically rename variables
   {
-    "nvim-treesitter/nvim-treesitter-refactor",
-    dependencies = "nvim-treesitter",
-    event = "BufWinEnter",
+    'nvim-treesitter/nvim-treesitter-refactor',
+    dependencies = 'nvim-treesitter',
+    event = 'BufWinEnter',
   },
   -- use treesitter to automagically close html tags
   {
-    "windwp/nvim-ts-autotag",
-    dependencies = "nvim-treesitter",
-    event = "BufWinEnter",
-    ft = "html",
-    opts = {}
-  },
-  -- treesitter semantic functions for generating cpp code
-  {
-    "Badhi/nvim-treesitter-cpp-tools",
-    dependencies = "nvim-treesitter",
-    ft = "cpp",
+    'windwp/nvim-ts-autotag',
+    dependencies = 'nvim-treesitter',
+    event = 'BufWinEnter',
+    ft = 'html',
     opts = {},
   },
   -- use treesitter and snippet_engine to generate docstrings
   {
-    "danymat/neogen",
-    dependencies = "nvim-treesitter",
-    cmd = "Neogen",
-    opts = { snippet_engine = "snippy" },
+    'danymat/neogen',
+    dependencies = 'nvim-treesitter',
+    cmd = 'Neogen',
+    opts = { snippet_engine = 'snippy' },
   },
 }

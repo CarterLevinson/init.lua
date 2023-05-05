@@ -6,7 +6,7 @@ local api       = vim.api
 local lsp       = vim.lsp
 
 local function lsp_format_buffer()
-  lsp.buf.format({ async = true })
+  lsp.buf.format { async = true }
 end
 
 local function pretty_print(obj)
@@ -15,6 +15,10 @@ end
 
 local function print_lsp_ws_folders()
   pretty_print(lsp.buf.list_workspace_folders())
+end
+
+local function bcmd(buffer, name, command)
+  api.nvim_buf_create_user_command(buffer, name, command, {})
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -45,18 +49,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     nmap("<space>rn", ":IncRename " , opts)
     nmap("<space>ca", cmd "CodeActionMenu", opts)
+
+    bcmd(opts.buffer, "Format", lsp_format_buffer)
+    bcmd(opts.buffer, "ListWS", print_lsp_ws_folders)
   end,
 })
 
--- enable lsp snippet support
-local capabilities = lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- change border for hover (in case we don't use pretty hover)
+lsp.handlers["textDocument/hover"] = lsp.with(
+  lsp.handlers.hover,
+  { border = "double" }
+)
+
+-- change border for signature_help
+lsp.handlers["textDocument/signatureHelp"] = lsp.with(
+  lsp.handlers.signature_help,
+  { border = "double" }
+)
 
 -- default lsp configuration, others can extend from here
 local config = {
   settings = {
-    -- create nvim-cmp capabilities for lsp client
-    capabilities = cmp.default_capabilities(capabilities),
+    -- create nvim-cmp default capabilities for the lsp client
+    capabilities = cmp.default_capabilities(),
     -- disable telemetry (if any)
     telemetry = { enable = false },
   },
@@ -84,4 +99,6 @@ for server, _ in pairs(servers) do
 end
 
 -- return default config for lsp extension plugins to build configurations
-return { default = config }
+return {
+  default = config
+}

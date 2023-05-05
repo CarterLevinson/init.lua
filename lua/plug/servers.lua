@@ -1,41 +1,41 @@
 return {
   -- setup lua-ls for neovim development
   {
-    "folke/neodev.nvim",
-    dependencies = "nvim-lspconfig",
+    'folke/neodev.nvim',
+    dependencies = 'nvim-lspconfig',
     config = function()
-      require("cfg.lsp.luals")
+      require 'cfg.lsp.luals'
     end,
-    ft = "lua",
+    ft = 'lua',
   },
   -- provides json schemas for json ls
   {
-    "b0o/schemastore.nvim",
-    dependencies = "nvim-lspconfig",
+    'b0o/schemastore.nvim',
+    dependencies = 'nvim-lspconfig',
     config = function()
-      require("cfg.lsp.jsonls")
+      require 'cfg.lsp.jsonls'
     end,
-    ft = "json",
+    ft = 'json',
   },
   -- haskell lsp extensions
   {
-    "MrcJkb/haskell-tools.nvim",
+    'MrcJkb/haskell-tools.nvim',
     dependencies = {
-      "nvim-lspconfig",
-      "nvim-lua/plenary.nvim",
+      'nvim-lspconfig',
+      'nvim-lua/plenary.nvim',
     },
     config = function()
-      require("cfg.lsp.hls")
+      require 'cfg.lsp.hls'
     end,
-    ft = { "haskell", "lhaskell", "cabal" },
+    ft = { 'haskell', 'lhaskell', 'cabal' },
   },
   -- clangd lsp extensions
   {
-    "p00f/clangd_extensions.nvim",
-    dependencies = "nvim-lspconfig",
+    'p00f/clangd_extensions.nvim',
+    dependencies = 'nvim-lspconfig',
     config = function()
-      require("cfg.lsp.clangd")
+      require 'cfg.lsp.clangd'
     end,
-    ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+    ft = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
   },
 }

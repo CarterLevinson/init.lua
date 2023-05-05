@@ -1,2 +1,2 @@
-require("load.bootstrap")
-require("load.lazy")
+require 'load.bootstrap'
+require 'load.lazy'
