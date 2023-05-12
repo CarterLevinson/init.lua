@@ -2,185 +2,146 @@ local icon   = require 'util.icon'
 local snippy = require 'snippy'
 local cmp    = require 'cmp'
 
-local function select_next(fallback)
+local function select_next()
   local opts = { select = true }
-  if not cmp.select_next_item(opts) then
-    fallback()
-  end
+  return cmp.mapping.select_next_item(opts)
 end
 
-local function select_prev(fallback)
+local function select_prev()
   local opts = { select = true }
-  if not cmp.select_prev_item(opts) then
-    fallback()
-  end
+  return cmp.mapping.select_prev_item(opts)
 end
 
-local function close(fallback)
-  if not cmp.close() then
-    fallback()
-  end
+-- accepts completion
+local function close()
+  return cmp.mapping.close()
 end
 
--- TODO functions for spell / ripgrep
-local function complete(fallback)
-  if not cmp.complete() then
-    fallback()
-  end
+-- rejects completion
+local function abort()
+  return cmp.mapping.abort()
 end
 
-local function abort(fallback)
-  if not cmp.abort() then
-    fallback()
-  end
+local function scroll_docs_down(count)
+  return cmp.mapping.scroll_docs(count)
 end
 
-local function scroll_docs(delta)
-  return function(fallback)
-    if not cmp.scroll_docs(delta) then
+local function scroll_docs_up(count)
+  return cmp.mapping.scroll_docs(-1 * count)
+end
+
+local function scroll_menu_down(count)
+  local opts = { select = false, count = count }
+  return cmp.mapping.select_next_item(opts)
+end
+
+local function scroll_menu_up(count)
+  local opts = { select = false, count = count }
+  return cmp.mapping.select_prev_item(opts)
+end
+
+local function confirm()
+  return cmp.mapping(function(fallback)
+    if cmp.visible() then
+      local opts = { select = true }
+      cmp.confirm(opts)
+    elseif snippy.can_jump(1) then
+      snippy.next()
+    else
       fallback()
     end
-  end
+  end)
 end
 
-local function scroll_up(count)
-  return function(fallback)
-    local opts = { select = false, count = count }
-    if not cmp.select_next_item(opts) then
-      fallback()
-    end
-  end
-end
+local mapping = {
+  ['<C-n>'] = select_next(),
+  ['<C-p>'] = select_prev(),
 
-local function scroll_down(count)
-  return function(fallback)
-    local opts = { select = false, count = count }
-    if not cmp.select_prev_item(opts) then
-      fallback()
-    end
-  end
-end
+  ['<C-j>'] = select_next(),
+  ['<C-k>'] = select_prev(),
 
-local function generate_fallback()
-  return function(fallback)
-    fallback()
-  end
-end
+  ['<C-e>'] = abort(),
+  ['<C-y>'] = close(),
 
+  ['<C-b>'] = scroll_docs_up(4),
+  ['<C-f>'] = scroll_docs_down(4),
 
-local function scroll_menu(delta)
-  if delta > 0 then
-    return scroll_down(delta)
-  elseif delta < 0 then
-    return scroll_up(math.abs(delta))
-  else
-    return generate_fallback()
-  end
-end
+  ['<C-u>'] = scroll_menu_up(4),
+  ['<C-d>'] = scroll_menu_down(4),
 
-
-local function confirm(fallback)
-  if cmp.visible() then
-    cmp.confirm { select = true }
-  elseif snippy.can_jump(1) then
-    snippy.next()
-  else
-    fallback()
-  end
-end
-
-local cmp_mapping = {
-  ['<C-n>'] = cmp.mapping(select_next),
-  ['<C-p>'] = cmp.mapping(select_prev),
-
-  ['<C-j>'] = cmp.mapping(select_next),
-  ['<C-k>'] = cmp.mapping(select_prev),
-
-  -- rejects completion
-  ['<C-e>'] = cmp.mapping(abort),
-  -- accepts completion
-  ['<C-y>'] = cmp.mapping(close),
-
-  ['<C-b>'] = cmp.mapping(scroll_docs(-4)),
-  ['<C-f>'] = cmp.mapping(scroll_docs(4)),
-
-  ['<C-u>'] = cmp.mapping(scroll_menu(-4)),
-  ['<C-d>'] = cmp.mapping(scroll_menu(4)),
-
-  -- ['<C-o>'] = cmp.mapping(complete),
-
-  ['<CR>'] = cmp.mapping(confirm),
+  ['<CR>'] = confirm(),
 }
 
-local cmp_window = cmp.config.window.bordered {
-  border = 'double',
-}
-
-local cmp_menu = {
-  ['buffer']                   = '[β]',
-  ['cmdline']                  = '[C]',
-  ['snippy']                   = '[𝜎]',
-  ['cmp_git']                  = '[𝛾]',
+local menu = {
+  ['rg']                       = '[𝜌]',
   ['path']                     = '[𝜑]',
   ['omni']                     = '[Ω]',
   ['calc']                     = '[=]',
-  ['rg']                       = '[𝜌]',
+  ['snippy']                   = '[𝜎]',
+  ['spell']                    = '[S]',
+  ['buffer']                   = '[β]',
+  ['cmdline']                  = '[C]',
+  ['cmp_git']                  = '[𝛾]',
+  ['nvim_lsp']                 = '[𝜆]',
   ['treesitter']               = '[T]',
   ['lua-latex-symbols']        = '[𝜒]',
-  ['nvim_lsp']                 = '[𝜆]',
+  ['nvim-cmp-ts-tag-close']    = '[ ]',
   ['nvim_lsp_signature_help']  = '[𝜆]',
   ['nvim_lsp_document_symbol'] = '[𝜆]',
-  ['nvim-cmp-ts-tag-close']    = '[ ]',
 }
 
-local function old_format(entry, item)
-  item.kind = ({
-    Text = ' ',
-    Method = ' ',
-    Function = ' ',
-    Constructor = ' ',
-    Field = 'ﰠ ',
-    Variable = ' ',
-    Class = ' ',
-    Interface = 'ﳤ ',
-    Module = ' ',
-    Property = '襁',
-    Unit = '塞',
-    Number = ' ',
-    Keyword = ' ',
-    Snippet = ' ',
-    Color = ' ',
-    Enum = '練',
-    File = ' ',
-    Reference = ' ',
-    Folder = ' ',
-    EnumMember = 'ﴯ ',
-    Constant = ' ',
-    Struct = 'פּ ',
-    String = ' ',
-    Event = ' ',
-    Operator = ' ',
-    Null = ' ',
-    TypeParameter = ' ',
-  })[item.kind]
-  item.menu = ({
-    ['buffer'] = '[β]',
-    ['cmdline'] = '[C]',
-    ['snippy'] = '[𝜎]',
-    ['cmp_git'] = '[𝛾]',
-    ['path'] = '[𝜑]',
-    ['omni'] = '[Ω]',
-    ['treesitter'] = '[T]',
-    ['lua-latex-symbols'] = '[𝜒]',
-    ['nvim_lsp'] = '[𝜆]',
-    ['nvim_lsp_signature_help'] = '[𝜆]',
-    ['nvim_lsp_document_symbol'] = '[𝜆]',
-    ['nvim-cmp-ts-tag-close'] = '[ ]',
-    ['calc'] = '[=]',
-    ['rg'] = '[𝜌]',
-  })[entry.source.name]
-  return item
-end
+-- local function old_format(entry, item)
+--   item.kind = ({
+--     Text = ' ',
+--     Method = ' ',
+--     Function = ' ',
+--     Constructor = ' ',
+--     Field = 'ﰠ ',
+--     Variable = ' ',
+--     Class = ' ',
+--     Interface = 'ﳤ ',
+--     Module = ' ',
+--     Property = '襁',
+--     Unit = '塞',
+--     Number = ' ',
+--     Keyword = ' ',
+--     Snippet = ' ',
+--     Color = ' ',
+--     Enum = '練',
+--     File = ' ',
+--     Reference = ' ',
+--     Folder = ' ',
+--     EnumMember = 'ﴯ ',
+--     Constant = ' ',
+--     Struct = 'פּ ',
+--     String = ' ',
+--     Event = ' ',
+--     Operator = ' ',
+--     Null = ' ',
+--     TypeParameter = ' ',
+--   })[item.kind]
+--   item.menu = ({
+--     ['buffer'] = '[β]',
+--     ['cmdline'] = '[C]',
+--     ['snippy'] = '[𝜎]',
+--     ['cmp_git'] = '[𝛾]',
+--     ['path'] = '[𝜑]',
+--     ['omni'] = '[Ω]',
+--     ['treesitter'] = '[T]',
+--     ['lua-latex-symbols'] = '[𝜒]',
+--     ['nvim_lsp'] = '[𝜆]',
+--     ['nvim_lsp_signature_help'] = '[𝜆]',
+--     ['nvim_lsp_document_symbol'] = '[𝜆]',
+--     ['nvim-cmp-ts-tag-close'] = '[ ]',
+--     ['calc'] = '[=]',
+--     ['rg'] = '[𝜌]',
+--   })[entry.source.name]
+--   return item
+-- end
+
+local window = cmp.config.window.bordered {
+  border = 'double',
+}
 
 cmp.setup {
   snippet = {
@@ -204,21 +165,20 @@ cmp.setup {
     -- format: icon[kind] txt menu[src]
     fields = { 'kind', 'abbr', 'menu' },
     format = function(entry, item)
-      local kinds = icon.kinds
+      local kind = icon.kinds
 
-      item.menu = cmp_menu[entry.source.name]
-      item.kind = kinds[item.kind]
-      -- item.dup = 0
+      item.kind = kind[item.kind]
+      item.menu = menu[entry.source.name]
 
       return item
     end,
   },
   window = {
-    completion = cmp_window,
-    documentation = cmp_window,
+    completion = window,
+    documentation = window,
   },
   -- keymaps defined in table above
-  mapping = cmp.mapping.preset.insert(cmp_mapping),
+  mapping = cmp.mapping.preset.insert(mapping),
   -- default sources for all buffers
   sources = cmp.config.sources {
     { name = 'snippy' },
@@ -255,7 +215,7 @@ cmp.setup.filetype('markdown', {
 
 -- use buffer and lsp document symbol source for `/`
 cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(cmp_mapping),
+  mapping = cmp.mapping.preset.cmdline(mapping),
   view = {
     entries = { name = 'wildmenu', separator = '|' },
   },
@@ -268,7 +228,7 @@ cmp.setup.cmdline({ '/', '?' }, {
 
 -- use cmdline & path source for ':'
 cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(cmp_mapping),
+  mapping = cmp.mapping.preset.cmdline(mapping),
   view = {
     entries = { name = 'custom', selection_order = 'near_cursor' },
   },

@@ -10,7 +10,7 @@ lint.linters_by_ft = {
   lhaskell = { 'hlint' },
   lua      = { 'luacheck' },
   tex      = { 'lacheck', 'chktex' },
-  python   = { 'pylint' },
+  python   = { 'pylint', 'flake8' },
 }
 
 local function try_codespell()
