@@ -1,15 +1,24 @@
 return {
-  -- main colorscheme
+  -- main colors
   {
     'nyngwang/nvimgelion',
-    priority = 1000,
     config = function()
       vim.cmd.colorscheme [[nvimgelion]]
     end,
+    priority = 1000,
   },
-  -- auxiliary colorschemes
-  { 'ofirgall/ofirkai.nvim', lazy = true },
-  { 'lourenci/github-colors', lazy = true },
-  { 'kdheepak/monochrome.nvim', lazy = true },
+  -- add transparent background hl
+  'xiyaowong/nvim-transparent',
+  -- vim syntax highlighting files
+  'Fymyte/mbsync.vim',
+  'kovetskiy/sxhkd-vim',
+  'kmonad/kmonad-vim',
+  'fladson/vim-kitty',
+  'jbmorgado/vim-pine-script',
+  'neovimhaskell/haskell-vim',
+  -- auxiliary colors
+  { 'ofirgall/ofirkai.nvim',            lazy = true },
+  { 'lourenci/github-colors',           lazy = true },
+  { 'kdheepak/monochrome.nvim',         lazy = true },
   { 'justinsgithub/oh-my-monokai.nvim', lazy = true },
 }

@@ -5,33 +5,28 @@ return {
       require 'cfg.treesitter'
     end,
     build = ':TSUpdate',
-    event = { 'BufReadPost', 'BufNewFile' },
+    -- event = { 'BufReadPost', 'BufNewFile' },
   },
-  -- create vim textobjects using treesitter queries
+  -- create vim text objects using TS queries
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
     dependencies = 'nvim-treesitter',
-    event = 'BufWinEnter',
+    event = 'VeryLazy',
   },
-  -- use treesitter to semantically rename variables
+  -- use TS to semantically rename variables
   {
     'nvim-treesitter/nvim-treesitter-refactor',
     dependencies = 'nvim-treesitter',
-    event = 'BufWinEnter',
+    event = 'VeryLazy',
   },
-  -- use treesitter to automagically close html tags
+  -- interactively test queries and get TS tree info
   {
-    'windwp/nvim-ts-autotag',
+    'nvim-treesitter/playground',
     dependencies = 'nvim-treesitter',
-    event = 'BufWinEnter',
-    ft = 'html',
-    opts = {},
-  },
-  -- use treesitter and snippet_engine to generate docstrings
-  {
-    'danymat/neogen',
-    dependencies = 'nvim-treesitter',
-    cmd = 'Neogen',
-    opts = { snippet_engine = 'snippy' },
+    cmd = {
+      'TSPlaygroundToggle',
+      'TSNodeUnderCursor',
+      'TSHighlightCapturesUnderCursor',
+    },
   },
 }

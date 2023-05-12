@@ -1,35 +1,43 @@
-local gs = {}
-
-gs.on_attach = function(bufnr)
-  local gs = package.loaded.gitsigns
+local function gs_callback(bufnr)
+  local gitsigns = package.loaded.gitsigns
   local opts = { buffer = bufnr }
 
-  nmap(']h', gs.next_hunk, opts)
-  nmap('[h', gs.prev_hunk, opts)
-  nmap('<leader>gph', gs.preview_hunk, opts)
+  nmap(']h', gitsigns.next_hunk, opts)
+  nmap('[h', gitsigns.prev_hunk, opts)
 
-  nvmap('<leader>gsh', cmd 'Gitsigns stage_hunk', opts)
-  nvmap('<leader>grh', cmd 'Gitsigns reset_hunk', opts)
+  nmap('<LEADER>gq', cmd 'Gitsigns setqflist', opts)
+  nmap('<LEADER>gl', cmd 'Gitsigns setloclist', opts)
 
-  oxmap('ih', cmd '<C-U>Gitsigns select_hunk', opts)
+  nmap('<LEADER>gph', gitsigns.preview_hunk, opts)
+
+  nvmap('<LEADER>gsh', cmd 'Gitsigns stage_hunk', opts)
+  nvmap('<LEADER>grh', cmd 'Gitsigns reset_hunk', opts)
 end
 
-gs.signs = {
-  add = { text = '+' },
-  change = { text = '~' },
-  delete = { text = '_' },
-  topdelete = { text = '‾' },
-  changedelete = { text = '~' },
-  untracked = { text = '┆' },
-}
-
-gs.preview_config = { border = { 'double' } }
-
 return {
-  'tpope/vim-fugitive',
+  {
+    'tpope/vim-fugitive',
+    cond = has 'git',
+  },
   {
     'lewis6991/gitsigns.nvim',
+    cond = has 'git',
     event = 'BufWinEnter',
-    opts = gs,
-  },
+    opts = {
+      on_attach = gs_callback,
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked = { text = '?' },
+      },
+      preview_config = {
+        border = 'double',
+        style = 'minimal',
+        relative = 'cursor',
+      },
+    },
+  }
 }

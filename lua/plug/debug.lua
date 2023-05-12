@@ -1,23 +1,16 @@
-local icons = require 'util.icons'
-local signs = icons.diagnostic_signs
 return {
-  -- linter interface to nvim diagnostics
+  -- interface between various linters and vim diagnostics
   {
     'mfussenegger/nvim-lint',
     config = function()
       require 'cfg.lint'
     end,
   },
-  -- improvements to qf window
+  -- multiple improvements to qf window
   {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
     opts = {},
-  },
-  {
-    'yorickpeterse/nvim-pqf',
-    opts = { signs = signs },
-    enabled = false,
   },
   -- async build cmds linked to vim qf window
   {

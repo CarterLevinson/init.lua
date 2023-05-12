@@ -1,17 +1,30 @@
-local lazyconfig = {}
+local lazyopts = {}
 
-lazyconfig.rtp = {
+local performance = {}
+
+performance.rtp = {
+  -- don't remove elements from rtp
+  reset = false,
+  -- except for these plugins
   disabled_plugins = {
+    'black',
+    'meson',
     'matchit',
     'matchparen',
     'netrwPlugin',
     'tohtml',
-  },
+  }
 }
 
-lazyconfig.dev = {
+lazyopts.ui = {
+  border = 'double'
+}
+
+lazyopts.dev = {
   path = '~/git/plugins',
   patterns = {},
 }
 
-require('lazy').setup('plug', lazyconfig)
+lazyopts.performance = performance
+
+require('lazy').setup('plug', lazyopts)

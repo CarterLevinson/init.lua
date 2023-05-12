@@ -1,22 +1,29 @@
-local diag = require 'glob.diagnostics'
-local M = {}
+local qf = require 'util.quickfix'
 
 local function toggle_opt(setting, global)
   if global then
-    vim.opt[setting] = not (vim.opt[setting]:get())
+    local set = vim.opt
+    set[setting] = not (vim.opt[setting]:get())
   else
-    vim.opt_local[setting] = not (vim.opt_local[setting]:get())
+    local setlocal = vim.opt_local
+    setlocal[setting] = not (vim.opt_local[setting]:get())
   end
 end
+
+local M = {}
 
 M.toggle_spell = function()
   toggle_opt('spell', true)
 end
 
+M.toggle_window_spell = function()
+  toggle_opt('spell', false)
+end
+
 M.toggle_loc = function()
-  if not diag.is_loc_open() then
+  if not qf.is_loc_open() then
     if vim.tbl_isempty(vim.fn.getloclist(0)) then
-      diag.update_loc()
+      qf.update_loc()
     end
     vim.cmd.lopen()
   else
@@ -25,9 +32,9 @@ M.toggle_loc = function()
 end
 
 M.toggle_qf = function()
-  if not diag.is_qf_open() then
+  if not qf.is_qf_open() then
     if vim.tbl_isempty(vim.fn.getqflist()) then
-      diag.update_qf()
+      qf.update_qf()
     end
     vim.cmd.copen()
   else

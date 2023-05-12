@@ -22,20 +22,20 @@ snippet lorem
 
 snippet { "expand curly brackets"
 	{
-		${1:...}
+		${1:${VISUAL}}
 	}${0}
 
 snippet [ "expand hard brackets"
-	[${1:...}]${0}
+	[${1:${VISUAL}}]${0}
 
 snippet ( "expand parentheses"
-	(${1:...})${0}
+	(${1:${VISUAL}})${0}
 
 snippet ' "expand single quotes"
-	'${1:...}'${0}
+	'${1:${VISUAL}}'${0}
 
 snippet " "expand double quotes"
-	"${1:...}"${0}
+	"${1:$VISUAL}}"${0}
 
 snippet GPL2
 	${1:One line to give the program's name and a brief description.}

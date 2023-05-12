@@ -1,30 +1,3 @@
--- vim.fn.sign_define("LightBulbSign", {
---   text = "",
---   textl = "LspDiagnosticsDefaultInformation" }
--- )
-
---
--- local function update_lightbulb(error, result, context, config)
---   if not result == nil then
---   end
--- end
---
--- local function code_action_listener()
---   local params = vim.lsp.util.make_range_params()
---   params.context = { diagnostics = vim.diagnostic.get(0, {}) }
---   vim.lsp.buf_request(0, "textDocument/codeAction", params, function(err, result, ctx, config)
--- end
---
-local function create_augroup(name)
-  local opts = { clear = true }
-  return vim.api.nvim_create_augroup(name, opts)
-end
-
-local function get_augroup(name)
-  local opts = { clear = false }
-  return vim.api.nvim_create_augroup(name, opts)
-end
-
 -- settings for terminal buffers since we can't use ftplugin
 vim.api.nvim_create_autocmd('TermOpen', {
   group = create_augroup 'TerminalStart',
@@ -37,31 +10,12 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
--- highlight yanked text for 300ms
+-- highlight yanked text for one quarter second
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = create_augroup 'YankHighlight',
   callback = function()
-    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 300 }
-  end,
-  pattern = '*',
-})
-
--- show cmdline when recording macros
-vim.api.nvim_create_autocmd('RecordingEnter', {
-  group = create_augroup 'MacroRecord',
-  callback = function()
-    local set = vim.opt
-    set.cmdheight = 1
-  end,
-  pattern = '*',
-})
-
--- stop showing cmdline when done
-vim.api.nvim_create_autocmd('RecordingLeave', {
-  group = get_augroup 'MacroRecord',
-  callback = function()
-    local set = vim.opt
-    set.cmdheight = 0
+    local opts = { higroup = 'IncSearch', timeout = 250 }
+    vim.highlight.on_yank(opts)
   end,
   pattern = '*',
 })

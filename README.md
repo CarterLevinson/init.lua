@@ -6,15 +6,15 @@ Dependencies:
 
 * Symbols Nerd Font
 * Codicon Font
-* Unicode supporting terminal emulator
-* [FZF](https://github.com/junegunn/fzf)
+* Unicode capable terminal
 
 Optional Dependencies:
 
+* [fzf](https://github.com/junegunn/fzf)
 * [cppman](https://github.com/aitjcize/cppman)
 * [pointfree](https://github.com/bmillwood/pointfree.git)
-* [ripgrep](https://github.com/BurntSushi/ripgrep.git) (preferred)
-* [kitty](https://github.com/kovidgoyal/kitty) (preferred)
+* [ripgrep](https://github.com/BurntSushi/ripgrep.git)
+* [kitty](https://github.com/kovidgoyal/kitty)
 
 Currently configured LSP Servers:
 

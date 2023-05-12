@@ -4,19 +4,22 @@ local fugitive_branch = {
   icon = '',
 }
 
+local function gitsigns_status()
+  local gs = vim.b.gitsigns_status_dict
+  if gs then
+    local status = {
+      added = gs.added,
+      modified = gs.modified,
+      removed = gs.removed,
+    }
+    return status
+  end
+end
+
 -- setup git diff component for buffer using gitsigns.nvim
 local gitsigns_diff = {
   'diff',
-  source = function()
-    local gitsigns = vim.b.gitsigns_status_dict
-    if gitsigns then
-      return {
-        added = gitsigns.added,
-        modified = gitsigns.changed,
-        removed = gitsigns.removed,
-      }
-    end
-  end,
+  source = gitsigns_status,
 }
 
 -- setup filename component
@@ -49,8 +52,10 @@ local display_byte = [["0x%B"]]
 require('lualine').setup({
   options = {
     icons_enabled = true,
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
+    component_separators = { left = '╲', right = '╱' },
+    section_separators = { left = '', right = '' },
+    -- component_separators = { left = '', right = '' },
+    -- section_separators = { left = '', right = '' },
     disabled_filetypes = {},
     always_divide_middle = true,
     globalstatus = true,
@@ -60,7 +65,7 @@ require('lualine').setup({
     lualine_a = { 'mode' },
     lualine_b = { fugitive_branch, gitsigns_diff, diagnostics },
     lualine_c = { fname },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_x = { 'filetype', 'fileformat', 'encoding' },
     lualine_y = { 'progress', 'filesize', display_byte },
     lualine_z = { 'location' },
   },
@@ -73,10 +78,10 @@ require('lualine').setup({
     lualine_z = {},
   },
   tabline = {},
-  -- extensions = {
-  --   "fugitive",
-  --   "man",
-  --   "quickfix",
+  extensions = {
+    "fugitive",
+    "man",
+    "quickfix",
   --   "fzf",
-  -- },
+  },
 })

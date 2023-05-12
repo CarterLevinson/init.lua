@@ -1,6 +1,5 @@
 require 'glob.functions'
-require 'glob.highlights'
 require 'glob.autocmds'
+require 'glob.highlights'
 require 'glob.settings'
 require 'glob.keymaps'
-require 'glob.diagnostics'

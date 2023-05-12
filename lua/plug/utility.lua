@@ -4,13 +4,29 @@ return {
   'jghauser/mkdir.nvim',
 
   -- lua
-  'milisims/nvim-luaref',
-  -- see also :h lua-guide & :h luvref
-  'bfredl/nvim-luadev',
+  'rafcamlet/nvim-luapad',
+  -- see also:
+  -- :h lua-guide,
+  -- :h luaref &
+  -- :h luvref
 
   -- editing
+
   -- visualize the undo tree
-  'mbbill/undotree',
+  {
+    'mbbill/undotree',
+    config = function()
+      nmap('<LEADER>u', cmd 'UndotreeToggle')
+    end
+  },
+
+  -- move single buffer to center of screen
+  {
+    'shortcuts/no-neck-pain.nvim',
+    config = function()
+      nmap('<LEADER>nnp', cmd 'NoNeckPain')
+    end
+  },
 
   {
     'junegunn/vim-easy-align',
@@ -19,7 +35,6 @@ return {
     end,
   },
 
-  -- TODO : add lua highlight whitespace function?
   { 'lewis6991/spaceless.nvim', opts = {} },
   { 'elihunter173/dirbuf.nvim', opts = {} },
 

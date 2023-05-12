@@ -1,14 +1,14 @@
-local lspconfig = require("lspconfig")
-local lspc      = require("cfg.lsp")
-local store     = require("schemastore")
+local lspconfig = require 'lspconfig'
+local store = require 'schemastore'
+local cfg = require 'cfg.lsp'
 
-local config = vim.tbl_deep_extend("force", lspc.default, {
+local config = vim.tbl_deep_extend('force', cfg, {
   settings = {
     json = {
       schemas = store.json.schemas(),
       validate = { enable = true },
-    }
-  }
+    },
+  },
 })
 
-lspconfig["jsonls"].setup(config)
+lspconfig['jsonls'].setup(config)

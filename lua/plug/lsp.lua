@@ -5,12 +5,7 @@ return {
     config = function()
       require 'cfg.lsp'
     end,
-  },
-  -- command preview applied to lsp rename
-  {
-    'smjonas/inc-rename.nvim',
-    cmd = 'IncRename',
-    opts = {},
+    -- event = { 'BufReadPost', 'BufNewFile' },
   },
   -- standalone ui widget for lsp progress
   {
@@ -22,12 +17,6 @@ return {
     'rmagatti/goto-preview',
     event = 'LspAttach',
     opts = {},
-  },
-  -- nicely renders doxygen tags in hover window
-  {
-    'Fildo7525/pretty_hover',
-    event = 'LspAttach',
-    opts = { border = 'double' },
   },
   -- show reference counts above function if lsp supports codelens
   {

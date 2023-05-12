@@ -2,25 +2,33 @@ return {
   -- window scrolling animations
   {
     'karb94/neoscroll.nvim',
-    event = 'BufWinEnter',
-    opts = { easing_function = 'circular' },
+    keys = {
+      '<C-f>', '<C-b>',
+      '<C-d>', '<C-u>'
+    },
+    opts = { easing_function = 'sine' },
   },
-  -- transparent background highlighting
+  -- wrapper for vim.ui.select() and vim.ui.input()
   {
-    'xiyaowong/nvim-transparent',
-    event = 'BufWinEnter',
+    'stevearc/dressing.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+  {
+    'rcarriga/nvim-notify',
+    event = 'VeryLazy',
     opts = {},
   },
   -- highlight indentation level
   {
     'lukas-reineke/indent-blankline.nvim',
-    event = 'BufWinEnter',
+    event = 'VeryLazy',
     opts = { max_indent_increase = 1 },
   },
   -- colorizer and color picker
   {
     'uga-rosa/ccc.nvim',
-    event = 'BufWinEnter',
+    event = 'VeryLazy',
     opts = { highlighter = { auto_enable = true } },
   },
 }

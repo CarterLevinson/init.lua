@@ -1,69 +1,114 @@
-local set                 = vim.opt
-local g                   = vim.g
-
-g.loaded_python3_provider = 0
-g.loaded_ruby_provider    = 0
-g.loaded_perl_provider    = 0
-g.loaded_node_provider    = 0
-
-set.confirm               = true
-set.vb                    = true
+local set = vim.opt
 
 -- display
-set.title                 = true
-set.showcmd               = true
-set.wildmenu              = true
-set.ruler                 = true
-set.number                = true
-set.relativenumber        = true
-set.cursorline            = true
-set.lazyredraw            = true
-set.termguicolors         = true
+set.title = true
+set.showcmd = true
+set.wildmenu = true
+set.ruler = true
+set.number = true
+set.relativenumber = true
+set.cursorline = true
+set.termguicolors = true
 
--- status/tablines
-set.laststatus            = 3
-set.showtabline           = 0
-set.cmdheight             = 0
-
--- line breaks
-set.tw                    = 80
-set.linebreak             = true
-set.breakindent           = true
+-- statusline
+set.laststatus = 3
+set.showtabline = 1
 
 -- search
-set.hlsearch              = true
-set.incsearch             = true
-set.ignorecase            = true
-set.smartcase             = true
+set.hlsearch = true
+set.incsearch = true
+set.ignorecase = true
+set.smartcase = true
 
--- tabs/indents
-set.tabstop               = 2
-set.shiftwidth            = 2
-set.softtabstop           = -1
+-- linebreaks
+set.tw = 80
+set.linebreak = true
+set.breakindent = true
 
-set.expandtab             = true
+-- indent
+set.autoindent = true
+set.smartindent = true
 
-set.autoindent            = true
-set.smartindent           = true
+-- tab
+set.expandtab = true
 
--- treesitter folds
-set.foldmethod            = "expr"
-set.foldexpr              = "nvim_treesitter#foldexpr()"
-set.foldenable            = false
+set.tabstop = 2
+set.shiftwidth = 2
+set.softtabstop = -1
 
 -- spelling
-set.spelllang             = "en_us"
-set.spell                 = true
+set.spelllang = 'en_us'
+set.spell = true
 
--- misc
-set.browsedir             = "buffer"
-set.diffopt               = "vertical"
+-- folds
+set.foldexpr = 'nvim_treesitter#foldexpr()'
+set.foldmethod = 'expr'
+set.foldenable = false
+
+-- turn on the visual bell
+set.vb = true
+-- confirm potentially bad actions
+set.confirm = true
+-- always open browser in buf
+set.browsedir = 'buffer'
+-- open diffs with vsplit
+set.diffopt = 'vertical'
 
 -- ignore compiled files
-set.wildignore            = { "*.o", "*.so", "*.pyc", "*.class", "*.hi" }
+set.wildignore = {
+  '*.o',
+  '*.so',
+  '*.pyc',
+  '*.class',
+  '*.hi',
+}
+
+-- configure vim diagnostic module
+vim.diagnostic.config {
+  virtual_text = false,
+  signs = false,
+  float = {
+    source = 'always',
+    border = 'double'
+  },
+}
+
+-- disable plugin providers
+local providers = {
+  'node',
+  'perl',
+  'python3',
+  'ruby',
+}
+
+for _, p in ipairs(providers) do
+  vim.g['loaded_' .. p .. '_provider'] = 0
+end
+
+-- integrate system clipboard
+set.clipboard:append('unnamedplus')
+
+-- use xclip as system clipboard if installed
+if has 'xclip' then
+  local xclip = {}
+
+  xclip.name = 'xclip'
+
+  xclip.copy = {
+    ['*'] = 'xclip -selection clipboard',
+    ['+'] = 'xclip -selection clipboard',
+  }
+
+  xclip.paste = {
+    ['*'] = 'xclip -selection clipboard -o',
+    ['+'] = 'xclip -selection clipboard -o',
+  }
+
+  vim.g.clipboard = xclip
+end
 
 -- set :grep to use ripgrep if installed
-if has("rg") then
-  set.grepprg    = "rg --vimgrep --no-heading"
-  set.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+if has 'rg' then
+  set.grepprg = 'rg --vimgrep --no-heading'
+  set.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 end

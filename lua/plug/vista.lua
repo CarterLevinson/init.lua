@@ -1,49 +1,65 @@
-local vista = { 'liuchengxu/vista.vim' }
+return {
+  'liuchengxu/vista.vim',
+  keys = {
+    { '<LEADER>s',   cmd 'Vista!!' },        -- \s:  toggle the vista window
+    { '<LEADER>st',  cmd 'Vista!!' },        -- \st: toggle the vista window
+    { '<LEADER>sf',  cmd 'Vista focus' },    -- \ss: focus open vista window
+    { '<LEADER>sff', cmd 'Vista finder' },   -- \sf: run vista with finder exec
+    { '<LEADER>st',  cmd 'Vista ctags' },    -- \st: open vista window using ctags
+    { '<LEADER>sl',  cmd 'Vista nvim_lsp' }, -- \sl: open vista using nvim lsp
+    { '<LEADER>si',  cmd 'Vista info' },     -- \si: echo important plugin info
+    { '<LEADER>sc',  cmd 'Vista!' },         -- \sc: close open vista window
+  },
+  init = function()
+    -- define some opts
+    vim.g.vista_floating_border = 'double'
+    vim.g.vista_sidebar_position = 'vertical topleft'
+    vim.g.vista_close_fzf_select = 1
+    vim.g.vista_update_on_text_changed = 1
 
-vista.dependencies = { 'junegunn/fzf.vim', enabled = false }
-vista.keys = {
-  -- \s:  toggle the vista window
-  { '<leader>s', cmd 'Vista!!' },
-  -- \st: toggle the vista window
-  { '<leader>st', cmd 'Vista!!' },
-  -- \sf: focus open vista window
-  { '<leader>sf', cmd 'Vista focus' },
-  -- \sl: open vista using nvim lsp
-  { '<leader>sl', cmd 'Vista nvim_lsp' },
-  -- \sc: close open vista window
-  { '<leader>sc', cmd 'Vista!' },
+    -- default
+    vim.g.vista_close_on_jump = 0
+
+    local ctags = {}
+
+    -- use fast tags for haskell instead?
+    ctags.haskell  = 'hasktags -x -o - -c'
+    ctags.lhaskell = 'hasktags -x -o - -c'
+
+    vim.g.vista_ctags_cmd = ctags
+
+    -- default
+    vim.g.vista_default_executive = 'ctags'
+
+    -- all lsp filetypes except haskell & lhaskell
+    local filetypes = {
+      'awk',
+      'c',
+      'cmake',
+      'cpp',
+      'css',
+      'cuda',
+      'html',
+      'objc',
+      'objcpp',
+      'proto',
+      'json',
+      'lua',
+      'r',
+      'python',
+      'rust',
+      'tex',
+    }
+
+    -- use lsp client instead of ctags if it makes sense
+    local executives = {}
+    for _, ft in ipairs(filetypes) do
+      executives[ft] = 'nvim_lsp'
+    end
+    vim.g.vista_executive_for = executives
+
+    -- set icons for tree display
+    vim.g.vista_icon_indent = { '╰─➤ ', '├─➤ ' }
+  end,
+  lazy = true,
 }
-
-vista.init = function()
-  vim.g.vista_icon_indent = { '╰─➤ ', '├─➤ ' }
-  vim.g.vista_sidebar_position = 'vertical topleft'
-  vim.g.vista_update_on_text_changed = 1
-  vim.g.vista_default_executive = 'ctags'
-
-  -- use fast tags instead?
-  vim.g.vista_ctags_cmd = {
-    haskell = 'hasktags -x -o - -c',
-    lhaskell = 'hasktags -x -o - -c',
-  }
-
-  vim.g.vista_executive_for = {
-    awk = 'nvim_lsp',
-    c = 'nvim_lsp',
-    cpp = 'nvim_lsp',
-    objc = 'nvim_lsp',
-    objcpp = 'nvim_lsp',
-    cuda = 'nvim_lsp',
-    cmake = 'nvim_lsp',
-    css = 'nvim_lsp',
-    html = 'nvim_lsp',
-    json = 'nvim_lsp',
-    lua = 'nvim_lsp',
-    python = 'nvim_lsp',
-    proto = 'nvim_lsp',
-    r = 'nvim_lsp',
-    rust = 'nvim_lsp',
-    tex = 'nvim_lsp',
-  }
-end
-
-return vista

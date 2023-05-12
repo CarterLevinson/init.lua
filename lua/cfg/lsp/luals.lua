@@ -1,16 +1,17 @@
-local lspconfig = require("lspconfig")
-local lspc      = require("cfg.lsp")
-local neodev    = require("neodev")
+local lspconfig = require 'lspconfig'
+local neodev = require 'neodev'
+local cfg = require 'cfg.lsp'
 
 -- need to setup neodev before calling lspconfig setup on lua_ls
 neodev.setup {}
 
-local config = vim.tbl_deep_extend("force", lspc.default, {
+local config = vim.tbl_deep_extend('force', cfg, {
   settings = {
     Lua = {
-      completion = { callSnippet = "Replace" },
-    }
-  }
+      completion = { callSnippet = 'Replace' },
+      format = { enable = false },
+    },
+  },
 })
 
-lspconfig["lua_ls"].setup(config)
+lspconfig['lua_ls'].setup(config)

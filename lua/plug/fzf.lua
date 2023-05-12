@@ -1,42 +1,31 @@
-local fzf = { 'ibhagwan/fzf-lua' }
-
-fzf.dependencies = {
-  'nvim-tree/nvim-web-devicons',
-  { 'junegunn/fzf.vim', enabled = false },
+-- setup fzf.lua
+return {
+  'ibhagwan/fzf-lua',
+  cond = vim.g.loaded_fzf == 1 or has 'fzf',
+  dependencies = 'nvim-tree/nvim-web-devicons',
+  keys = {
+    { '<LEADER>f',   cmd 'FzfLua files' },
+    { '<LEADER>g',   cmd 'FzfLua live_grep' },
+    { '<LEADER>gw',  cmd 'FzfLua grep_cword' },
+    { '<LEADER>gW',  cmd 'FzfLua grep_cWORD' },
+    { '<LEADER>gr',  cmd 'FzfLua live_grep_resume' },
+    { '<LEADER>b',   cmd 'FzfLua buffers' },
+    { '<LEADER>fo',  cmd 'FzfLua oldfiles' },
+    { '<LEADER>fq',  cmd 'FzfLua quickfix' },
+    { '<LEADER>fl',  cmd 'FzfLua loclist' },
+    { '<LEADER>fg',  cmd 'FzfLua git_files' },
+    { '<LEADER>fgc', cmd 'FzfLua git_commits' },
+    { '<LEADER>fgb', cmd 'FzfLua git_branches' },
+    { '<LEADER>fd',  cmd 'FzfLua lsp_definitions' },
+    { '<LEADER>fr',  cmd 'FzfLua lsp_references' },
+    { '<LEADER>fs',  cmd 'FzfLua lsp_workspace_symbols' },
+    { '<LEADER>fi',  cmd 'FzfLua lsp_implementations' },
+    { '<LEADER>fM',  cmd 'FzfLua marks' },
+    { '<LEADER>fR',  cmd 'FzfLua registers' },
+  },
+  cmd = 'FzfLua',
+  config = function()
+    require 'cfg.fzf'
+  end,
+  lazy = false,
 }
-
-fzf.keys = {
-  { '<leader>f', cmd 'FzfLua files' },
-  { '<leader>g', cmd 'FzfLua live_grep' },
-  { '<leader>gw', cmd 'FzfLua grep_cword' },
-  { '<leader>gW', cmd 'FzfLua grep_cWORD' },
-  { '<leader>gr', cmd 'FzfLua live_grep_resume' },
-  { '<leader>b', cmd 'FzfLua buffers' },
-  { '<leader>fo', cmd 'FzfLua oldfiles' },
-  { '<leader>fq', cmd 'FzfLua quickfix' },
-  { '<leader>fl', cmd 'FzfLua loclist' },
-  { '<leader>fg', cmd 'FzfLua git_files' },
-  { '<leader>fgc', cmd 'FzfLua git_commits' },
-  { '<leader>fgb', cmd 'FzfLua git_branches' },
-  { '<leader>fd', cmd 'FzfLua lsp_definitions' },
-  { '<leader>fr', cmd 'FzfLua lsp_references' },
-  { '<leader>fs', cmd 'FzfLua lsp_workspace_symbols' },
-  { '<leader>fi', cmd 'FzfLua lsp_implementations' },
-  { '<leader>fM', cmd 'FzfLua marks' },
-  { '<leader>fR', cmd 'FzfLua registers' },
-}
-
-fzf.cmd = 'FzfLua'
-
-fzf.opts = {}
-
-fzf.opts.border = 'double'
-fzf.opts.winopts = {
-  normal = 'NormalFloat',
-  border = 'NormalFloat',
-  cursorline = 'Normal',
-}
-
-fzf.lazy = true
-
-return fzf

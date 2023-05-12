@@ -1,12 +1,10 @@
-local lspconfig = require("lspconfig")
-local pretty    = require("pretty_hover")
-local cmp       = require("cmp_nvim_lsp")
-local gp        = require("goto-preview")
-local api       = vim.api
-local lsp       = vim.lsp
+local lspconfig = require 'lspconfig'
+local cmp_lsp = require 'cmp_nvim_lsp'
+local gp = require 'goto-preview'
+
 
 local function lsp_format_buffer()
-  lsp.buf.format { async = true }
+  vim.lsp.buf.format { async = true }
 end
 
 local function pretty_print(obj)
@@ -14,64 +12,71 @@ local function pretty_print(obj)
 end
 
 local function print_lsp_ws_folders()
-  pretty_print(lsp.buf.list_workspace_folders())
+  pretty_print(vim.lsp.buf.list_workspace_folders())
 end
 
 local function bcmd(buffer, name, command)
-  api.nvim_buf_create_user_command(buffer, name, command, {})
+  vim.api.nvim_buf_create_user_command(buffer, name, command, {})
 end
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("LspConfig", {}),
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = create_augroup('Lspconfig'),
   callback = function(ev)
     local opts        = { buffer = ev.buf }
 
-    nmap("gd",        lsp.buf.definition, opts)     -- go to definition
-    nmap("gD",        lsp.buf.declaration, opts)    -- go to declaration
-    nmap("gr",        lsp.buf.references, opts)     -- list all refs in qf
-    nmap("gi",        lsp.buf.implementation, opts) -- list imps in qf
+    nmap('gd',        vim.lsp.buf.definition, opts)
+    nmap('gD',        vim.lsp.buf.declaration, opts)
+    nmap('gr',        vim.lsp.buf.references, opts)     -- uses qf list
+    nmap('gi',        vim.lsp.buf.implementation, opts) -- uses qf list
 
-    nmap("gpd",       gp.goto_preview_definition, opts)
-    nmap("gpt",       gp.goto_preview_type_definition, opts)
-    nmap("gpr",       gp.goto_preview_references, opts)
-    nmap("gpc",       gp.close_all_win, opts)
+    nmap('gpd',       gp.goto_preview_definition, opts)
+    nmap('gpt',       gp.goto_preview_type_definition, opts)
+    nmap('gpr',       gp.goto_preview_references, opts)
+    nmap('gpi',       gp.goto_preview_implementation, opts)
+    nmap('gpc',       gp.close_all_win, opts)
 
-    nmap("K",         pretty.hover, opts)
-    nmap("<space>h",  lsp.buf.signature_help, opts)
-    nmap("<space>t",  lsp.buf.type_definition, opts)
-    nmap("<space>f",  lsp_format_buffer, opts)
+    nmap('K',         vim.lsp.buf.hover, opts)
+    nmap('<SPACE>f',  lsp_format_buffer, opts)
+    nmap('<SPACE>t',  vim.lsp.buf.type_definition, opts)
+    nmap('<SPACE>h',  vim.lsp.buf.signature_help, opts)
 
-    nmap("<space>wa", lsp.buf.add_workspace_folder, opts)
-    nmap("<space>wr", lsp.buf.remove_workspace_folder, opts)
-    nmap("<space>ls", print_lsp_ws_folders, opts)
+    -- imap('<C-h>',     vim.lsp.buf.signature_help, opts)
 
-    nmap("<space>cl", lsp.codelens.run, opts)
+    nmap('<SPACE>wa', vim.lsp.buf.add_workspace_folder, opts)
+    nmap('<SPACE>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    nmap('<SPACE>ls', print_lsp_ws_folders, opts)
 
-    nmap("<space>rn", ":IncRename " , opts)
-    nmap("<space>ca", cmd "CodeActionMenu", opts)
+    nmap('<SPACE>cl', vim.lsp.codelens.run, opts)
 
-    bcmd(opts.buffer, "Format", lsp_format_buffer)
-    bcmd(opts.buffer, "ListWS", print_lsp_ws_folders)
+    -- create own lsp handler using inc preview + vim.ui
+    -- nmap('<space>rn', ':IncRename ' , opts)
+    nmap('<SPACE>rn', vim.lsp.buf.rename, opts)
+    nmap('<SPACE>ca', cmd 'CodeActionMenu', opts)
+
+    bcmd(opts.buffer, 'Format', lsp_format_buffer)
+    bcmd(opts.buffer, 'ListWS', print_lsp_ws_folders)
   end,
 })
 
 -- change border for hover (in case we don't use pretty hover)
-lsp.handlers["textDocument/hover"] = lsp.with(
-  lsp.handlers.hover,
-  { border = "double" }
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  { border = 'double' }
 )
 
+-- TODO: lsp signature help handler that displays virtual text as you type
+
 -- change border for signature_help
-lsp.handlers["textDocument/signatureHelp"] = lsp.with(
-  lsp.handlers.signature_help,
-  { border = "double" }
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  { border = 'double' }
 )
 
 -- default lsp configuration, others can extend from here
-local config = {
+local defaults = {
   settings = {
     -- create nvim-cmp default capabilities for the lsp client
-    capabilities = cmp.default_capabilities(),
+    capabilities = cmp_lsp.default_capabilities(),
     -- disable telemetry (if any)
     telemetry = { enable = false },
   },
@@ -82,7 +87,7 @@ local config = {
 -- list of installed lsp servers with default configurations
 local servers = {
   awk_ls = {},
-  -- bashls = {},
+  bashls = {},
   cmake = {},
   cssls = {},
   html = {},
@@ -94,11 +99,18 @@ local servers = {
 }
 
 -- setup each lsp server in list
+
+-- local err = {}
 for server, _ in pairs(servers) do
-  lspconfig[server].setup(config)
+  -- if has(lsp.cmd) then
+    lspconfig[server].setup(defaults)
+  -- else
+    -- err[server] = 'LSP: executable ' .. server .. 'not found'
+  -- end
 end
 
--- return default config for lsp extension plugins to build configurations
-return {
-  default = config
-}
+-- for _, msg in pairs(err) do
+--   vim.notify(msg, vim.log.levels.WARN, {})
+-- end
+-- return default config
+return defaults
