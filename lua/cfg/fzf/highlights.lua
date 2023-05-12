@@ -8,7 +8,7 @@ vim.cmd [[highlight! link FzfLuaCursorLineNr CursorLineNr]]
 vim.cmd [[highlight! link FzfLuaTitle FzfLuaNormal]]
 vim.cmd [[highlight! link FzfLuaSearch IncSearch]]
 
--- leave scrolls as default
+-- leave scrollbars alone
 
 vim.cmd [[highlight! link FzfLuaHelpNormal FzfLuaNormal]]
 vim.cmd [[highlight! link FzfLuaHelpBorder FzfLuaBorder]]

@@ -84,12 +84,11 @@ M.kinds = {
   TypeParameter = ' ',
 }
 
-M.types = {
+M.extras = {
   Null = ' ',
   String = ' ',
   Number = ' ',
 }
-
 
 M.diagnostics = {
   -- icons / text used for a diagnostic
@@ -101,7 +100,7 @@ M.diagnostics = {
 }
 
 M.extended = function()
-  return vim.tbl_extend('keep', M.kinds, M.types)
+  return vim.tbl_extend('keep', M.kinds, M.extras)
 end
 
 return M

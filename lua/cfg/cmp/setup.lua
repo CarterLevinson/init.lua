@@ -12,12 +12,10 @@ local function select_prev()
   return cmp.mapping.select_prev_item(opts)
 end
 
--- accepts completion
 local function close()
   return cmp.mapping.close()
 end
 
--- rejects completion
 local function abort()
   return cmp.mapping.abort()
 end
@@ -60,7 +58,9 @@ local mapping = {
   ['<C-j>'] = select_next(),
   ['<C-k>'] = select_prev(),
 
+  -- removes any insertion
   ['<C-e>'] = abort(),
+  -- keeps any insertions
   ['<C-y>'] = close(),
 
   ['<C-b>'] = scroll_docs_up(4),
